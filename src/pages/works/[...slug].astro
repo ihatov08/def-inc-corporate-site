@@ -25,21 +25,19 @@ const dateStr = data.date.toLocaleDateString('ja-JP', {
 <BaseLayout title={data.title} description={data.summary}>
   <article>
     <!-- ヒーロー -->
-    <header
-      class="relative overflow-hidden text-white"
-      style={`background: linear-gradient(135deg, ${data.accent ?? 'var(--color-brand)'} 0%, color-mix(in srgb, ${data.accent ?? 'var(--color-brand)'} 55%, #000) 100%);`}
-    >
+    <header class="relative border-b border-line bg-surface-subtle">
+      <span class="pointer-events-none absolute left-0 top-0 h-full w-[3px]" style={`background: ${data.accent ?? 'var(--color-brand)'};`} aria-hidden="true"></span>
       <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
-        <a href="/works" class="inline-flex items-center gap-1.5 text-sm text-white/80 hover:text-white">
+        <a href="/works" class="inline-flex items-center gap-1.5 text-sm text-ink-muted hover:text-brand">
           <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
           開発実績一覧へ
         </a>
-        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/85">
-          <span class="rounded-full bg-white/20 px-3 py-1 font-medium backdrop-blur-sm">{data.category}</span>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-ink-muted">
+          <span class="chip">{data.category}</span>
           <span class="font-en">{dateStr}</span>
         </div>
-        <h1 class="mt-4 max-w-3xl text-[clamp(1.8rem,4.5vw,3rem)] font-bold leading-tight">{data.title}</h1>
-        <p class="mt-4 max-w-2xl text-lg text-white/90">{data.summary}</p>
+        <h1 class="mt-4 max-w-3xl text-[clamp(1.8rem,4.5vw,3rem)] font-bold leading-tight text-ink">{data.title}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-ink-muted">{data.summary}</p>
       </div>
     </header>
 
