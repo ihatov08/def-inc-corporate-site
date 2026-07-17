@@ -72,7 +72,7 @@ const dateStr = data.date.toLocaleDateString('ja-JP', {
             {data.link && (
               <div>
                 <a class="btn btn-ghost btn-sm w-full" href={data.link} target="_blank" rel="noopener">
-                  サイトを見る
+                  {data.linkLabel ?? 'サイトを見る'}
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
                 </a>
               </div>
@@ -133,6 +133,18 @@ const dateStr = data.date.toLocaleDateString('ja-JP', {
   .prose-work :global(strong) {
     color: var(--text);
     font-weight: 700;
+  }
+  .prose-work :global(blockquote) {
+    margin: 1.6rem 0;
+    padding: 0.9rem 1.2rem;
+    border-left: 3px solid var(--color-brand);
+    background: var(--bg-subtle);
+    border-radius: 0 8px 8px 0;
+    color: var(--text-muted);
+    font-size: 0.92rem;
+  }
+  .prose-work :global(blockquote p) {
+    margin: 0;
   }
   .prose-work :global(code) {
     background: var(--bg-subtle);

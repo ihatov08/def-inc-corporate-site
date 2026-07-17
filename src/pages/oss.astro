@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import OssCard from '../components/OssCard.astro';
+import { ossContributions } from '../data/publications';
+---
+
+<BaseLayout
+  title="OSS Contributions"
+  description="def合同会社（代表 吉田智哉）のOSSコントリビュート。sqlc や devise_token_auth など、公開されているオープンソースプロジェクトへ貢献しています。"
+>
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Open Source</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">OSSコントリビュート</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        日々の開発で使わせてもらっているオープンソースプロジェクトへ、修正や改善のプルリクエストを送っています。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {ossContributions.map((oss) => (<OssCard oss={oss} />))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

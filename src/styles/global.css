@@ -151,6 +151,28 @@
   }
 }
 
+/* ヒーローの任意写真レイヤー（/images/hero.jpg を置くと表示） */
+.hero-photo {
+  background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 55%, transparent),
+      color-mix(in srgb, var(--bg) 82%, transparent)
+    ),
+    image-set(url("/images/hero.jpg") 1x);
+  background-size: cover;
+  background-position: center;
+  /* 画像が無い場合はグラデーションのみで自然に見えるよう控えめに */
+  opacity: 0.9;
+}
+:root[data-theme="dark"] .hero-photo {
+  background-image: linear-gradient(
+      to bottom,
+      color-mix(in srgb, var(--bg) 62%, transparent),
+      color-mix(in srgb, var(--bg) 88%, transparent)
+    ),
+    image-set(url("/images/hero.jpg") 1x);
+}
+
 /* スクロール連動フェードイン */
 .reveal {
   opacity: 0;

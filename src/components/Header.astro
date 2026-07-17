@@ -16,8 +16,8 @@ const isActive = (href: string) =>
       def<span class="text-brand">.</span><span class="font-medium text-ink-muted">inc</span>
     </a>
 
-    <nav id="primaryNav" class="mx-auto max-md:fixed max-md:inset-x-0 max-md:top-[68px] max-md:max-h-0 max-md:overflow-hidden max-md:border-b max-md:border-line max-md:bg-surface max-md:shadow-[var(--shadow-card)] max-md:transition-[max-height] max-md:duration-300 max-md:mx-0" aria-label="グローバルナビゲーション">
-      <ul id="navList" class="flex list-none gap-1 max-md:flex-col max-md:gap-1 max-md:px-[clamp(1.25rem,5vw,2.5rem)] max-md:py-5">
+    <nav id="primaryNav" class="mx-auto max-lg:fixed max-lg:inset-x-0 max-lg:top-[68px] max-lg:max-h-0 max-lg:overflow-hidden max-lg:border-b max-lg:border-line max-lg:bg-surface max-lg:shadow-[var(--shadow-card)] max-lg:transition-[max-height] max-lg:duration-300 max-lg:mx-0" aria-label="グローバルナビゲーション">
+      <ul id="navList" class="flex list-none gap-1 max-lg:flex-col max-lg:gap-1 max-lg:px-[clamp(1.25rem,5vw,2.5rem)] max-lg:py-5">
         {
           nav.map((item) => (
             <li>
@@ -35,7 +35,7 @@ const isActive = (href: string) =>
     </nav>
 
     <div class="flex items-center gap-2.5">
-      <a class="btn btn-primary btn-sm max-md:hidden" href="/contact">お問い合わせ</a>
+      <a class="btn btn-primary btn-sm max-xl:hidden" href="/contact">お問い合わせ</a>
       <button
         id="themeToggle"
         type="button"
@@ -52,7 +52,7 @@ const isActive = (href: string) =>
         aria-label="メニュー"
         aria-expanded="false"
         aria-controls="navList"
-        class="hidden max-md:flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-[10px] border border-line bg-surface-elevated"
+        class="hidden max-lg:flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-[10px] border border-line bg-surface-elevated"
       >
         <span class="h-0.5 w-[18px] bg-ink"></span>
         <span class="h-0.5 w-[18px] bg-ink"></span>
@@ -75,7 +75,7 @@ const isActive = (href: string) =>
 
     const burger = document.getElementById('navBurger');
     const navEl = document.getElementById('primaryNav');
-    const OPEN = 'max-md:max-h-[70vh]';
+    const OPEN = 'max-lg:max-h-[70vh]';
     burger?.addEventListener('click', () => {
       const open = navEl?.classList.toggle(OPEN);
       burger.setAttribute('aria-expanded', String(!!open));

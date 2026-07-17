@@ -2,12 +2,18 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import WorkCard from '../components/WorkCard.astro';
+import BookCard from '../components/BookCard.astro';
+import CourseCard from '../components/CourseCard.astro';
+import OssCard from '../components/OssCard.astro';
 import { site } from '../data/site';
+import { books, courses, ossContributions } from '../data/publications';
 
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
 );
-const topWorks = works.slice(0, 3);
+const topBooks = books.slice(0, 4);
+const topCourses = courses.slice(0, 3);
+const topOss = ossContributions.slice(0, 3);
 
 const services = [
   {
@@ -31,12 +37,32 @@ const services = [
 <BaseLayout>
   <!-- Hero -->
   <section class="relative overflow-hidden">
-    <div
-      class="pointer-events-none absolute inset-0 -z-10"
-      style="background:
-        radial-gradient(60% 55% at 15% 0%, color-mix(in srgb, var(--color-brand) 22%, transparent), transparent 70%),
-        radial-gradient(50% 50% at 100% 20%, color-mix(in srgb, var(--color-brand) 14%, transparent), transparent 70%);"
-    >
+    <!-- 背景: 岩手の自然（山並み）モチーフ。/images/hero.jpg を置くと写真が重なります -->
+    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
+      <!-- 空のグラデーション -->
+      <div
+        class="absolute inset-0"
+        style="background:
+          radial-gradient(70% 60% at 15% 0%, color-mix(in srgb, var(--color-brand) 20%, transparent), transparent 70%),
+          radial-gradient(55% 55% at 100% 10%, color-mix(in srgb, var(--color-brand) 12%, transparent), transparent 70%);"
+      >
+      </div>
+      <!-- 任意の写真レイヤー（存在すれば表示。無ければ透明） -->
+      <div class="hero-photo absolute inset-0"></div>
+      <!-- 岩手山をイメージした山並みのシルエット -->
+      <svg
+        class="absolute inset-x-0 bottom-0 w-full text-brand"
+        viewBox="0 0 1440 320"
+        preserveAspectRatio="none"
+        style="height: min(46vh, 420px);"
+      >
+        <path fill="currentColor" fill-opacity="0.06"
+          d="M0,220 L240,120 L360,180 L560,60 L760,190 L980,90 L1200,200 L1440,130 L1440,320 L0,320 Z" />
+        <path fill="currentColor" fill-opacity="0.10"
+          d="M0,270 L200,190 L420,250 L640,150 L820,240 L1040,170 L1260,260 L1440,210 L1440,320 L0,320 Z" />
+        <path fill="currentColor" fill-opacity="0.16"
+          d="M0,300 L260,250 L520,290 L780,240 L1020,295 L1280,255 L1440,290 L1440,320 L0,320 Z" />
+      </svg>
     </div>
     <div class="container-x flex min-h-[86vh] flex-col justify-center py-24">
       <p class="eyebrow reveal is-visible">{site.tagline}</p>
@@ -127,9 +153,9 @@ const services = [
         <a class="btn btn-ghost max-sm:hidden" href="/works">すべて見る</a>
       </div>
 
-      {topWorks.length > 0 ? (
+      {works.length > 0 ? (
         <div class="mt-12 grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1">
-          {topWorks.map((w) => (
+          {works.map((w) => (
             <WorkCard
               href={`/works/${w.id}`}
               title={w.data.title}
@@ -146,6 +172,66 @@ const services = [
 
       <div class="reveal mt-8 sm:hidden">
         <a class="btn btn-ghost" href="/works">すべて見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Publications -->
+  <section class="border-t border-line bg-surface-subtle py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x">
+      <div class="reveal flex items-end justify-between gap-4">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Publications</p>
+          <h2 class="mt-3 text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-ink">出版実績</h2>
+          <p class="mt-3 text-ink-muted">技術書籍の執筆を通じて、開発の知見を発信しています。</p>
+        </div>
+        <a class="btn btn-ghost max-sm:hidden" href="/publications">すべて見る</a>
+      </div>
+      <div class="mt-10 grid grid-cols-2 gap-5 max-sm:grid-cols-1">
+        {topBooks.map((b) => (<BookCard book={b} />))}
+      </div>
+      <div class="reveal mt-8 sm:hidden">
+        <a class="btn btn-ghost" href="/publications">すべて見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Courses -->
+  <section class="py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x">
+      <div class="reveal flex items-end justify-between gap-4">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Courses</p>
+          <h2 class="mt-3 text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-ink">オンライン講座</h2>
+          <p class="mt-3 text-ink-muted">Udemyで生成AI・Rails・Next.js・Docker・Linux などの講座を公開しています。</p>
+        </div>
+        <a class="btn btn-ghost max-sm:hidden" href="/courses">すべて見る</a>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {topCourses.map((c) => (<CourseCard course={c} />))}
+      </div>
+      <div class="reveal mt-8 sm:hidden">
+        <a class="btn btn-ghost" href="/courses">すべて見る</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- OSS -->
+  <section class="border-t border-line bg-surface-subtle py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x">
+      <div class="reveal flex items-end justify-between gap-4">
+        <div class="max-w-2xl">
+          <p class="eyebrow">Open Source</p>
+          <h2 class="mt-3 text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-ink">OSSコントリビュート</h2>
+          <p class="mt-3 text-ink-muted">利用しているオープンソースプロジェクトへ改善を還元しています。</p>
+        </div>
+        <a class="btn btn-ghost max-sm:hidden" href="/oss">すべて見る</a>
+      </div>
+      <div class="mt-10 grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {topOss.map((oss) => (<OssCard oss={oss} />))}
+      </div>
+      <div class="reveal mt-8 sm:hidden">
+        <a class="btn btn-ghost" href="/oss">すべて見る</a>
       </div>
     </div>
   </section>

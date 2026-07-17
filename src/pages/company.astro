@@ -23,7 +23,38 @@ const rows = [
     </div>
   </section>
 
+  <!-- 代表プロフィール -->
   <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      <div class="reveal grid grid-cols-[220px_1fr] items-center gap-10 rounded-card border border-line bg-surface-elevated p-8 shadow-soft max-sm:grid-cols-1 max-sm:gap-6 max-sm:p-6">
+        <div class="relative mx-auto aspect-square w-full max-w-[220px] overflow-hidden rounded-2xl bg-brand-soft">
+          <span class="absolute inset-0 grid place-items-center font-en text-5xl font-bold text-brand/40">Y</span>
+          <img
+            src="/images/representative.jpg"
+            alt="代表社員 吉田 智哉"
+            loading="lazy"
+            class="relative h-full w-full object-cover"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div>
+          <p class="eyebrow">Representative</p>
+          <h2 class="mt-2 text-2xl font-bold text-ink">吉田 智哉 <span class="ml-1 text-base font-medium text-ink-muted">代表社員</span></h2>
+          <p class="mt-4 mb-0 text-ink-muted">
+            岩手県八幡平市を拠点に、Webシステム・スマートフォンアプリの受託開発を行っています。技術書籍の執筆やUdemyでの講座公開、OSSへの貢献を通じて、開発で得た知見の発信にも取り組んでいます。お客様の課題を「定義」するところから伴走し、長く役に立つプロダクトづくりを大切にしています。
+          </p>
+          <div class="mt-5 flex flex-wrap gap-2">
+            <a class="chip hover:opacity-80" href="/works">開発実績</a>
+            <a class="chip hover:opacity-80" href="/publications">出版実績</a>
+            <a class="chip hover:opacity-80" href="/courses">オンライン講座</a>
+            <a class="chip hover:opacity-80" href="/oss">OSS</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-[clamp(3rem,7vw,5rem)]">
     <div class="container-x">
       <dl class="reveal overflow-hidden rounded-card border border-line">
         {rows.map((r, i) => (

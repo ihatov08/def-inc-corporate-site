@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import CourseCard from '../components/CourseCard.astro';
+import { courses } from '../data/publications';
+---
+
+<BaseLayout
+  title="Courses"
+  description="def合同会社（代表 吉田智哉）が公開するオンライン講座。Udemyで生成AI・Ruby on Rails・Next.js・Docker・Linux などをハンズオンで学べます。"
+>
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Courses</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">オンライン講座</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        Udemyで技術講座を公開しています。生成AI・Ruby on Rails・Next.js・Docker・Linux などを、手を動かしながら学べる内容です。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      <div class="grid grid-cols-3 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {courses.map((c) => (<CourseCard course={c} />))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

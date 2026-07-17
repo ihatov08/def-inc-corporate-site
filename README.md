@@ -27,6 +27,9 @@ npm run preview   # ビルド結果のプレビュー
 | `/services` | サービス紹介 |
 | `/works` | 開発実績の一覧（カテゴリ絞り込み付き） |
 | `/works/<slug>` | 開発実績の詳細 |
+| `/publications` | 出版実績（書籍） |
+| `/courses` | オンライン講座（Udemy） |
+| `/oss` | OSSコントリビュート |
 | `/company` | 会社概要 |
 | `/contact` | お問い合わせ |
 | `/sales-email-policy` | 営業目的のご連絡に関するポリシー |
@@ -58,6 +61,20 @@ npm run preview   # ビルド結果のプレビュー
 | `draft` | | `true` の間は公開されません |
 
 スキーマの定義は [`src/content.config.ts`](src/content.config.ts) にあります。
+
+## 出版・講座・OSS の編集
+
+書籍・Udemy講座・OSSコントリビュートは [`src/data/publications.ts`](src/data/publications.ts) の
+配列（`books` / `courses` / `ossContributions`）を編集すれば、各ページとトップページに反映されます。
+
+## 画像の配置
+
+以下の画像を `public/images/` に置くと表示されます（未配置でもレイアウトは崩れません）。
+
+| パス | 用途 |
+| --- | --- |
+| `public/images/representative.jpg` | 会社概要ページの代表写真（未配置時は「Y」モノグラム表示） |
+| `public/images/hero.jpg` | トップのヒーロー背景に重ねる岩手の風景写真（任意。未配置時は山並みSVGのみ） |
 
 ## 会社情報の編集
 

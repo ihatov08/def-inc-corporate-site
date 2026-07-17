@@ -23,6 +23,8 @@ const works = defineCollection({
     accent: z.string().optional(),
     // 実績公開URL（任意。あれば「サイトを見る」リンクを表示）
     link: z.string().url().optional(),
+    // リンクのラベル（任意。未指定は「サイトを見る」）
+    linkLabel: z.string().optional(),
     // 一覧に大きく表示するピックアップ実績にするか
     featured: z.boolean().default(false),
     // 一覧・詳細に出さず下書きにする場合 true

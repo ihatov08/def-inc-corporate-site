@@ -1,0 +1,28 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import BookCard from '../components/BookCard.astro';
+import { books } from '../data/publications';
+---
+
+<BaseLayout
+  title="Publications"
+  description="def合同会社（代表 吉田智哉）の出版実績。技術書籍の執筆を通じて、Web開発・生成AIアプリケーション開発の知見を発信しています。"
+>
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Publications</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">出版実績</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        技術書籍の執筆を通じて、開発で得た知見を発信しています。手を動かして学べる、実践的な内容を意識しています。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      <div class="grid grid-cols-2 gap-5 max-sm:grid-cols-1">
+        {books.map((b) => (<BookCard book={b} />))}
+      </div>
+    </div>
+  </section>
+</BaseLayout>

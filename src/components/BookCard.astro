@@ -1,0 +1,32 @@
+---
+import type { Book } from '../data/publications';
+interface Props { book: Book }
+const { book: b } = Astro.props;
+---
+
+<a
+  href={b.link}
+  target="_blank"
+  rel="noopener"
+  class="reveal group grid grid-cols-[96px_1fr] gap-5 rounded-card border border-line bg-surface-elevated p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card max-sm:grid-cols-[80px_1fr]"
+>
+  <div
+    class="relative flex aspect-3/4 flex-col justify-between overflow-hidden rounded-md p-2.5 text-white shadow-md"
+    style={`background: linear-gradient(140deg, ${b.accent ?? 'var(--color-brand)'}, color-mix(in srgb, ${b.accent ?? 'var(--color-brand)'} 55%, #000));`}
+  >
+    <span class="text-[0.5rem] leading-tight opacity-80 line-clamp-3">{b.title}</span>
+    {b.volume && <span class="font-en text-[0.6rem] font-bold">{b.volume}</span>}
+    <span class="absolute inset-y-0 left-0 w-[3px] bg-black/25"></span>
+  </div>
+
+  <div class="min-w-0 self-center">
+    <div class="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
+      {b.series && <span class="chip">{b.series}</span>}
+      {b.format && <span class="text-xs text-ink-faint">{b.format}</span>}
+    </div>
+    <h3 class="text-[0.98rem] font-bold leading-snug text-ink transition-colors group-hover:text-brand">
+      {b.title}{b.volume ? `　${b.volume}` : ''}
+    </h3>
+    <p class="mt-1 mb-0 text-sm text-ink-muted">{b.author}</p>
+  </div>
+</a>
