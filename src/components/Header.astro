@@ -1,0 +1,103 @@
+---
+import { site, nav } from '../data/site';
+
+const path = Astro.url.pathname.replace(/\/$/, '') || '/';
+const isActive = (href: string) =>
+  href === '/' ? path === '/' : path === href || path.startsWith(href + '/');
+---
+
+<header
+  id="siteHeader"
+  class="sticky top-0 z-50 border-b border-transparent backdrop-blur-md backdrop-saturate-150 transition-colors"
+  style="background: color-mix(in srgb, var(--bg) 82%, transparent);"
+>
+  <div class="container-x flex h-[68px] items-center gap-4">
+    <a href="/" class="font-en text-[1.35rem] font-bold tracking-tight text-ink" aria-label={`${site.brand} トップ`}>
+      def<span class="text-brand">.</span><span class="font-medium text-ink-muted">inc</span>
+    </a>
+
+    <nav id="primaryNav" class="mx-auto max-md:fixed max-md:inset-x-0 max-md:top-[68px] max-md:max-h-0 max-md:overflow-hidden max-md:border-b max-md:border-line max-md:bg-surface max-md:shadow-[var(--shadow-card)] max-md:transition-[max-height] max-md:duration-300 max-md:mx-0" aria-label="グローバルナビゲーション">
+      <ul id="navList" class="flex list-none gap-1 max-md:flex-col max-md:gap-1 max-md:px-[clamp(1.25rem,5vw,2.5rem)] max-md:py-5">
+        {
+          nav.map((item) => (
+            <li>
+              <a
+                href={item.href}
+                aria-current={isActive(item.href) ? 'page' : undefined}
+                class="block rounded-full px-[0.9rem] py-2 text-[0.95rem] font-medium text-ink-muted transition-colors hover:bg-surface-subtle hover:text-ink aria-[current=page]:bg-brand-soft aria-[current=page]:text-brand max-md:px-4 max-md:py-3 max-md:text-[1.05rem]"
+              >
+                {item.label}
+              </a>
+            </li>
+          ))
+        }
+      </ul>
+    </nav>
+
+    <div class="flex items-center gap-2.5">
+      <a class="btn btn-primary btn-sm max-md:hidden" href="/contact">お問い合わせ</a>
+      <button
+        id="themeToggle"
+        type="button"
+        aria-label="テーマ切替"
+        title="ライト / ダーク切替"
+        class="grid h-10 w-10 place-items-center rounded-full border border-line bg-surface-elevated text-ink-muted transition-colors hover:border-brand hover:text-brand"
+      >
+        <svg class="block dark:hidden" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M12 17a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 3a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0v-1a1 1 0 0 1 1-1Zm0-19a1 1 0 0 1 1 1v1a1 1 0 1 1-2 0V2a1 1 0 0 1 1-1Zm10 11a1 1 0 0 1-1 1h-1a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1ZM4 12a1 1 0 0 1-1 1H2a1 1 0 1 1 0-2h1a1 1 0 0 1 1 1Zm14.95 6.95a1 1 0 0 1-1.41 0l-.71-.71a1 1 0 0 1 1.41-1.41l.71.71a1 1 0 0 1 0 1.41ZM7.16 7.16a1 1 0 0 1-1.41 0l-.71-.71A1 1 0 0 1 6.45 5.04l.71.71a1 1 0 0 1 0 1.41Zm11.79-2.12a1 1 0 0 1 0 1.41l-.71.71a1 1 0 1 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0ZM7.16 16.84a1 1 0 0 1 0 1.41l-.71.71a1 1 0 0 1-1.41-1.41l.71-.71a1 1 0 0 1 1.41 0Z"/></svg>
+        <svg class="hidden dark:block" viewBox="0 0 24 24" width="18" height="18" aria-hidden="true"><path fill="currentColor" d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/></svg>
+      </button>
+      <button
+        id="navBurger"
+        type="button"
+        aria-label="メニュー"
+        aria-expanded="false"
+        aria-controls="navList"
+        class="hidden max-md:flex h-10 w-10 flex-col items-center justify-center gap-[5px] rounded-[10px] border border-line bg-surface-elevated"
+      >
+        <span class="h-0.5 w-[18px] bg-ink"></span>
+        <span class="h-0.5 w-[18px] bg-ink"></span>
+        <span class="h-0.5 w-[18px] bg-ink"></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<script is:inline>
+  (function () {
+    const header = document.getElementById('siteHeader');
+    const onScroll = () => {
+      if (!header) return;
+      header.classList.toggle('border-[var(--border)]', window.scrollY > 8);
+      header.classList.toggle('border-transparent', window.scrollY <= 8);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+
+    const burger = document.getElementById('navBurger');
+    const navEl = document.getElementById('primaryNav');
+    const OPEN = 'max-md:max-h-[70vh]';
+    burger?.addEventListener('click', () => {
+      const open = navEl?.classList.toggle(OPEN);
+      burger.setAttribute('aria-expanded', String(!!open));
+    });
+    document.getElementById('navList')?.addEventListener('click', (e) => {
+      if (e.target instanceof HTMLElement && e.target.closest('a')) {
+        navEl?.classList.remove(OPEN);
+        burger?.setAttribute('aria-expanded', 'false');
+      }
+    });
+
+    const toggle = document.getElementById('themeToggle');
+    toggle?.addEventListener('click', () => {
+      const root = document.documentElement;
+      const current =
+        root.dataset.theme ||
+        (window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light');
+      const next = current === 'dark' ? 'light' : 'dark';
+      root.dataset.theme = next;
+      try {
+        localStorage.setItem('theme', next);
+      } catch (e) {}
+    });
+  })();
+</script>

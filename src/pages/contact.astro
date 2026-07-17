@@ -1,0 +1,52 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+---
+
+<BaseLayout title="Contact" description="def合同会社へのお問い合わせ。開発のご相談・お見積りはお問い合わせフォームよりご連絡ください。">
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Contact</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">お問い合わせ</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        開発のご相談・お見積り・その他のお問い合わせは、以下のフォームよりお気軽にご連絡ください。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x grid grid-cols-[1.3fr_1fr] gap-8 max-lg:grid-cols-1">
+      <div class="reveal rounded-card border border-line bg-surface-elevated p-8 shadow-soft max-sm:p-6">
+        <h2 class="text-xl font-bold text-ink">お問い合わせフォーム</h2>
+        <p class="mt-2 text-ink-muted">
+          Googleフォームが開きます。いただいた内容を確認のうえ、担当者よりご連絡いたします。
+        </p>
+        <a class="btn btn-primary mt-4" href={site.contactFormUrl} target="_blank" rel="noopener">
+          フォームを開く
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+
+        <div class="mt-8 rounded-xl border border-line bg-surface-subtle p-5 text-sm text-ink-muted">
+          <p class="mb-2 font-bold text-ink">ご送信の前に</p>
+          <p class="mb-0">
+            当社は営業目的のご連絡をお断りしています。詳しくは
+            <a class="text-brand underline underline-offset-2" href="/sales-email-policy">営業目的のご連絡に関するポリシー</a>
+            をご確認ください。
+          </p>
+        </div>
+      </div>
+
+      <div class="reveal rounded-card border border-line bg-surface-subtle p-8 max-sm:p-6">
+        <h2 class="text-lg font-bold text-ink">対応内容の例</h2>
+        <ul class="mt-4 grid gap-2.5">
+          {['Webシステムの新規開発', 'スマホアプリの開発', '既存システムの改修・保守', 'システムの運用サポート'].map((t) => (
+            <li class="flex items-start gap-2 text-[0.95rem] text-ink">
+              <svg class="mt-1 shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+              {t}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const services = [
+  {
+    title: 'Webアプリケーション開発',
+    lead: '業務システムから顧客向けサービスまで、Web上で動くプロダクトを設計・開発します。',
+    points: [
+      '要件定義・仕様策定からの伴走',
+      'モダンなフロントエンド / バックエンド構成',
+      '保守・運用を見据えた設計',
+    ],
+    icon: 'M4 5h16v11H4zM2 20h20M9 9l2 2-2 2m4 0h3',
+  },
+  {
+    title: 'スマートフォンアプリ開発',
+    lead: 'iOS / Android 双方に対応したモバイルアプリを開発します。',
+    points: [
+      'クロスプラットフォーム開発でコスト最適化',
+      'プッシュ通知・カメラ等の端末機能連携',
+      'ストア申請・公開までサポート',
+    ],
+    icon: 'M7 3h10a1 1 0 0 1 1 1v16a1 1 0 0 1-1 1H7a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1zM10 18h4',
+  },
+  {
+    title: '保守・運用',
+    lead: 'リリース後も継続的に。改善・機能追加・障害対応まで長期的に支援します。',
+    points: [
+      '公開後の機能追加・改善',
+      'バグ修正・障害対応',
+      '長期的な運用サポート',
+    ],
+    icon: 'M12 3v2m0 14v2m9-9h-2M5 12H3m14.5-6.5-1.4 1.4M7.9 16.1l-1.4 1.4m11 0-1.4-1.4M7.9 7.9 6.5 6.5M15 12a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z',
+  },
+];
+
+const flow = [
+  { step: '01', title: 'ヒアリング', desc: '課題や実現したいことをお聞きし、本質的な要件を一緒に「定義」します。' },
+  { step: '02', title: 'ご提案・お見積り', desc: '実現方法・スケジュール・費用感をご提示します。' },
+  { step: '03', title: '設計・開発', desc: '小さく作って確認しながら進め、認識のズレを防ぎます。' },
+  { step: '04', title: 'リリース・運用', desc: '公開して終わりではなく、運用・改善まで継続的に支援します。' },
+];
+---
+
+<BaseLayout title="Services" description="def合同会社のサービス。Webアプリ開発・スマホアプリ開発・保守運用を、要件定義から運用まで一貫して提供します。">
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Services</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">サービス</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        企画・設計から開発、公開後の保守・運用まで。開発に関わることをまとめてお任せいただけます。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3.5rem,8vw,6rem)]">
+    <div class="container-x grid gap-6">
+      {services.map((s, i) => (
+        <div class="reveal grid grid-cols-[auto_1fr] gap-6 rounded-card border border-line bg-surface-elevated p-8 shadow-soft max-sm:grid-cols-1 max-sm:p-6">
+          <div class="grid h-14 w-14 place-items-center rounded-2xl bg-brand-soft text-brand">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none"><path d={s.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          </div>
+          <div>
+            <div class="flex items-baseline gap-3">
+              <span class="font-en text-sm font-semibold text-ink-faint">0{i + 1}</span>
+              <h2 class="text-xl font-bold text-ink">{s.title}</h2>
+            </div>
+            <p class="mt-2 text-ink-muted">{s.lead}</p>
+            <ul class="mt-4 grid gap-2">
+              {s.points.map((p) => (
+                <li class="flex items-start gap-2 text-[0.95rem] text-ink">
+                  <svg class="mt-1 shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      ))}
+    </div>
+  </section>
+
+  <section class="border-y border-line bg-surface-subtle py-[clamp(3.5rem,8vw,6rem)]">
+    <div class="container-x">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow">Flow</p>
+        <h2 class="mt-3 text-[clamp(1.6rem,3.6vw,2.4rem)] font-bold text-ink">お仕事の進め方</h2>
+      </div>
+      <div class="mt-10 grid grid-cols-4 gap-5 max-lg:grid-cols-2 max-sm:grid-cols-1">
+        {flow.map((f) => (
+          <div class="reveal rounded-card border border-line bg-surface-elevated p-6 shadow-soft">
+            <span class="font-en text-3xl font-bold text-brand/30">{f.step}</span>
+            <h3 class="mt-2 text-base font-bold text-ink">{f.title}</h3>
+            <p class="mt-1.5 mb-0 text-sm text-ink-muted">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3.5rem,8vw,6rem)]">
+    <div class="container-x text-center">
+      <h2 class="reveal text-[clamp(1.5rem,3.4vw,2.2rem)] font-bold text-ink">まずはご相談ください</h2>
+      <p class="reveal mx-auto mt-3 max-w-xl text-ink-muted">要件が固まっていない段階でも構いません。実現したいことからお聞きします。</p>
+      <div class="reveal mt-8 flex flex-wrap justify-center gap-3">
+        <a class="btn btn-primary" href={site.contactFormUrl} target="_blank" rel="noopener">お問い合わせフォーム</a>
+        <a class="btn btn-ghost" href="/works">開発実績を見る</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

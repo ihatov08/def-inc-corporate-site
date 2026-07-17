@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { company } from '../data/site';
+
+const rows = [
+  { label: '会社名', value: company.name },
+  { label: '代表社員', value: company.representative },
+  { label: '設立', value: company.established },
+  { label: '資本金', value: company.capital },
+  { label: '事業内容', value: company.business },
+  { label: '所在地', value: `〒${company.postalCode} ${company.address}` },
+];
+---
+
+<BaseLayout title="Company" description="def合同会社の会社概要。所在地・代表者・事業内容などの基本情報です。">
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Company</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">会社概要</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        岩手県八幡平市を拠点に、Webシステム・スマートフォンアプリの開発を行っています。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      <dl class="reveal overflow-hidden rounded-card border border-line">
+        {rows.map((r, i) => (
+          <div class:list={['grid grid-cols-[220px_1fr] max-sm:grid-cols-1', i % 2 === 1 && 'bg-surface-subtle']}>
+            <dt class="border-b border-line px-6 py-5 font-bold text-ink max-sm:border-b-0 max-sm:pb-1">{r.label}</dt>
+            <dd class="border-b border-line px-6 py-5 text-ink-muted max-sm:pt-0">{r.value}</dd>
+          </div>
+        ))}
+      </dl>
+    </div>
+  </section>
+
+  <section class="pb-[clamp(3.5rem,8vw,6rem)]">
+    <div class="container-x">
+      <div class="reveal overflow-hidden rounded-card border border-line shadow-soft">
+        <iframe
+          title="def合同会社 所在地の地図"
+          src={company.mapEmbedUrl}
+          width="100%"
+          height="420"
+          style="border:0; display:block;"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+          allowfullscreen></iframe>
+      </div>
+    </div>
+  </section>
+</BaseLayout>

@@ -1,0 +1,144 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { site } from '../../data/site';
+
+export const getStaticPaths = (async () => {
+  const works = await getCollection('works', ({ data }) => !data.draft);
+  return works.map((entry) => ({
+    params: { slug: entry.id },
+    props: { entry },
+  }));
+}) satisfies GetStaticPaths;
+
+const { entry } = Astro.props;
+const { data } = entry;
+const { Content } = await render(entry);
+
+const dateStr = data.date.toLocaleDateString('ja-JP', {
+  year: 'numeric',
+  month: 'long',
+});
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+  <article>
+    <!-- ヒーロー -->
+    <header
+      class="relative overflow-hidden text-white"
+      style={`background: linear-gradient(135deg, ${data.accent ?? 'var(--color-brand)'} 0%, color-mix(in srgb, ${data.accent ?? 'var(--color-brand)'} 55%, #000) 100%);`}
+    >
+      <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+        <a href="/works" class="inline-flex items-center gap-1.5 text-sm text-white/80 hover:text-white">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M19 12H5M11 18l-6-6 6-6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+          開発実績一覧へ
+        </a>
+        <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-white/85">
+          <span class="rounded-full bg-white/20 px-3 py-1 font-medium backdrop-blur-sm">{data.category}</span>
+          <span class="font-en">{dateStr}</span>
+        </div>
+        <h1 class="mt-4 max-w-3xl text-[clamp(1.8rem,4.5vw,3rem)] font-bold leading-tight">{data.title}</h1>
+        <p class="mt-4 max-w-2xl text-lg text-white/90">{data.summary}</p>
+      </div>
+    </header>
+
+    <div class="container-x grid grid-cols-[1fr_260px] gap-12 py-[clamp(3rem,7vw,5rem)] max-lg:grid-cols-1">
+      <div class="prose-work">
+        <Content />
+      </div>
+
+      <aside class="max-lg:order-first">
+        <div class="sticky top-24 rounded-card border border-line bg-surface-subtle p-6">
+          <dl class="grid gap-4 text-sm">
+            {data.role && (
+              <div>
+                <dt class="font-en text-xs uppercase tracking-wider text-ink-faint">Role</dt>
+                <dd class="mt-1 text-ink">{data.role}</dd>
+              </div>
+            )}
+            <div>
+              <dt class="font-en text-xs uppercase tracking-wider text-ink-faint">Category</dt>
+              <dd class="mt-1 text-ink">{data.category}</dd>
+            </div>
+            {data.tags.length > 0 && (
+              <div>
+                <dt class="font-en text-xs uppercase tracking-wider text-ink-faint">Stack</dt>
+                <dd class="mt-2 flex flex-wrap gap-1.5">
+                  {data.tags.map((t) => (<span class="chip">{t}</span>))}
+                </dd>
+              </div>
+            )}
+            {data.link && (
+              <div>
+                <a class="btn btn-ghost btn-sm w-full" href={data.link} target="_blank" rel="noopener">
+                  サイトを見る
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </a>
+              </div>
+            )}
+          </dl>
+        </div>
+      </aside>
+    </div>
+
+    <div class="container-x pb-[clamp(3.5rem,8vw,6rem)]">
+      <div class="flex flex-wrap items-center justify-between gap-4 rounded-xl2 border border-line bg-surface-subtle px-8 py-8 max-sm:px-5">
+        <p class="mb-0 font-bold text-ink">同様のご相談はお気軽に</p>
+        <a class="btn btn-primary" href={site.contactFormUrl} target="_blank" rel="noopener">お問い合わせフォーム</a>
+      </div>
+    </div>
+  </article>
+</BaseLayout>
+
+<style>
+  .prose-work :global(h2) {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 2.4rem 0 0.9rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 1px solid var(--border);
+  }
+  .prose-work :global(h2:first-child) {
+    margin-top: 0;
+  }
+  .prose-work :global(h3) {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text);
+    margin: 1.8rem 0 0.6rem;
+  }
+  .prose-work :global(p) {
+    color: var(--text-muted);
+    margin: 0 0 1.2rem;
+  }
+  .prose-work :global(ul),
+  .prose-work :global(ol) {
+    color: var(--text-muted);
+    margin: 0 0 1.3rem;
+    padding-left: 1.3rem;
+  }
+  .prose-work :global(li) {
+    margin-bottom: 0.5rem;
+  }
+  .prose-work :global(ul li::marker) {
+    color: var(--color-brand);
+  }
+  .prose-work :global(a) {
+    color: var(--color-brand);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+  }
+  .prose-work :global(strong) {
+    color: var(--text);
+    font-weight: 700;
+  }
+  .prose-work :global(code) {
+    background: var(--bg-subtle);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 0.1rem 0.4rem;
+    font-size: 0.9em;
+  }
+</style>

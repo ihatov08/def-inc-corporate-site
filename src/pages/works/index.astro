@@ -1,0 +1,118 @@
+---
+import { getCollection } from 'astro:content';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import WorkCard from '../../components/WorkCard.astro';
+import { site } from '../../data/site';
+
+const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// カテゴリ一覧（フィルタ用）
+const categories = [...new Set(works.map((w) => w.data.category))];
+---
+
+<BaseLayout title="Works" description="def合同会社の開発実績。Webシステム・スマートフォンアプリの受託開発事例をご紹介します。">
+  <section class="border-b border-line bg-surface-subtle">
+    <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
+      <p class="eyebrow reveal is-visible">Works</p>
+      <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">開発実績</h1>
+      <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
+        これまでに手がけたWebシステム・アプリ開発の事例です。守秘義務の都合上、内容を一部変更・抽象化して掲載しています。
+      </p>
+    </div>
+  </section>
+
+  <section class="py-[clamp(3rem,7vw,5rem)]">
+    <div class="container-x">
+      {works.length > 0 ? (
+        <>
+          {categories.length > 1 && (
+            <div class="reveal mb-10 flex flex-wrap gap-2" id="filterBar" role="group" aria-label="カテゴリで絞り込み">
+              <button type="button" class="filter-chip is-active" data-cat="all">すべて</button>
+              {categories.map((c) => (
+                <button type="button" class="filter-chip" data-cat={c}>{c}</button>
+              ))}
+            </div>
+          )}
+
+          <div id="worksGrid" class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1">
+            {works.map((w) => (
+              <div class="work-item contents" data-cat={w.data.category}>
+                <WorkCard
+                  href={`/works/${w.id}`}
+                  title={w.data.title}
+                  summary={w.data.summary}
+                  category={w.data.category}
+                  tags={w.data.tags}
+                  accent={w.data.accent}
+                />
+              </div>
+            ))}
+          </div>
+        </>
+      ) : (
+        <div class="rounded-card border border-dashed border-line bg-surface-subtle p-12 text-center">
+          <p class="mb-2 text-lg font-bold text-ink">実績は準備中です</p>
+          <p class="mb-0 text-ink-muted">
+            <code class="rounded bg-surface-elevated px-1.5 py-0.5 text-sm">src/content/works/</code>
+            にMarkdownを追加すると、ここに実績が並びます。
+          </p>
+        </div>
+      )}
+    </div>
+  </section>
+
+  <section class="pb-[clamp(3.5rem,8vw,6rem)]">
+    <div class="container-x">
+      <div class="reveal rounded-xl2 border border-line bg-surface-subtle px-8 py-12 text-center max-sm:px-5">
+        <h2 class="text-[clamp(1.4rem,3.2vw,2rem)] font-bold text-ink">似たようなお悩みはありませんか?</h2>
+        <p class="mx-auto mt-3 max-w-xl text-ink-muted">同じ業種・課題でのご相談も歓迎です。お気軽にお問い合わせください。</p>
+        <a class="btn btn-primary mt-6" href={site.contactFormUrl} target="_blank" rel="noopener">お問い合わせフォーム</a>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .filter-chip {
+    padding: 0.5rem 1.05rem;
+    border-radius: 999px;
+    border: 1px solid var(--border);
+    background: var(--bg-elevated);
+    color: var(--text-muted);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.15s ease;
+  }
+  .filter-chip:hover {
+    border-color: var(--color-brand);
+    color: var(--color-brand);
+  }
+  .filter-chip.is-active {
+    background: var(--color-brand);
+    border-color: var(--color-brand);
+    color: #fff;
+  }
+</style>
+
+<script is:inline>
+  (function () {
+    const bar = document.getElementById('filterBar');
+    if (!bar) return;
+    const items = Array.from(document.querySelectorAll('.work-item'));
+    bar.addEventListener('click', (e) => {
+      const btn = e.target instanceof HTMLElement ? e.target.closest('.filter-chip') : null;
+      if (!btn) return;
+      const cat = btn.getAttribute('data-cat');
+      bar.querySelectorAll('.filter-chip').forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      items.forEach((it) => {
+        const show = cat === 'all' || it.getAttribute('data-cat') === cat;
+        it.classList.toggle('hidden', !show);
+        it.classList.toggle('contents', show);
+      });
+    });
+  })();
+</script>
