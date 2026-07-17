@@ -11,11 +11,21 @@ const { course: c } = Astro.props;
   class="reveal group flex flex-col rounded-[var(--radius-card)] border border-line bg-surface-elevated transition-colors duration-200 hover:border-brand"
 >
   <div
-    class="flex h-24 items-end justify-between overflow-hidden rounded-t-[var(--radius-card)] p-3 text-white"
-    style={`background: ${c.accent ?? 'var(--color-brand)'};`}
+    class="relative flex h-32 items-end justify-between overflow-hidden rounded-t-[var(--radius-card)] p-3 text-white"
+    style={c.image ? undefined : `background: ${c.accent ?? 'var(--color-brand)'};`}
   >
-    <span class="rounded-[2px] border border-white/40 px-2 py-0.5 font-en text-[0.7rem] font-medium">{c.category}</span>
-    <span class="font-en text-xs font-semibold opacity-90">{c.platform ?? 'Udemy'}</span>
+    {c.image && (
+      <img
+        src={c.image}
+        alt={`${c.title} のサムネイル`}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 h-full w-full object-cover"
+      />
+    )}
+    {c.image && <span class="absolute inset-0 bg-linear-to-t from-black/55 to-transparent"></span>}
+    <span class="relative rounded-[2px] border border-white/40 bg-black/20 px-2 py-0.5 font-en text-[0.7rem] font-medium">{c.category}</span>
+    <span class="relative font-en text-xs font-semibold opacity-90">{c.platform ?? 'Udemy'}</span>
   </div>
   <div class="flex flex-1 flex-col p-4">
     <h3 class="text-sm font-bold leading-snug text-ink transition-colors group-hover:text-brand line-clamp-4">{c.title}</h3>
