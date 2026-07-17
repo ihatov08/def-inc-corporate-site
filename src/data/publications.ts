@@ -149,8 +149,14 @@ export const courses: Course[] = [
   },
 ];
 
-// OSSコントリビュート（外部の公開プロジェクトへのマージ済みPR）
+// OSSコントリビュート（外部の公開プロジェクトへのマージ済みPR。スター数の多い順）
 export const ossContributions: OssContribution[] = [
+  {
+    repo: 'heartcombo/devise',
+    description: 'Ruby on Rails の定番認証ライブラリ',
+    tag: 'Rails',
+    link: 'https://github.com/heartcombo/devise/pulls?q=is%3Apr+author%3Aihatov08',
+  },
   {
     repo: 'sqlc-dev/sqlc',
     description: 'SQLからタイプセーフなコードを生成するツール（Go）',
@@ -158,28 +164,40 @@ export const ossContributions: OssContribution[] = [
     link: 'https://github.com/sqlc-dev/sqlc/pulls?q=is%3Apr+author%3Aihatov08',
   },
   {
+    repo: 'tabulapdf/tabula',
+    description: 'PDF内の表データを抽出するツール',
+    tag: 'Ruby',
+    link: 'https://github.com/tabulapdf/tabula/pulls?q=is%3Apr+author%3Aihatov08',
+  },
+  {
     repo: 'lynndylanhurley/devise_token_auth',
-    description: 'Ruby on Rails 向けのトークン認証ライブラリ',
+    description: 'Rails製JSON API向けのトークン認証ライブラリ',
     tag: 'Rails',
     link: 'https://github.com/lynndylanhurley/devise_token_auth/pulls?q=is%3Apr+author%3Aihatov08',
+  },
+  {
+    repo: 'active-hash/active_hash',
+    description: '定数データをActiveRecordのように扱えるRails向けライブラリ',
+    tag: 'Rails',
+    link: 'https://github.com/active-hash/active_hash/pulls?q=is%3Apr+author%3Aihatov08',
+  },
+  {
+    repo: 'fgrehm/letter_opener_web',
+    description: '開発環境で送信メールをブラウザで確認できるRailsライブラリ',
+    tag: 'Rails',
+    link: 'https://github.com/fgrehm/letter_opener_web/pulls?q=is%3Apr+author%3Aihatov08',
+  },
+  {
+    repo: 'TechBooster/ReVIEW-Template',
+    description: '技術書の執筆・組版に使われる Re:VIEW のテンプレート',
+    tag: 'Re:VIEW',
+    link: 'https://github.com/TechBooster/ReVIEW-Template/pulls?q=is%3Apr+author%3Aihatov08',
   },
   {
     repo: 'coderdojo-japan/coderdojo.jp',
     description: '子ども向けプログラミング道場 CoderDojo Japan の公式サイト',
     tag: 'Rails',
     link: 'https://github.com/coderdojo-japan/coderdojo.jp/pulls?q=is%3Apr+author%3Aihatov08',
-  },
-  {
-    repo: 'TechBooster/ReVIEW-Template',
-    description: '技術書の執筆・組版に使われる ReVIEW のテンプレート',
-    tag: 'ReVIEW',
-    link: 'https://github.com/TechBooster/ReVIEW-Template/pulls?q=is%3Apr+author%3Aihatov08',
-  },
-  {
-    repo: 'happiness-chain/rails_template',
-    description: 'エンジニア学習コミュニティ向けの Rails 開発テンプレート',
-    tag: 'Rails',
-    link: 'https://github.com/happiness-chain/rails_template/pulls?q=is%3Apr+author%3Aihatov08',
   },
 ];
 
