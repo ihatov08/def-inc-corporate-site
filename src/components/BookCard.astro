@@ -10,14 +10,26 @@ const { book: b } = Astro.props;
   rel="noopener"
   class="reveal group grid grid-cols-[96px_1fr] gap-5 rounded-[var(--radius-card)] border border-line bg-surface-elevated p-5 transition-colors duration-200 hover:border-brand max-sm:grid-cols-[80px_1fr]"
 >
-  <div
-    class="relative flex aspect-3/4 flex-col justify-between overflow-hidden rounded-[2px] p-2.5 text-white"
-    style={`background: ${b.accent ?? 'var(--color-brand)'};`}
-  >
-    <span class="text-[0.5rem] leading-tight opacity-80 line-clamp-3">{b.title}</span>
-    {b.volume && <span class="font-en text-[0.6rem] font-bold">{b.volume}</span>}
-    <span class="absolute inset-y-0 left-0 w-[3px] bg-black/25"></span>
-  </div>
+  {b.image ? (
+    <div class="aspect-3/4 overflow-hidden rounded-[2px] shadow-sm">
+      <img
+        src={b.image}
+        alt={`${b.title}${b.volume ? `　${b.volume}` : ''} の表紙`}
+        loading="lazy"
+        decoding="async"
+        class="h-full w-full object-cover"
+      />
+    </div>
+  ) : (
+    <div
+      class="relative flex aspect-3/4 flex-col justify-between overflow-hidden rounded-[2px] p-2.5 text-white"
+      style={`background: ${b.accent ?? 'var(--color-brand)'};`}
+    >
+      <span class="text-[0.5rem] leading-tight opacity-80 line-clamp-3">{b.title}</span>
+      {b.volume && <span class="font-en text-[0.6rem] font-bold">{b.volume}</span>}
+      <span class="absolute inset-y-0 left-0 w-[3px] bg-black/25"></span>
+    </div>
+  )}
 
   <div class="min-w-0 self-center">
     <div class="mb-1.5 flex flex-wrap items-center gap-x-2 gap-y-1">
