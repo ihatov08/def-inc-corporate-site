@@ -14,17 +14,16 @@ const { href, title, summary, category, tags = [], accent, featured = false } = 
 <a
   href={href}
   class:list={[
-    'reveal group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface-elevated shadow-[var(--shadow-soft)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[var(--shadow-card)]',
+    'reveal group relative flex flex-col overflow-hidden rounded-[var(--radius-card)] border border-line bg-surface-elevated transition-colors duration-200 hover:border-brand',
     featured && 'md:col-span-2',
   ]}
 >
-  <div
-    class="relative flex h-40 items-end overflow-hidden p-5"
-    style={`background: linear-gradient(135deg, ${accent ?? 'var(--color-brand)'} 0%, color-mix(in srgb, ${accent ?? 'var(--color-brand)'} 60%, #000) 100%);`}
-  >
-    <span class="absolute -right-3 -top-4 select-none font-en text-[5.5rem] font-bold leading-none text-white/15">{category}</span>
-    <span class="relative rounded-full bg-white/20 px-3 py-1 text-xs font-medium text-white backdrop-blur-sm">{category}</span>
-    <div class="pointer-events-none absolute inset-0 bg-linear-to-t from-black/25 to-transparent opacity-0 transition-opacity duration-300 group-hover:opacity-100"></div>
+  <!-- アクセントのシグナルライン -->
+  <span class="h-[3px] w-full" style={`background: ${accent ?? 'var(--color-brand)'};`}></span>
+
+  <div class="relative flex h-24 items-end justify-between border-b border-line bg-surface-subtle p-4">
+    <span class="pointer-events-none absolute -top-2 right-2 select-none font-en text-[3.4rem] font-bold leading-none text-ink-faint/15">{category}</span>
+    <span class="chip relative">{category}</span>
   </div>
 
   <div class="flex flex-1 flex-col p-6">
@@ -35,7 +34,7 @@ const { href, title, summary, category, tags = [], accent, featured = false } = 
         {tags.slice(0, 4).map((t) => (<span class="chip">{t}</span>))}
       </div>
     )}
-    <span class="mt-4 inline-flex items-center gap-1 font-en text-sm font-medium text-brand">
+    <span class="mt-4 inline-flex items-center gap-1.5 font-en text-sm font-medium text-brand">
       詳細を見る
       <svg width="15" height="15" viewBox="0 0 24 24" fill="none" class="transition-transform duration-200 group-hover:translate-x-1"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
     </span>

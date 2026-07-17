@@ -8,13 +8,13 @@ const { course: c } = Astro.props;
   href={c.link}
   target="_blank"
   rel="noopener"
-  class="reveal group flex flex-col rounded-card border border-line bg-surface-elevated shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-card"
+  class="reveal group flex flex-col rounded-[var(--radius-card)] border border-line bg-surface-elevated transition-colors duration-200 hover:border-brand"
 >
   <div
-    class="flex h-24 items-end justify-between overflow-hidden rounded-t-card p-3 text-white"
-    style={`background: linear-gradient(135deg, ${c.accent ?? 'var(--color-brand)'}, color-mix(in srgb, ${c.accent ?? 'var(--color-brand)'} 55%, #000));`}
+    class="flex h-24 items-end justify-between overflow-hidden rounded-t-[var(--radius-card)] p-3 text-white"
+    style={`background: ${c.accent ?? 'var(--color-brand)'};`}
   >
-    <span class="rounded-full bg-white/20 px-2.5 py-0.5 text-xs font-medium backdrop-blur-sm">{c.category}</span>
+    <span class="rounded-[2px] border border-white/40 px-2 py-0.5 font-en text-[0.7rem] font-medium">{c.category}</span>
     <span class="font-en text-xs font-semibold opacity-90">{c.platform ?? 'Udemy'}</span>
   </div>
   <div class="flex flex-1 flex-col p-4">
