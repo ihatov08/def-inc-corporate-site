@@ -35,11 +35,11 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
     <meta property="og:locale" content="ja_JP" />
     <meta name="twitter:card" content="summary_large_image" />
 
-    <!-- 英字見出し用フォント -->
+    <!-- 本文用 Inter / 英字・数字・ラベル用 JetBrains Mono -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
       rel="stylesheet"
     />
 
@@ -63,10 +63,12 @@ const canonical = new URL(Astro.url.pathname, site.url).href;
       >本文へスキップ</a
     >
     <Header />
-    <main id="main">
-      <slot />
-    </main>
-    <Footer />
+    <div class="container-x frame-x px-0!">
+      <main id="main">
+        <slot />
+      </main>
+      <Footer />
+    </div>
 
     <!-- スクロール連動フェードイン -->
     <script is:inline>

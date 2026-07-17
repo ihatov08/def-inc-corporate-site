@@ -36,37 +36,12 @@ const services = [
 
 <BaseLayout>
   <!-- Hero -->
-  <section class="relative overflow-hidden">
-    <!-- 背景: 岩手の自然（山並み）モチーフ。/images/hero.jpg を置くと写真が重なります -->
-    <div class="pointer-events-none absolute inset-0 -z-10" aria-hidden="true">
-      <!-- 空のグラデーション -->
-      <div
-        class="absolute inset-0"
-        style="background:
-          radial-gradient(70% 60% at 15% 0%, color-mix(in srgb, var(--color-brand) 20%, transparent), transparent 70%),
-          radial-gradient(55% 55% at 100% 10%, color-mix(in srgb, var(--color-brand) 12%, transparent), transparent 70%);"
-      >
-      </div>
-      <!-- 任意の写真レイヤー（存在すれば表示。無ければ透明） -->
-      <div class="hero-photo absolute inset-0"></div>
-      <!-- 岩手山をイメージした山並みのシルエット -->
-      <svg
-        class="absolute inset-x-0 bottom-0 w-full text-brand"
-        viewBox="0 0 1440 320"
-        preserveAspectRatio="none"
-        style="height: min(46vh, 420px);"
-      >
-        <path fill="currentColor" fill-opacity="0.06"
-          d="M0,220 L240,120 L360,180 L560,60 L760,190 L980,90 L1200,200 L1440,130 L1440,320 L0,320 Z" />
-        <path fill="currentColor" fill-opacity="0.10"
-          d="M0,270 L200,190 L420,250 L640,150 L820,240 L1040,170 L1260,260 L1440,210 L1440,320 L0,320 Z" />
-        <path fill="currentColor" fill-opacity="0.16"
-          d="M0,300 L260,250 L520,290 L780,240 L1020,295 L1280,255 L1440,290 L1440,320 L0,320 Z" />
-      </svg>
-    </div>
-    <div class="container-x flex min-h-[86vh] flex-col justify-center py-24">
+  <section class="relative border-b border-line">
+    <!-- 左端のシグナルライン（アクセント） -->
+    <span class="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand" aria-hidden="true"></span>
+    <div class="container-x flex min-h-[82vh] flex-col justify-center py-24">
       <p class="eyebrow reveal is-visible">{site.tagline}</p>
-      <h1 class="reveal is-visible mt-4 max-w-4xl text-[clamp(2.2rem,6.5vw,4.4rem)] font-bold leading-[1.15] tracking-tight text-ink">
+      <h1 class="reveal is-visible mt-5 max-w-4xl text-[clamp(2.2rem,6.5vw,4.4rem)] font-bold leading-[1.1] tracking-tight text-ink">
         課題を<span class="text-brand">定義</span>し、<br class="max-sm:hidden" />役に立つプロダクトへ。
       </h1>
       <p class="reveal is-visible mt-6 max-w-2xl text-lg text-ink-muted">
@@ -77,18 +52,18 @@ const services = [
         <a class="btn btn-ghost" href="/contact">お問い合わせ</a>
       </div>
 
-      <dl class="reveal mt-16 grid max-w-2xl grid-cols-3 gap-6 border-t border-line pt-8 max-sm:grid-cols-1 max-sm:gap-4">
-        <div>
+      <dl class="reveal mt-16 grid max-w-3xl grid-cols-3 border border-line max-sm:grid-cols-1">
+        <div class="border-r border-line p-5 max-sm:border-b max-sm:border-r-0">
           <dt class="font-en text-3xl font-bold text-ink">2019</dt>
-          <dd class="text-sm text-ink-muted">設立以来の開発実績</dd>
+          <dd class="mt-1 font-en text-xs uppercase tracking-wider text-ink-muted">Since / 設立</dd>
         </div>
-        <div>
+        <div class="border-r border-line p-5 max-sm:border-b max-sm:border-r-0">
           <dt class="font-en text-3xl font-bold text-ink">Web / App</dt>
-          <dd class="text-sm text-ink-muted">両輪での開発体制</dd>
+          <dd class="mt-1 font-en text-xs uppercase tracking-wider text-ink-muted">両輪の開発体制</dd>
         </div>
-        <div>
-          <dt class="font-en text-3xl font-bold text-ink">一貫対応</dt>
-          <dd class="text-sm text-ink-muted">設計から運用まで</dd>
+        <div class="p-5">
+          <dt class="font-en text-3xl font-bold text-ink">End-to-End</dt>
+          <dd class="mt-1 font-en text-xs uppercase tracking-wider text-ink-muted">設計から運用まで</dd>
         </div>
       </dl>
     </div>
@@ -125,8 +100,8 @@ const services = [
 
       <div class="mt-12 grid grid-cols-3 gap-6 max-lg:grid-cols-1">
         {services.map((s) => (
-          <div class="reveal rounded-[var(--radius-card)] border border-line bg-surface-elevated p-7 shadow-[var(--shadow-soft)] transition-transform duration-300 hover:-translate-y-1">
-            <div class="grid h-12 w-12 place-items-center rounded-xl bg-brand-soft text-brand">
+          <div class="reveal rounded-[var(--radius-card)] border border-line bg-surface-elevated p-7 transition-colors duration-200 hover:border-brand">
+            <div class="grid h-12 w-12 place-items-center rounded-[var(--radius-card)] border border-line text-brand">
               <svg width="24" height="24" viewBox="0 0 24 24" fill="none"><path d={s.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
             </div>
             <h3 class="mt-5 text-lg font-bold text-ink">{s.title}</h3>
@@ -239,17 +214,16 @@ const services = [
   <!-- CTA -->
   <section class="pb-[clamp(4rem,9vw,7rem)]">
     <div class="container-x">
-      <div
-        class="reveal relative overflow-hidden rounded-[var(--radius-xl2)] px-8 py-16 text-center text-white max-sm:px-5"
-        style="background: linear-gradient(135deg, var(--color-brand), var(--color-brand-strong));"
-      >
-        <h2 class="text-[clamp(1.5rem,3.4vw,2.2rem)] font-bold">プロジェクトのご相談はお気軽に</h2>
-        <p class="mx-auto mt-3 max-w-xl text-white/85">
+      <div class="reveal relative overflow-hidden rounded-[var(--radius-xl2)] border border-line bg-surface-subtle px-8 py-16 text-center max-sm:px-5">
+        <span class="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand" aria-hidden="true"></span>
+        <p class="eyebrow">Contact</p>
+        <h2 class="mt-4 text-[clamp(1.5rem,3.4vw,2.2rem)] font-bold text-ink">プロジェクトのご相談はお気軽に</h2>
+        <p class="mx-auto mt-3 max-w-xl text-ink-muted">
           「こんなことはできる?」という段階でも大丈夫です。まずはお話をお聞かせください。
         </p>
         <div class="mt-8 flex flex-wrap justify-center gap-3">
-          <a class="btn bg-white text-brand-strong hover:bg-white/90" href={site.contactFormUrl} target="_blank" rel="noopener">お問い合わせフォーム</a>
-          <a class="btn border-white/40 text-white hover:border-white" href="/contact">お問い合わせ方法</a>
+          <a class="btn btn-primary" href={site.contactFormUrl} target="_blank" rel="noopener">お問い合わせフォーム</a>
+          <a class="btn btn-ghost" href="/contact">お問い合わせ方法</a>
         </div>
       </div>
     </div>

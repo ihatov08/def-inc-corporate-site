@@ -26,12 +26,12 @@ export const company = {
 
 // グローバルナビゲーション
 export const nav = [
-  { label: 'Home', href: '/' },
-  { label: 'Services', href: '/services' },
-  { label: 'Works', href: '/works' },
-  { label: 'Publications', href: '/publications' },
-  { label: 'Courses', href: '/courses' },
+  { label: 'ホーム', href: '/' },
+  { label: 'サービス', href: '/services' },
+  { label: '開発実績', href: '/works' },
+  { label: '出版実績', href: '/publications' },
+  { label: '講座', href: '/courses' },
   { label: 'OSS', href: '/oss' },
-  { label: 'Company', href: '/company' },
-  { label: 'Contact', href: '/contact' },
+  { label: '会社概要', href: '/company' },
+  { label: 'お問い合わせ', href: '/contact' },
 ] as const;
