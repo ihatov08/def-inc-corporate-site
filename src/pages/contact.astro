@@ -15,37 +15,53 @@ import { site } from '../data/site';
   </section>
 
   <section class="py-[clamp(3rem,7vw,5rem)]">
-    <div class="container-x grid grid-cols-[1.3fr_1fr] gap-8 max-lg:grid-cols-1">
-      <div class="reveal rounded-card border border-line bg-surface-elevated p-8 shadow-soft max-sm:p-6">
+    <div class="container-x grid grid-cols-[1fr_20rem] gap-8 max-lg:grid-cols-1">
+      <div class="reveal rounded-card border border-line bg-surface-elevated p-8 shadow-soft max-lg:order-2 max-sm:p-6">
         <h2 class="text-xl font-bold text-ink">お問い合わせフォーム</h2>
         <p class="mt-2 text-ink-muted">
-          Googleフォームが開きます。いただいた内容を確認のうえ、担当者よりご連絡いたします。
+          下記フォームからご送信ください。いただいた内容を確認のうえ、担当者よりご連絡いたします。
         </p>
-        <a class="btn btn-primary mt-4" href={site.contactFormUrl} target="_blank" rel="noopener">
-          フォームを開く
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none"><path d="M7 17 17 7M8 7h9v9" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-        </a>
 
-        <div class="mt-8 rounded-xl border border-line bg-surface-subtle p-5 text-sm text-ink-muted">
-          <p class="mb-2 font-bold text-ink">ご送信の前に</p>
+        {/* Googleフォームの埋め込み。iframe 内はGoogle側のライトテーマ固定のため白地で囲む */}
+        <div class="mt-6 overflow-hidden rounded-xl border border-line bg-white">
+          <iframe
+            src={site.contactFormEmbedUrl}
+            title="def合同会社 お問い合わせフォーム"
+            loading="lazy"
+            class="block h-[1150px] w-full max-md:h-[1400px]"
+            frameborder="0"
+            marginheight="0"
+            marginwidth="0">読み込んでいます…</iframe>
+        </div>
+
+        <p class="mt-4 text-sm text-ink-muted">
+          フォームが表示されない場合は
+          <a class="text-brand underline underline-offset-2" href={site.contactFormUrl} target="_blank" rel="noopener">別のタブで開く</a>
+          こともできます。
+        </p>
+      </div>
+
+      <div class="reveal grid content-start gap-6 max-lg:order-1">
+        <div class="rounded-card border border-line bg-surface-subtle p-8 max-sm:p-6">
+          <h2 class="text-lg font-bold text-ink">対応内容の例</h2>
+          <ul class="mt-4 grid gap-2.5">
+            {['Webシステムの新規開発', 'スマホアプリの開発', '既存システムの改修・保守', 'システムの運用サポート'].map((t) => (
+              <li class="flex items-start gap-2 text-[0.95rem] text-ink">
+                <svg class="mt-1 shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                {t}
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <div class="rounded-card border border-line bg-surface-subtle p-8 text-sm text-ink-muted max-sm:p-6">
+          <p class="mb-2 text-base font-bold text-ink">ご送信の前に</p>
           <p class="mb-0">
             当社は営業目的のご連絡をお断りしています。詳しくは
             <a class="text-brand underline underline-offset-2" href="/sales-email-policy">営業目的のご連絡に関するポリシー</a>
             をご確認ください。
           </p>
         </div>
-      </div>
-
-      <div class="reveal rounded-card border border-line bg-surface-subtle p-8 max-sm:p-6">
-        <h2 class="text-lg font-bold text-ink">対応内容の例</h2>
-        <ul class="mt-4 grid gap-2.5">
-          {['Webシステムの新規開発', 'スマホアプリの開発', '既存システムの改修・保守', 'システムの運用サポート'].map((t) => (
-            <li class="flex items-start gap-2 text-[0.95rem] text-ink">
-              <svg class="mt-1 shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none"><path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-              {t}
-            </li>
-          ))}
-        </ul>
       </div>
     </div>
   </section>
