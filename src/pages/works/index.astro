@@ -12,7 +12,7 @@ const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
 const categories = [...new Set(works.map((w) => w.data.category))];
 ---
 
-<BaseLayout title="Works" description="def合同会社の開発実績。Webシステム・スマートフォンアプリの受託開発事例をご紹介します。">
+<BaseLayout title="開発実績" description="def合同会社の開発実績。Webシステム・スマートフォンアプリの受託開発事例をご紹介します。">
   <section class="border-b border-line bg-surface-subtle">
     <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
       <p class="eyebrow reveal is-visible">Works</p>
