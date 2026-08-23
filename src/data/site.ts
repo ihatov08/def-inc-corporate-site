@@ -9,6 +9,9 @@ export const site = {
   description:
     'def合同会社は、岩手県八幡平市を拠点にWebシステム・スマートフォンアプリの企画・開発・保守運用を行う開発会社です。お客様のビジネスに寄り添い、課題を「定義」するところから伴走します。',
   contactFormUrl: 'https://forms.gle/swa8kjGTCskRL2gv9',
+  // 上記フォームの埋め込み用URL（短縮URLは iframe に使えないため実URL + embedded=true）
+  contactFormEmbedUrl:
+    'https://docs.google.com/forms/d/e/1FAIpQLSeKAAqkIiLtxHNPRJ3_bVXlyRC8jhQlzl-AnG_W422EcoeAnA/viewform?embedded=true',
   // 代表の技術ブログ（/qr などの外部リンクで使用）
   blogUrl: 'https://blog.tomoyayoshida.com',
   copyrightSince: 2019,
