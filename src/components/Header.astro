@@ -21,7 +21,7 @@ const isActive = (href: string) =>
       <ul id="navList" class="flex list-none gap-0.5 max-lg:flex-col max-lg:gap-1 max-lg:px-[clamp(1.25rem,5vw,2.5rem)] max-lg:py-5">
         {
           nav.map((item) => (
-            <li>
+            <li class={item.href === '/contact' ? 'xl:hidden' : undefined}>
               <a
                 href={item.href}
                 aria-current={isActive(item.href) ? 'page' : undefined}
@@ -35,7 +35,7 @@ const isActive = (href: string) =>
       </ul>
     </nav>
 
-    <div class="flex items-center gap-2.5">
+    <div class="flex items-center gap-2.5 max-lg:ml-auto">
       <a class="btn btn-primary btn-sm max-xl:hidden" href="/contact">お問い合わせ</a>
       <button
         id="themeToggle"
