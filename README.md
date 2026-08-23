@@ -76,6 +76,45 @@ npm run preview   # ビルド結果のプレビュー
 | `public/images/representative.jpg` | 会社概要ページの代表写真（未配置時は「Y」モノグラム表示） |
 | `public/images/hero.jpg` | トップのヒーロー背景に重ねる岩手の風景写真（任意。未配置時は山並みSVGのみ） |
 
+## ロゴ / ブランドアセット
+
+ロゴは名刺の元データ（`吉田様_名刺fix.ai` のアウトライン化済みパス）から抽出した正式データです。
+トレースや作り直しではありません。抽出元・検証内容は [`public/brand/SOURCE.txt`](public/brand/SOURCE.txt) に残してあります。
+
+サイト内（ヘッダー・フッター）では [`src/components/Logo.astro`](src/components/Logo.astro) を使います。
+`currentColor` で塗るのでライト / ダークに自動で追従します。
+
+```astro
+---
+import Logo from '../components/Logo.astro';
+---
+<Logo class="h-[24px] w-auto" />
+```
+
+サイト外（資料・スライド・他サービス）で使う静的ファイルは `public/brand/` に置いてあります。
+
+| ファイル | 内容 |
+| --- | --- |
+| `brand/def-logo.svg` | 正式ロゴ / 黒 `#000000`（通常はこれ） |
+| `brand/def-logo-white.svg` | 正式ロゴ / 白（濃い背景用） |
+| `brand/def-logo-currentcolor.svg` | 正式ロゴ / `currentColor`（HTML にインライン展開して CSS で着色） |
+| `brand/def-mark.svg` / `-white.svg` / `-currentcolor.svg` | `d` 単体のシンボル（同じパスから切り出し） |
+| `brand/def-mark-tile.svg` | `d` + 角丸タイル（アプリアイコン原本 512px） |
+| `brand/*.png` | SVG が使えない場所向けのラスター書き出し |
+| `brand/SOURCE.txt` | 抽出元・実寸・検証結果 |
+
+印刷と同じ黒に合わせたい場合は SVG 内の `fill` を `#231916`（スミK100 / Japan Color）に変更してください。
+`fill` は1箇所だけなので任意の色に差し替えられます。
+
+ファビコン類はルート直下に配置し、[`src/layouts/BaseLayout.astro`](src/layouts/BaseLayout.astro) から読み込んでいます。
+`def` 全体だと 16px でカウンターが潰れるため、`d` 単体のシンボルを使っています。
+
+| ファイル | 用途 |
+| --- | --- |
+| `public/favicon.svg` | メインのファビコン（SVG） |
+| `public/favicon.ico` | SVG 非対応ブラウザ向けフォールバック（16/32/48px） |
+| `public/apple-touch-icon.png` | iOS のホーム画面追加用（180px） |
+
 ## 会社情報の編集
 
 会社名・住所・お問い合わせフォームURL・ナビゲーションなどは
