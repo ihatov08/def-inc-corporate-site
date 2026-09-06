@@ -8,17 +8,18 @@ const rows = [
   { label: '設立', value: company.established },
   { label: '資本金', value: company.capital },
   { label: '事業内容', value: company.business },
-  { label: '所在地', value: `〒${company.postalCode} ${company.address}` },
+  { label: '本店所在地', value: `〒${company.postalCode} ${company.address}（登記上の所在地）` },
+  { label: '営業所', value: `${company.office}（開発業務はこちらで行っています）` },
 ];
 ---
 
-<BaseLayout title="会社概要" description="def合同会社の会社概要。所在地・代表者・事業内容などの基本情報です。">
+<BaseLayout title="会社概要" description="def合同会社の会社概要。本店所在地・営業所・代表者・事業内容などの基本情報です。">
   <section class="border-b border-line bg-surface-subtle">
     <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
       <p class="eyebrow reveal is-visible">Company</p>
       <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">会社概要</h1>
       <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
-        岩手県八幡平市を拠点に、Webシステム・スマートフォンアプリの開発を行っています。
+        岩手県盛岡市の営業所を開発拠点に、Webシステム・スマートフォンアプリの開発を行っています。登記上の本店は八幡平市にあります。
       </p>
     </div>
   </section>
@@ -41,7 +42,7 @@ const rows = [
           <p class="eyebrow">Representative</p>
           <h2 class="mt-2 text-2xl font-bold text-ink">吉田 智哉 <span class="ml-1 text-base font-medium text-ink-muted">代表社員</span></h2>
           <p class="mt-4 mb-0 text-ink-muted">
-            岩手県八幡平市を拠点に、Webシステム・スマートフォンアプリの受託開発を行っています。技術書籍の執筆やUdemyでの講座公開、OSSへの貢献を通じて、開発で得た知見の発信にも取り組んでいます。お客様の課題を「定義」するところから伴走し、長く役に立つプロダクトづくりを大切にしています。
+            岩手県盛岡市の営業所を拠点に、Webシステム・スマートフォンアプリの受託開発を行っています。技術書籍の執筆やUdemyでの講座公開、OSSへの貢献を通じて、開発で得た知見の発信にも取り組んでいます。お客様の課題を「定義」するところから伴走し、長く役に立つプロダクトづくりを大切にしています。
           </p>
           <div class="mt-5 flex flex-wrap gap-2">
             <a class="chip hover:opacity-80" href="/works">開発実績</a>
@@ -69,9 +70,10 @@ const rows = [
 
   <section class="pb-[clamp(3.5rem,8vw,6rem)]">
     <div class="container-x">
+      <p class="reveal mb-3 text-sm text-ink-faint">下記は登記上の本店所在地です。開発業務は盛岡市の営業所で行っています。</p>
       <div class="reveal overflow-hidden rounded-card border border-line shadow-soft">
         <iframe
-          title="def合同会社 所在地の地図"
+          title="def合同会社 本店所在地（登記上）の地図"
           src={company.mapEmbedUrl}
           width="100%"
           height="420"

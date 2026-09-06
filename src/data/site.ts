@@ -7,7 +7,7 @@ export const site = {
   tagline: 'def（define：定義する）',
   catch: '市場のニーズに密着した、多くの人の役に立つサービスを。',
   description:
-    'def合同会社は、岩手県八幡平市を拠点にWebシステム・スマートフォンアプリの企画・開発・保守運用を行う開発会社です。お客様のビジネスに寄り添い、課題を「定義」するところから伴走します。',
+    'def合同会社は、岩手県盛岡市の営業所を開発拠点として、Webシステム・スマートフォンアプリの企画・開発・保守運用を行う開発会社です。お客様のビジネスに寄り添い、課題を「定義」するところから伴走します。',
   contactFormUrl: 'https://forms.gle/swa8kjGTCskRL2gv9',
   // 上記フォームの埋め込み用URL（短縮URLは iframe に使えないため実URL + embedded=true）
   contactFormEmbedUrl:
@@ -23,8 +23,11 @@ export const company = {
   established: '令和元年10月（2019年10月）',
   capital: '50万円',
   business: 'Webシステム・スマートフォンアプリの開発・保守・運用',
+  // 登記上の本店所在地。実際の開発は下記の営業所で行っている
   postalCode: '028-7111',
   address: '岩手県八幡平市大更25地割113番地 八幡平市起業家支援センター',
+  // 実際に開発業務を行っている営業所。番地まで公開する場合はここに追記する
+  office: '岩手県盛岡市',
   mapEmbedUrl:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.675707443051!2d141.0928112512863!3d39.926272893143626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f85143eb02b9ea7%3A0x21afa7c8ea25aa24!2z5YWr5bmh5bmz5biC6LW35qWt5a625pSv5o-044K744Oz44K_44O877yIU3RhcnR1cCBDb3Jl77yJ!5e0!3m2!1sja!2sjp!4v1582722114480!5m2!1sja!2sjp',
 } as const;
