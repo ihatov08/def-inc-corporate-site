@@ -1,0 +1,82 @@
+---
+import { clients, clientsNote } from '../data/clients';
+
+interface Props {
+  /** 見出し（省略時は「お取引実績」） */
+  title?: string;
+}
+const { title = 'お取引実績' } = Astro.props;
+
+// ロゴのリンク先。実績ページがあればそちらを優先し、なければ企業サイトへ。
+function hrefFor(c: (typeof clients)[number]) {
+  if (c.work) return `/works/${c.work}`;
+  return c.url;
+}
+---
+
+{clients.length > 0 && (
+  <section class="border-b border-line py-[clamp(2.5rem,6vw,4rem)]">
+    <div class="container-x">
+      <p class="eyebrow reveal is-visible">Clients</p>
+      <h2 class="reveal is-visible mt-3 text-[clamp(1.2rem,2.6vw,1.6rem)] font-bold text-ink">{title}</h2>
+
+      <ul class="reveal mt-8 flex flex-wrap gap-3" role="list">
+        {clients.map((c) => {
+          const href = hrefFor(c);
+          const external = !c.work && !!c.url;
+          const inner = c.logo ? (
+            <img
+              src={c.logo}
+              alt={c.name}
+              loading="lazy"
+              decoding="async"
+              class="h-7 w-auto max-w-[168px] object-contain"
+            />
+          ) : (
+            <span class="text-sm font-bold leading-none text-ink">{c.name}</span>
+          );
+
+          return (
+            <li>
+              {href ? (
+                <a
+                  href={href}
+                  target={external ? '_blank' : undefined}
+                  rel={external ? 'noopener' : undefined}
+                  class="client-plate group"
+                >
+                  {inner}
+                </a>
+              ) : (
+                <span class="client-plate">{inner}</span>
+              )}
+            </li>
+          );
+        })}
+      </ul>
+
+      {clientsNote && <p class="reveal mt-5 max-w-2xl text-sm text-ink-faint">{clientsNote}</p>}
+    </div>
+  </section>
+)}
+
+<style>
+  /* ロゴ・社名を載せる台座。高さを揃えて一列に並べる */
+  .client-plate {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 64px;
+    padding: 0.9rem 1.4rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-card);
+    background: var(--bg-elevated);
+    transition: border-color 0.15s ease;
+  }
+  a.client-plate:hover {
+    border-color: var(--color-brand);
+  }
+  a.client-plate:hover span {
+    color: var(--color-brand);
+  }
+</style>
