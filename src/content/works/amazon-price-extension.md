@@ -2,6 +2,8 @@
 title: Amazon価格収集ツール（Chrome拡張機能）
 summary: Amazon商品ページの価格情報を、ブラウザ操作だけで手軽に収集・記録できるChrome拡張機能です。
 category: ツール
+type: client
+client: EC事業者様
 role: 設計・開発
 tags:
   - JavaScript

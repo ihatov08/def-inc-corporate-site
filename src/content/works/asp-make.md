@@ -2,6 +2,7 @@
 title: アフィリエイト運用SaaS「asp-make」
 summary: 広告主が自社のアフィリエイトプログラムを作成・運用できるマルチテナント型のSaaS。AWS上にインフラをコード化して構築しました。
 category: SaaS
+type: inhouse
 role: 設計・開発・インフラ構築
 tags:
   - Ruby on Rails

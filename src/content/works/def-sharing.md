@@ -2,6 +2,7 @@
 title: シェアリングサービスのデモアプリ
 summary: モノやスペースを貸し借りするシェアリング型マーケットプレイスのデモ。出品から予約・決済までの流れを実装した検証プロジェクトです。
 category: シェアリング
+type: inhouse
 role: 設計・開発
 tags:
   - Ruby on Rails

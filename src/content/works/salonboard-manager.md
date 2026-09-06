@@ -2,6 +2,8 @@
 title: サロン運用管理システム
 summary: 美容サロン向け予約管理サービスの運用業務を効率化するシステム。ブラウザ操作の自動化で、日次レポートやデータ収集の手作業を削減します。
 category: 美容
+type: client
+client: 美容サロン向け予約管理サービス事業者様
 role: 設計・開発
 tags:
   - Ruby on Rails

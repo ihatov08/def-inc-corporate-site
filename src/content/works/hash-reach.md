@@ -2,6 +2,7 @@
 title: Instagram運用自動化サービス「hash reach」
 summary: ハッシュタグやキーワードを軸に、Instagram上のフォロー・いいね・コメントなどの運用を自動化するSaaS。Stripe連携のサブスクリプション課金を備えます。
 category: SNS
+type: inhouse
 role: 設計・開発・運用
 tags:
   - Ruby on Rails

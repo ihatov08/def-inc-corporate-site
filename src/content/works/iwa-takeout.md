@@ -2,6 +2,7 @@
 title: 岩手のテイクアウト応援サービス「iwa_takeout」
 summary: コロナ禍で影響を受けた地域の飲食店を応援するため、岩手県内でテイクアウトできるお店を地域別にまとめて紹介するWebサービス。
 category: 地域
+type: inhouse
 role: 企画・設計・開発
 tags:
   - Ruby on Rails
