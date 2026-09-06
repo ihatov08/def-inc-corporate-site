@@ -181,6 +181,12 @@
     border: 1px solid var(--border);
     color: var(--text-muted);
   }
+  /* クライアントワークの種別チップ。ブランドカラーで自社プロダクトと区別する */
+  .chip-client {
+    border-color: color-mix(in srgb, var(--color-brand) 45%, transparent);
+    background: color-mix(in srgb, var(--color-brand) 10%, transparent);
+    color: var(--color-brand);
+  }
 }
 
 /* スクロール連動フェードイン */

@@ -2,6 +2,7 @@
 title: プログラミング学習サービス「tech_sapuri」
 summary: ブラウザ上でコードを書きながら学べるプログラミング学習サービス。エディタを組み込み、手を動かして学習できる環境を構築しました。
 category: 教育
+type: inhouse
 role: 企画・設計・開発
 tags:
   - Ruby on Rails

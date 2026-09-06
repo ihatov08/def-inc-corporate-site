@@ -2,6 +2,7 @@
 title: フリマアプリ（C2Cマーケットプレイス）
 summary: 出品から購入・決済までをそなえたC2Cフリマアプリ。マーケットプレイスに必要な一連の機能を実装した自社開発プロジェクトです。
 category: EC
+type: inhouse
 role: 設計・開発
 tags:
   - Ruby on Rails

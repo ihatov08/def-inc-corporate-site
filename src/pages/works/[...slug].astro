@@ -2,7 +2,7 @@
 import { getCollection, render } from 'astro:content';
 import type { GetStaticPaths } from 'astro';
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { site } from '../../data/site';
+import { site, workTypes } from '../../data/site';
 
 export const getStaticPaths = (async () => {
   const works = await getCollection('works', ({ data }) => !data.draft);
@@ -33,9 +33,13 @@ const dateStr = data.date.toLocaleDateString('ja-JP', {
           開発実績一覧へ
         </a>
         <div class="mt-6 flex flex-wrap items-center gap-3 text-sm text-ink-muted">
+          <span class:list={['chip', data.type === 'client' && 'chip-client']}>{workTypes[data.type]}</span>
           <span class="chip">{data.category}</span>
           <span class="font-en">{dateStr}</span>
         </div>
+        {data.type === 'client' && data.client && (
+          <p class="mt-4 text-sm text-ink-muted">{data.client}</p>
+        )}
         <h1 class="mt-4 max-w-3xl text-[clamp(1.8rem,4.5vw,3rem)] font-bold leading-tight text-ink">{data.title}</h1>
         <p class="mt-4 max-w-2xl text-lg text-ink-muted">{data.summary}</p>
       </div>
@@ -53,6 +57,12 @@ const dateStr = data.date.toLocaleDateString('ja-JP', {
               <div>
                 <dt class="font-en text-xs uppercase tracking-wider text-ink-faint">Role</dt>
                 <dd class="mt-1 text-ink">{data.role}</dd>
+              </div>
+            )}
+            {data.type === 'client' && data.client && (
+              <div>
+                <dt class="font-en text-xs uppercase tracking-wider text-ink-faint">Client</dt>
+                <dd class="mt-1 text-ink">{data.client}</dd>
               </div>
             )}
             <div>

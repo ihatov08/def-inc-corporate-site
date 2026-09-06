@@ -1,14 +1,18 @@
 ---
+import { workTypes, type WorkType } from '../data/site';
+
 interface Props {
   href: string;
   title: string;
   summary: string;
   category: string;
+  type?: WorkType;
+  client?: string;
   tags?: string[];
   accent?: string;
   featured?: boolean;
 }
-const { href, title, summary, category, tags = [], accent, featured = false } = Astro.props;
+const { href, title, summary, category, type = 'inhouse', client, tags = [], accent, featured = false } = Astro.props;
 ---
 
 <a
@@ -23,10 +27,16 @@ const { href, title, summary, category, tags = [], accent, featured = false } = 
 
   <div class="relative flex h-24 items-end justify-between border-b border-line bg-surface-subtle p-4">
     <span class="pointer-events-none absolute -top-2 right-2 select-none font-en text-[3.4rem] font-bold leading-none text-ink-faint/15">{category}</span>
-    <span class="chip relative">{category}</span>
+    <span class="relative flex flex-wrap items-center gap-1.5">
+      <span class:list={['chip', type === 'client' && 'chip-client']}>{workTypes[type]}</span>
+      <span class="chip">{category}</span>
+    </span>
   </div>
 
   <div class="flex flex-1 flex-col p-6">
+    {type === 'client' && client && (
+      <p class="mb-1.5 text-xs text-ink-faint">{client}</p>
+    )}
     <h3 class="mb-2 text-lg font-bold text-ink transition-colors group-hover:text-brand">{title}</h3>
     <p class="mb-4 flex-1 text-[0.93rem] leading-relaxed text-ink-muted">{summary}</p>
     {tags.length > 0 && (

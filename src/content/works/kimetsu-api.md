@@ -2,6 +2,7 @@
 title: キャラクター情報を提供する公開API「鬼滅の刃API」
 summary: 開発者が学習や練習で気軽に使える、無料の公開JSON API。GitHub Pages上で静的APIとして提供しています。
 category: API
+type: inhouse
 role: 企画・開発
 tags:
   - REST API

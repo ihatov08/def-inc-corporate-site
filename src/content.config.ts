@@ -13,6 +13,11 @@ const works = defineCollection({
     summary: z.string(),
     // 業種・カテゴリ（例: 飲食 / 医療 / 社内業務）
     category: z.string(),
+    // 案件の種別。client=お客様からのご依頼、inhouse=自社で企画・開発したもの
+    type: z.enum(['client', 'inhouse']).default('inhouse'),
+    // 取引先の表記（任意。type: client のときだけ表示される）
+    // 実名を出す許諾があれば社名を、なければ「都内の美容サロン様」のように抽象化して書く
+    client: z.string().optional(),
     // 担当した役割（例: 設計・開発・運用）
     role: z.string().optional(),
     // 使用技術のタグ
