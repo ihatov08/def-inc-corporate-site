@@ -40,3 +40,11 @@ export const nav = [
   { label: '会社概要', href: '/company' },
   { label: 'お問い合わせ', href: '/contact' },
 ] as const;
+
+// 開発実績の種別ラベル。content.config.ts の works.type と対応させること。
+export const workTypes = {
+  client: 'クライアントワーク',
+  inhouse: '自社プロダクト',
+} as const;
+
+export type WorkType = keyof typeof workTypes;
