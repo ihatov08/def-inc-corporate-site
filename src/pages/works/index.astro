@@ -2,7 +2,8 @@
 import { getCollection } from 'astro:content';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import WorkCard from '../../components/WorkCard.astro';
-import { site } from '../../data/site';
+import ClientLogos from '../../components/ClientLogos.astro';
+import { site, workTypes } from '../../data/site';
 
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -10,6 +11,10 @@ const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
 
 // カテゴリ一覧（フィルタ用）
 const categories = [...new Set(works.map((w) => w.data.category))];
+// 種別一覧（フィルタ用）。1件も無い種別はボタンを出さない
+const types = (Object.keys(workTypes) as (keyof typeof workTypes)[]).filter((t) =>
+  works.some((w) => w.data.type === t)
+);
 ---
 
 <BaseLayout title="開発実績" description="def合同会社の開発実績。Webシステム・スマートフォンアプリの受託開発事例をご紹介します。">
@@ -18,38 +23,58 @@ const categories = [...new Set(works.map((w) => w.data.category))];
       <p class="eyebrow reveal is-visible">Works</p>
       <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">開発実績</h1>
       <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
-        これまでに手がけたWebシステム・アプリ開発の事例です。守秘義務の都合上、内容を一部変更・抽象化して掲載しています。
+        お客様からご依頼いただいたクライアントワークと、自社で企画・開発したプロダクトの事例です。守秘義務の都合上、社名や内容を一部変更・抽象化して掲載しています。
       </p>
     </div>
   </section>
+
+  <ClientLogos />
 
   <section class="py-[clamp(3rem,7vw,5rem)]">
     <div class="container-x">
       {works.length > 0 ? (
         <>
-          {categories.length > 1 && (
-            <div class="reveal mb-10 flex flex-wrap gap-2" id="filterBar" role="group" aria-label="カテゴリで絞り込み">
-              <button type="button" class="filter-chip is-active" data-cat="all">すべて</button>
-              {categories.map((c) => (
-                <button type="button" class="filter-chip" data-cat={c}>{c}</button>
-              ))}
-            </div>
-          )}
+          <div class="reveal mb-10 grid gap-4" id="filterBar">
+            {types.length > 1 && (
+              <div class="flex flex-wrap items-center gap-2" role="group" aria-label="種別で絞り込み">
+                <span class="mr-1 font-en text-xs uppercase tracking-wider text-ink-faint">Type</span>
+                <button type="button" class="filter-chip is-active" data-filter="type" data-value="all">すべて</button>
+                {types.map((t) => (
+                  <button type="button" class="filter-chip" data-filter="type" data-value={t}>{workTypes[t]}</button>
+                ))}
+              </div>
+            )}
+            {categories.length > 1 && (
+              <div class="flex flex-wrap items-center gap-2" role="group" aria-label="カテゴリで絞り込み">
+                <span class="mr-1 font-en text-xs uppercase tracking-wider text-ink-faint">Category</span>
+                <button type="button" class="filter-chip is-active" data-filter="cat" data-value="all">すべて</button>
+                {categories.map((c) => (
+                  <button type="button" class="filter-chip" data-filter="cat" data-value={c}>{c}</button>
+                ))}
+              </div>
+            )}
+          </div>
 
           <div id="worksGrid" class="grid grid-cols-3 gap-6 max-lg:grid-cols-2 max-sm:grid-cols-1">
             {works.map((w) => (
-              <div class="work-item contents" data-cat={w.data.category}>
+              <div class="work-item contents" data-cat={w.data.category} data-type={w.data.type}>
                 <WorkCard
                   href={`/works/${w.id}`}
                   title={w.data.title}
                   summary={w.data.summary}
                   category={w.data.category}
+                  type={w.data.type}
+                  client={w.data.client}
                   tags={w.data.tags}
                   accent={w.data.accent}
                 />
               </div>
             ))}
           </div>
+
+          <p id="worksEmpty" class="hidden mt-10 text-center text-ink-muted">
+            条件に合う実績はありません。
+          </p>
         </>
       ) : (
         <div class="rounded-card border border-dashed border-line bg-surface-subtle p-12 text-center">
@@ -105,17 +130,33 @@ const categories = [...new Set(works.map((w) => w.data.category))];
     const bar = document.getElementById('filterBar');
     if (!bar) return;
     const items = Array.from(document.querySelectorAll('.work-item'));
-    bar.addEventListener('click', (e) => {
-      const btn = e.target instanceof HTMLElement ? e.target.closest('.filter-chip') : null;
-      if (!btn) return;
-      const cat = btn.getAttribute('data-cat');
-      bar.querySelectorAll('.filter-chip').forEach((b) => b.classList.remove('is-active'));
-      btn.classList.add('is-active');
+    const empty = document.getElementById('worksEmpty');
+    // 種別・カテゴリの2軸をAND条件で適用する
+    const selected = { type: 'all', cat: 'all' };
+
+    function apply() {
+      let visible = 0;
       items.forEach((it) => {
-        const show = cat === 'all' || it.getAttribute('data-cat') === cat;
+        const show =
+          (selected.type === 'all' || it.getAttribute('data-type') === selected.type) &&
+          (selected.cat === 'all' || it.getAttribute('data-cat') === selected.cat);
+        if (show) visible++;
         it.classList.toggle('hidden', !show);
         it.classList.toggle('contents', show);
       });
+      if (empty) empty.classList.toggle('hidden', visible > 0);
+    }
+
+    bar.addEventListener('click', (e) => {
+      const btn = e.target instanceof HTMLElement ? e.target.closest('.filter-chip') : null;
+      if (!btn) return;
+      const group = btn.getAttribute('data-filter');
+      selected[group] = btn.getAttribute('data-value');
+      bar
+        .querySelectorAll(`.filter-chip[data-filter="${group}"]`)
+        .forEach((b) => b.classList.remove('is-active'));
+      btn.classList.add('is-active');
+      apply();
     });
   })();
 </script>
