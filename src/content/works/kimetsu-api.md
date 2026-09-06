@@ -29,3 +29,5 @@ draft: false
 
 - 誰でも無料で利用できる公開APIとして提供
 - 学習・プロトタイピング向けのデータソースとして活用できる形に
+
+> APIの仕様やエンドポイントは <a href="https://ihatov08.github.io/kimetsu_api/" target="_blank" rel="noopener">鬼滅の刃API 公開ページ</a> で確認できます。

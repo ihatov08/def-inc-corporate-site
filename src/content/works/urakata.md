@@ -12,7 +12,7 @@ tags:
   - Docker
 date: 2024-10-30
 accent: "#5f3dc4"
-link: https://urakata.lishinc.co.jp/
+link: https://lishinc.co.jp/urakata
 linkLabel: サービスサイト
 draft: false
 ---
@@ -36,4 +36,4 @@ draft: false
 - クライアントへの稼働状況の可視化により、報告にかかる工数を削減
 - 役割ごとに必要な情報へアクセスできる、権限に応じた運用を実現
 
-> リンク先はサービスの紹介サイトです。当社が開発したのは運営用の業務管理システムで、別サイト（非公開）として稼働しています。
+> サービスの詳細は <a href="https://lishinc.co.jp/urakata" target="_blank" rel="noopener">URAKATA サービスサイト</a> をご覧ください。リンク先はサービスの紹介サイトで、当社が開発したのは運営用の業務管理システムです（別サイト・非公開として稼働しています）。
