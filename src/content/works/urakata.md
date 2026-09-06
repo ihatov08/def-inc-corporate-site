@@ -12,7 +12,7 @@ tags:
   - Docker
 date: 2024-10-30
 accent: "#5f3dc4"
-link: https://urakata.lishinc.co.jp/
+link: https://lishinc.co.jp/urakata
 linkLabel: サービスサイト
 draft: false
 ---
