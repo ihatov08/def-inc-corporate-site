@@ -28,6 +28,12 @@ export const company = {
   address: '岩手県八幡平市大更25地割113番地 八幡平市起業家支援センター',
   // 実際に開発業務を行っている営業所。番地まで公開する場合はここに追記する
   office: '岩手県盛岡市',
+  // 開発拠点（盛岡営業所）の地図。番地が決まったら下記URLの q= を書き換えて
+  // curl -sSL -o /dev/null -w '%{url_effective}' 'https://maps.google.com/maps?q=<住所>&z=15&output=embed'
+  // で得られる正規URLに差し替える
+  officeMapEmbedUrl:
+    'https://www.google.com/maps/embed?origin=mfe&pb=!1m3!2m1!1z5bKp5omL55yM55ub5bKh5biC!6i13',
+  // 登記上の本店所在地の地図
   mapEmbedUrl:
     'https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3059.675707443051!2d141.0928112512863!3d39.926272893143626!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x5f85143eb02b9ea7%3A0x21afa7c8ea25aa24!2z5YWr5bmh5bmz5biC6LW35qWt5a625pSv5o-044K744Oz44K_44O877yIU3RhcnR1cCBDb3Jl77yJ!5e0!3m2!1sja!2sjp!4v1582722114480!5m2!1sja!2sjp',
 } as const;
