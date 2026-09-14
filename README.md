@@ -17,6 +17,7 @@ Web / スマホアプリ開発の**開発実績（Works）**の掲載に対応�
 npm install       # 依存関係のインストール
 npm run dev       # 開発サーバー（http://localhost:4321）
 npm run build     # 本番ビルド（dist/ に出力）
+npm run check     # 型チェック（astro check）
 npm run preview   # ビルド結果のプレビュー
 ```
 
@@ -138,6 +139,11 @@ import Logo from '../components/Logo.astro';
 
 会社名・住所・お問い合わせフォームURL・ナビゲーションなどは
 [`src/data/site.ts`](src/data/site.ts) にまとまっています。ここを編集すれば全ページに反映されます。
+
+## CI
+
+push / Pull Request 時に GitHub Actions（[`.github/workflows/ci.yml`](.github/workflows/ci.yml)）が
+型チェック（`astro check`）とビルドを実行します。
 
 ## デプロイ
 
