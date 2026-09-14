@@ -7,7 +7,6 @@ import QrCode from '../components/QrCode.astro';
 import { site, company } from '../data/site';
 import { services, strengths, fields, flow } from '../data/content';
 import { books, courses, ossContributions } from '../data/publications';
-import { clients, clientsNote } from '../data/clients';
 
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
