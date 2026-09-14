@@ -1,0 +1,49 @@
+---
+// URLからQRコード（SVG）をビルド時に生成してインライン展開する。
+// 印刷でも確実に表示され、外部APIに依存しない。
+//
+// 注意: qrcode の toString('svg') は stroke + shape-rendering="crispEdges" で
+// 横線を描くため、小さいサイズでは行が潰れてスキャン不能になる。
+// ここでは modules から塗りつぶし矩形のパスを組み立て、任意サイズで再現性を保つ。
+import QRCode from 'qrcode';
+
+interface Props {
+  value: string;
+  class?: string;
+  /** 誤り訂正レベル。大きいほど汚れに強いが密度が上がる */
+  level?: 'L' | 'M' | 'Q' | 'H';
+  /** 余白（モジュール数）。スキャナ用のクワイエットゾーン */
+  margin?: number;
+}
+
+const { value, class: className = '', level = 'M', margin = 1 } = Astro.props;
+
+const qr = QRCode.create(value, { errorCorrectionLevel: level });
+const size = qr.modules.size;
+const data = qr.modules.data;
+const total = size + margin * 2;
+
+// 各行の連続する黒モジュールを1つの矩形（fill）としてまとめる
+let d = '';
+for (let y = 0; y < size; y++) {
+  let x = 0;
+  while (x < size) {
+    if (data[y * size + x]) {
+      const x0 = x;
+      while (x < size && data[y * size + x]) x++;
+      const w = x - x0;
+      d += `M${x0 + margin} ${y + margin}h${w}v1h-${w}z`;
+    } else {
+      x++;
+    }
+  }
+}
+
+const svg =
+  `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${total} ${total}" shape-rendering="crispEdges">` +
+  `<rect width="${total}" height="${total}" fill="#ffffff"/>` +
+  `<path d="${d}" fill="#000000"/>` +
+  `</svg>`;
+---
+
+<span class:list={['qr', className]} set:html={svg} aria-hidden="true"></span>

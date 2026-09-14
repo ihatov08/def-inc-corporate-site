@@ -1,0 +1,49 @@
+---
+import Logo from './Logo.astro';
+
+interface Props {
+  /** ヘッダー右の小ラベル（例: Company） */
+  label: string;
+  /** ページ番号（例: 02） */
+  pageNo: string;
+  /** ページ見出し */
+  title?: string;
+  /** 見出し下のリード文 */
+  lead?: string;
+  /** 総ページ数 */
+  total?: string;
+}
+
+const { label, pageNo, title, lead, total = '09' } = Astro.props;
+---
+
+<section class="page flex flex-col">
+  <header class="flex items-center justify-between border-b border-line px-[16mm] py-[7mm]">
+    <div class="flex items-center gap-2.5">
+      <Logo class="h-[18px] w-auto text-ink" />
+      <span class="text-[0.82rem] font-bold tracking-tight text-ink">def合同会社</span>
+    </div>
+    <span class="eyebrow text-[0.65rem]!">{label}</span>
+  </header>
+
+  <div class="flex-1 overflow-hidden px-[16mm] pt-[9mm] pb-[6mm]">
+    {
+      title && (
+        <div>
+          <h2 class="text-[1.55rem] font-bold leading-tight text-ink">{title}</h2>
+          {lead && <p class="mt-2 mb-0 text-[0.85rem] text-ink">{lead}</p>}
+        </div>
+      )
+    }
+    <div class="mt-6">
+      <slot />
+    </div>
+  </div>
+
+  <footer
+    class="flex items-center justify-between border-t border-line px-[16mm] py-[5mm] font-en text-[0.6rem] tracking-[0.14em] text-ink uppercase"
+  >
+    <span>def合同会社&nbsp;&nbsp;/&nbsp;&nbsp;https://de-f.net</span>
+    <span>{pageNo} / {total}</span>
+  </footer>
+</section>

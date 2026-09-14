@@ -1,0 +1,121 @@
+/* =========================================================
+   会社紹介パンフレット（A4縦・印刷用）
+   - 画面では紙面プレビュー、印刷では1ページ=1枚に割り付ける
+   - global.css のデザイントークンをそのまま使う
+   ========================================================= */
+
+@page {
+  size: A4;
+  margin: 0;
+}
+
+/* 紙面1枚分。固定サイズ＋改ページで印刷時の割り付けを安定させる */
+.page {
+  position: relative;
+  width: 210mm;
+  height: 297mm;
+  overflow: hidden;
+  background: #ffffff;
+  color: var(--text);
+  page-break-after: always;
+  break-after: page;
+  -webkit-print-color-adjust: exact;
+  print-color-adjust: exact;
+}
+.page:last-child {
+  page-break-after: auto;
+  break-after: auto;
+}
+
+/* 印刷時にブラウザが余白を足さないよう、ページ内側で余白を作る */
+.pamphlet {
+  counter-reset: none;
+}
+
+/* QRコード（QrCode.astro がインライン展開するSVG） */
+.qr {
+  display: inline-block;
+  overflow: hidden;
+  background: #fff;
+}
+.qr svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+/* ---- 画面プレビュー ---- */
+@media screen {
+  body {
+    background: #e7e7e3;
+  }
+  .pamphlet {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 24px;
+    padding: 32px 16px 64px;
+  }
+  .page {
+    box-shadow: 0 12px 40px rgba(20, 22, 28, 0.18);
+  }
+  /* 紙面幅(210mm≈794px)に収まらない画面では縮小して全体を見せる */
+  @media (max-width: 860px) {
+    .pamphlet {
+      align-items: flex-start;
+      overflow-x: auto;
+    }
+    .page {
+      transform: scale(0.72);
+      transform-origin: top left;
+      margin-bottom: -83mm;
+    }
+  }
+}
+
+/* 画面上部の操作バー（印刷時は非表示） */
+.pamphlet-toolbar {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 20px;
+  background: var(--bg-elevated);
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+.pamphlet-toolbar .btn {
+  padding: 0.55rem 1.1rem;
+}
+
+/* ---- 印刷 ---- */
+@media print {
+  html,
+  body {
+    background: #fff !important;
+    background-image: none !important;
+    margin: 0;
+    padding: 0;
+  }
+  .no-print,
+  .pamphlet-toolbar {
+    display: none !important;
+  }
+  .pamphlet {
+    display: block;
+    padding: 0;
+    gap: 0;
+  }
+  .page {
+    box-shadow: none !important;
+    margin: 0;
+    transform: none !important;
+  }
+  a {
+    text-decoration: none;
+  }
+}
