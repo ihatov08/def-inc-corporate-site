@@ -165,7 +165,7 @@ const companyRows = [
           <img
             src="/images/representative.jpg"
             alt={`代表社員 ${company.representative}`}
-            loading="lazy"
+            loading="eager"
             class="relative h-full w-full object-cover"
             onerror="this.style.display='none'"
           />
@@ -407,7 +407,7 @@ const companyRows = [
           <li class="flex flex-col rounded-card border border-line bg-surface-elevated p-[3mm]">
             <div class="overflow-hidden rounded-[3px] border border-line bg-white">
               {b.image ? (
-                <img src={b.image} alt={b.title} loading="lazy" class="block h-auto w-full" />
+                <img src={b.image} alt={b.title} loading="eager" class="block h-auto w-full" />
               ) : (
                 <div class="grid aspect-[5/7] w-full place-items-center bg-brand-soft text-[0.58rem] text-brand">
                   {b.series}
@@ -445,7 +445,7 @@ const companyRows = [
           <li class="flex gap-[3mm] rounded-card border border-line bg-surface-elevated p-[2.5mm]">
             <div class="aspect-video w-[30mm] shrink-0 overflow-hidden rounded-[3px] border border-line bg-surface-subtle">
               {c.image ? (
-                <img src={c.image} alt={c.title} loading="lazy" class="h-full w-full object-cover" />
+                <img src={c.image} alt={c.title} loading="eager" class="h-full w-full object-cover" />
               ) : (
                 <span class="grid h-full w-full place-items-center text-[0.58rem] text-ink">{c.category}</span>
               )}
