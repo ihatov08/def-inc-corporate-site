@@ -70,6 +70,9 @@ npm run preview   # ビルド結果のプレビュー
 書籍・Udemy講座・OSSコントリビュートは [`src/data/publications.ts`](src/data/publications.ts) の
 配列（`books` / `courses` / `ossContributions`）を編集すれば、各ページとトップページに反映されます。
 
+書籍の累計販売数（`bookSales`）とUdemyの総受講登録者数（`udemyEnrollment`）も同ファイルにまとまっています。
+数値・基準日はここを書き換えると、`/publications`・`/courses`・トップ・パンフレットに反映されます。
+
 ## 会社紹介パンフレット（`/pamphlet`）
 
 A4縦・全9ページの会社案内を印刷用に書き出したページです。ナビには表示せず、`noindex` を付けています。
@@ -84,8 +87,8 @@ A4縦・全9ページの会社案内を印刷用に書き出したページで�
 - QRコード: 掲載URLは [`src/components/QrCode.astro`](src/components/QrCode.astro) がビルド時にSVGで生成します
   （外部APIに依存せず、紙面でも崩れません）。用途は**紙面から各サービスのサイトを開くこと**で、
   実績の詳細はパンフレット本文に掲載しています
-- 掲載文言は [`src/data/content.ts`](src/data/content.ts) の共有配列（`services` / `strengths` / `fields` / `flow`）
-  と各データから読み込んでいます
+- 掲載文言は [`src/data/content.ts`](src/data/content.ts) の共有配列（`services` / `strengths` / `fields` / `flow` / `techStack` / `collaborations`）
+  と各データから読み込んでいます（`techStack` / `techNote` は `/company`、`collaborations` は `/contact` とも共有）
 
 ## 画像の配置
 
@@ -95,6 +98,12 @@ A4縦・全9ページの会社案内を印刷用に書き出したページで�
 | --- | --- |
 | `public/images/representative.jpg` | 会社概要ページの代表写真（未配置時は「Y」モノグラム表示） |
 | `public/images/hero.jpg` | トップのヒーロー背景に重ねる岩手の風景写真（任意。未配置時は山並みSVGのみ） |
+
+## 技術ロゴ（使用可能な言語・技術）
+
+「使用可能な言語・技術」（[`/company`](src/pages/company.astro) とパンフレット P2）で使うブランドロゴは
+`public/logos/` に置いています。由来・ライセンス・元ファイル対応は [`public/logos/SOURCE.txt`](public/logos/SOURCE.txt) を参照してください。
+掲載する技術の追加・削除は [`src/data/content.ts`](src/data/content.ts) の `techStack` を編集します。
 
 ## ロゴ / ブランドアセット
 
