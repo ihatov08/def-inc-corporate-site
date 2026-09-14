@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import BookCard from '../components/BookCard.astro';
-import { books } from '../data/publications';
+import { books, bookSales } from '../data/publications';
 ---
 
 <BaseLayout
   title="出版実績"
-  description="def合同会社（代表 吉田智哉）の出版実績。技術書籍の執筆を通じて、Web開発・生成AIアプリケーション開発の知見を発信しています。"
+  description={`def合同会社（代表 吉田智哉）の出版実績。技術書籍の執筆を通じて、Web開発・生成AIアプリケーション開発の知見を発信しています。累計販売数${bookSales.copies.toLocaleString('ja-JP')}冊（${bookSales.asOf}現在）。`}
 >
   <section class="border-b border-line bg-surface-subtle">
     <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
@@ -14,6 +14,12 @@ import { books } from '../data/publications';
       <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">出版実績</h1>
       <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
         技術書籍の執筆を通じて、開発で得た知見を発信しています。手を動かして学べる、実践的な内容を意識しています。
+      </p>
+      <p class="reveal is-visible mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span class="font-en text-[clamp(1.6rem,4vw,2.4rem)] font-bold leading-none text-brand">
+          {bookSales.copies.toLocaleString('ja-JP')}<span class="text-[0.55em]">冊</span>
+        </span>
+        <span class="text-sm text-ink-muted">累計販売数（{bookSales.since}〜{bookSales.asOf}）</span>
       </p>
     </div>
   </section>

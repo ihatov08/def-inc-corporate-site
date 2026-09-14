@@ -94,6 +94,77 @@ export const fields: IconItem[] = [
   },
 ];
 
+// 使用可能なプログラミング言語・主要技術。会社概要ページとパンフレットで共有。
+export interface TechItem {
+  name: string;
+  /** public/logos/ 配下のロゴ画像 */
+  logo: string;
+}
+
+export interface TechGroup {
+  label: string;
+  items: TechItem[];
+}
+
+export const techStack: TechGroup[] = [
+  {
+    label: '言語',
+    items: [
+      { name: 'Ruby', logo: '/logos/ruby.svg' },
+      { name: 'Go', logo: '/logos/go.svg' },
+      { name: 'TypeScript', logo: '/logos/typescript.svg' },
+      { name: 'JavaScript', logo: '/logos/javascript.svg' },
+      { name: 'Dart', logo: '/logos/dart.svg' },
+      { name: 'HTML', logo: '/logos/html5.svg' },
+      { name: 'CSS', logo: '/logos/css3.svg' },
+    ],
+  },
+  {
+    label: 'フレームワーク',
+    items: [
+      { name: 'Ruby on Rails', logo: '/logos/rails.svg' },
+      { name: 'React', logo: '/logos/react.svg' },
+      { name: 'Next.js', logo: '/logos/nextjs.svg' },
+      { name: 'Vue.js', logo: '/logos/vuejs.svg' },
+      { name: 'NestJS', logo: '/logos/nestjs.svg' },
+      { name: 'React Native', logo: '/logos/reactnative.svg' },
+      { name: 'Flutter', logo: '/logos/flutter.svg' },
+    ],
+  },
+  {
+    label: 'データベース',
+    items: [
+      { name: 'PostgreSQL', logo: '/logos/postgresql.svg' },
+      { name: 'MySQL', logo: '/logos/mysql.svg' },
+      { name: 'SQLite', logo: '/logos/sqlite.svg' },
+    ],
+  },
+  {
+    label: 'インフラ・運用',
+    items: [
+      { name: 'AWS', logo: '/logos/aws.svg' },
+      { name: 'Docker', logo: '/logos/docker.svg' },
+      { name: 'Terraform', logo: '/logos/terraform.svg' },
+    ],
+  },
+];
+
+// 上記以外の言語・技術にも対応できることを示す補足。サイトとパンフレットで共有。
+export const techNote =
+  '上記は一例です。ご要望に応じて、その他の言語・技術にも柔軟に対応します。';
+
+// 「こんな連携や相談をお待ちしております」の例。お問い合わせページとパンフレットで共有。
+export const collaborations: string[] = [
+  '業務のDX推進・Webシステム開発',
+  '定型業務の自動化・効率化システムの構築',
+  'スマートフォンアプリ（iOS / Android）の開発',
+  '既存システムの改修・保守、レガシーシステムの刷新',
+  'システム改善によるコスト削減・生産性向上',
+  '売上・集客につながるWebサービス開発',
+  '生成AIを活用した業務効率化・自動化',
+  '技術選定・設計のご相談、開発チームへの参画',
+];
+
 // /services の詳細表示（リード文＋箇条書き）
 export interface ServiceDetail {
   title: string;

@@ -167,6 +167,21 @@ export const courses: Course[] = [
   },
 ];
 
+// Udemy講座の総受講登録者数。更新時はここを書き換える（サイト・パンフレットで共有）。
+export const udemyEnrollment = {
+  count: 4000,
+  asOf: '2026年9月',
+} as const;
+
+// 書籍の累計販売数。技術書典・BOOTHマーケットの販売管理データを集計したもの。
+// セット販売（2冊1組）は冊数でカウントし、取消分は除く。更新時はここを書き換える。
+export const bookSales = {
+  copies: 368, // 累計販売冊数
+  orders: 365, // 累計注文件数（取消を除く）
+  since: '2022年9月',
+  asOf: '2026年4月',
+} as const;
+
 // OSSコントリビュート（外部の公開プロジェクトへのマージ済みPR。スター数の多い順）
 export const ossContributions: OssContribution[] = [
   {

@@ -1,0 +1,36 @@
+ブランドロゴ（使用可能な言語・技術のアイコン）
+================================================
+
+由来:
+  Devicon (https://devicon.dev/  /  https://github.com/devicons/devicon)
+  の `icons/` 配下の SVG をそのまま配置しています（改変なし）。
+
+ライセンス:
+  Devicon 本体は MIT License。
+  各ロゴ・商標の権利は各社に帰属します。スキル表示の目的で使用しています。
+
+ファイル対応（元パス）:
+  ruby.svg        ruby/ruby-original.svg
+  go.svg          go/go-original.svg
+  typescript.svg  typescript/typescript-original.svg
+  javascript.svg  javascript/javascript-original.svg
+  dart.svg        dart/dart-original.svg
+  html5.svg       html5/html5-original.svg
+  css3.svg        css3/css3-original.svg
+  rails.svg       rails/rails-original-wordmark.svg
+  react.svg       react/react-original.svg
+  nextjs.svg      nextjs/nextjs-original.svg
+  vuejs.svg       vuejs/vuejs-original.svg
+  nestjs.svg      nestjs/nestjs-original.svg
+  reactnative.svg reactnative/reactnative-original.svg
+  flutter.svg     flutter/flutter-original.svg
+  postgresql.svg  postgresql/postgresql-original.svg
+  mysql.svg       mysql/mysql-original.svg
+  sqlite.svg      sqlite/sqlite-original.svg
+  aws.svg         amazonwebservices/amazonwebservices-original-wordmark.svg
+  docker.svg      docker/docker-original.svg
+  terraform.svg   terraform/terraform-original.svg
+
+更新方法:
+  上記と同名のファイルを Devicon から取得して置き換えるだけで反映されます。
+  掲載する技術の追加・削除は src/data/content.ts の techStack を編集してください。

@@ -5,8 +5,8 @@ import PamphletPage from '../components/PamphletPage.astro';
 import Logo from '../components/Logo.astro';
 import QrCode from '../components/QrCode.astro';
 import { site, company } from '../data/site';
-import { services, strengths, fields, flow } from '../data/content';
-import { books, courses, ossContributions } from '../data/publications';
+import { services, strengths, fields, flow, techStack, techNote, collaborations } from '../data/content';
+import { books, courses, ossContributions, udemyEnrollment, bookSales } from '../data/publications';
 
 const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
   (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
@@ -181,32 +181,55 @@ const companyRows = [
     </div>
 
     <!-- 会社概要 -->
-    <h3 class="mt-[9mm] mb-0 text-[1rem] font-bold text-ink">会社概要</h3>
+    <h3 class="mt-[6mm] mb-0 text-[1rem] font-bold text-ink">会社概要</h3>
     <dl class="mt-3 overflow-hidden rounded-card border border-line">
       {
         companyRows.map((r, i) => (
           <div class:list={['grid grid-cols-[36mm_1fr] border-t border-line', i === 0 && 'border-t-0', i % 2 === 1 && 'bg-surface-subtle']}>
-            <dt class="border-r border-line px-[4mm] py-[2.4mm] text-[0.78rem] font-bold text-ink">{r.label}</dt>
-            <dd class="px-[4mm] py-[2.4mm] text-[0.78rem] text-ink">{r.value}</dd>
+            <dt class="border-r border-line px-[4mm] py-[1.7mm] text-[0.78rem] font-bold text-ink">{r.label}</dt>
+            <dd class="px-[4mm] py-[1.7mm] text-[0.78rem] text-ink">{r.value}</dd>
           </div>
         ))
       }
     </dl>
 
     <!-- 携わってきた分野 -->
-    <h3 class="mt-[8mm] mb-0 text-[1rem] font-bold text-ink">携わってきた分野</h3>
-    <ul class="mt-3 grid grid-cols-3 gap-2" role="list">
+    <h3 class="mt-[6mm] mb-0 text-[0.95rem] font-bold text-ink">携わってきた分野</h3>
+    <ul class="mt-2.5 grid grid-cols-3 gap-[1.8mm]" role="list">
       {
         fields.map((f) => (
-          <li class="flex items-center gap-2 rounded-card border border-line bg-surface-elevated px-[3.5mm] py-[3mm]">
-            <svg class="shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none">
+          <li class="flex items-center gap-[1.5mm] rounded-card border border-line bg-surface-elevated px-[3mm] py-[2mm]">
+            <svg class="shrink-0 text-brand" width="14" height="14" viewBox="0 0 24 24" fill="none">
               <path d={f.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
             </svg>
-            <span class="text-[0.75rem] font-bold text-ink">{f.title}</span>
+            <span class="text-[0.68rem] font-bold leading-tight text-ink">{f.title}</span>
           </li>
         ))
       }
     </ul>
+
+    <!-- 使用可能な言語・技術 -->
+    <h3 class="mt-[5mm] mb-0 text-[0.95rem] font-bold text-ink">使用可能な言語・技術</h3>
+    <dl class="mt-2.5 grid gap-[1.4mm]">
+      {
+        techStack.map((g) => (
+          <div class="grid grid-cols-[26mm_1fr] items-start gap-[2mm]">
+            <dt class="pt-[0.3mm] text-[0.68rem] font-bold text-ink">{g.label}</dt>
+            <dd class="m-0 flex flex-wrap gap-[1.3mm]">
+              {g.items.map((item) => (
+                <span class="inline-flex items-center gap-[1mm] rounded-[2px] border border-line bg-surface-subtle px-[1.4mm] py-[0.6mm] font-en text-[0.62rem] text-ink">
+                  <span class="grid h-[3.2mm] w-[3.2mm] shrink-0 place-items-center overflow-hidden rounded-[1px] bg-white">
+                    <img src={item.logo} alt="" class="h-full w-full object-contain" />
+                  </span>
+                  {item.name}
+                </span>
+              ))}
+            </dd>
+          </div>
+        ))
+      }
+    </dl>
+    <p class="mt-2 mb-0 text-[0.66rem] leading-relaxed text-ink">{techNote}</p>
   </PamphletPage>
 
   <!-- ===================== P3: 事業内容 ===================== -->
@@ -376,7 +399,7 @@ const companyRows = [
     label="Publications"
     pageNo="07"
     title="出版実績"
-    lead="技術書の執筆を通じて、開発の知見を発信しています。QRコードから各書籍の販売ページを開けます。"
+    lead={`技術書の執筆を通じて、開発の知見を発信しています。累計販売数${bookSales.copies.toLocaleString('ja-JP')}冊（${bookSales.since}〜${bookSales.asOf}）。QRコードから各書籍の販売ページを開けます。`}
   >
     <ul class="mt-1 grid grid-cols-4 gap-[4mm]" role="list">
       {
@@ -414,29 +437,31 @@ const companyRows = [
     label="Courses"
     pageNo="08"
     title="オンライン講座"
-    lead="Udemyで生成AI・Rails・Next.js・Docker・Linux などの講座を公開しています。QRコードから各講座のページを開けます。"
+    lead={`Udemyで生成AI・Rails・Next.js・Docker・Linux などの講座を公開しています。累計受講登録者数${udemyEnrollment.count.toLocaleString('ja-JP')}人（${udemyEnrollment.asOf}現在）。QRコードから各講座のページを開けます。`}
   >
-    <ul class="mt-1 grid grid-cols-3 gap-[5mm]" role="list">
+    <ul class="mt-1 grid grid-cols-2 gap-[3.5mm]" role="list">
       {
         courses.map((c) => (
-          <li class="flex flex-col rounded-card border border-line bg-surface-elevated p-[2.5mm]">
-            <div class="aspect-video w-full overflow-hidden rounded-[3px] border border-line bg-surface-subtle">
+          <li class="flex gap-[3mm] rounded-card border border-line bg-surface-elevated p-[2.5mm]">
+            <div class="aspect-video w-[30mm] shrink-0 overflow-hidden rounded-[3px] border border-line bg-surface-subtle">
               {c.image ? (
                 <img src={c.image} alt={c.title} loading="lazy" class="h-full w-full object-cover" />
               ) : (
                 <span class="grid h-full w-full place-items-center text-[0.58rem] text-ink">{c.category}</span>
               )}
             </div>
-            <span class="chip mt-2 self-start px-1.5 py-0 text-[0.55rem]">{c.category}</span>
-            <p class="mt-1.5 mb-0 line-clamp-2 text-[0.68rem] font-bold leading-snug text-ink">{c.title}</p>
-            <div class="mt-auto flex items-end justify-between gap-2 pt-2">
-              <span class="font-en text-[0.55rem] uppercase tracking-wide text-ink">Udemy</span>
-              <QrCode
-                value={c.link}
-                level="L"
-                class="h-[14mm] w-[14mm] shrink-0 rounded-card border border-line"
-                aria-hidden="true"
-              />
+            <div class="flex min-w-0 flex-1 flex-col">
+              <span class="chip self-start px-1.5 py-0 text-[0.55rem]">{c.category}</span>
+              <p class="mt-1 mb-0 text-[0.66rem] font-bold leading-snug text-ink">{c.title}</p>
+              <div class="mt-auto flex items-end justify-between gap-2 pt-1.5">
+                <span class="font-en text-[0.55rem] uppercase tracking-wide text-ink">Udemy</span>
+                <QrCode
+                  value={c.link}
+                  level="L"
+                  class="h-[12mm] w-[12mm] shrink-0 rounded-card border border-line"
+                  aria-hidden="true"
+                />
+              </div>
             </div>
           </li>
         ))
@@ -464,8 +489,23 @@ const companyRows = [
       }
     </ul>
 
+    <!-- こんな連携や相談をお待ちしております -->
+    <h3 class="mt-[6mm] mb-0 text-[1rem] font-bold text-ink">こんな連携や相談をお待ちしております</h3>
+    <ul class="mt-2.5 grid grid-cols-2 gap-x-[6mm] gap-y-[1.5mm]" role="list">
+      {
+        collaborations.map((c) => (
+          <li class="flex items-start gap-[1.5mm] text-[0.7rem] leading-snug text-ink">
+            <svg class="mt-[0.8mm] shrink-0 text-brand" width="13" height="13" viewBox="0 0 24 24" fill="none">
+              <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            {c}
+          </li>
+        ))
+      }
+    </ul>
+
     <!-- お問い合わせ -->
-    <div class="relative mt-[8mm] overflow-hidden rounded-card border border-line bg-surface-subtle px-[7mm] py-[6mm]">
+    <div class="relative mt-[6mm] overflow-hidden rounded-card border border-line bg-surface-subtle px-[7mm] py-[6mm]">
       <span class="pointer-events-none absolute left-0 top-0 h-full w-[2mm] bg-brand" aria-hidden="true"></span>
       <div class="flex items-center justify-between gap-[6mm]">
         <div>

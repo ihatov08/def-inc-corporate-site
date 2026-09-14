@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
 import CourseCard from '../components/CourseCard.astro';
-import { courses } from '../data/publications';
+import { courses, udemyEnrollment } from '../data/publications';
 ---
 
 <BaseLayout
   title="講座"
-  description="def合同会社（代表 吉田智哉）が公開するオンライン講座。Udemyで生成AI・Ruby on Rails・Next.js・Docker・Linux などをハンズオンで学べます。"
+  description={`def合同会社（代表 吉田智哉）が公開するオンライン講座。Udemyで生成AI・Ruby on Rails・Next.js・Docker・Linux などをハンズオンで学べます。累計受講登録者数${udemyEnrollment.count.toLocaleString('ja-JP')}人（${udemyEnrollment.asOf}現在）。`}
 >
   <section class="border-b border-line bg-surface-subtle">
     <div class="container-x py-[clamp(3.5rem,8vw,6rem)]">
@@ -14,6 +14,12 @@ import { courses } from '../data/publications';
       <h1 class="reveal is-visible mt-3 text-[clamp(2rem,5vw,3.2rem)] font-bold text-ink">オンライン講座</h1>
       <p class="reveal is-visible mt-4 max-w-2xl text-lg text-ink-muted">
         Udemyで技術講座を公開しています。生成AI・Ruby on Rails・Next.js・Docker・Linux などを、手を動かしながら学べる内容です。
+      </p>
+      <p class="reveal is-visible mt-5 flex flex-wrap items-baseline gap-x-3 gap-y-1">
+        <span class="font-en text-[clamp(1.6rem,4vw,2.4rem)] font-bold leading-none text-brand">
+          {udemyEnrollment.count.toLocaleString('ja-JP')}<span class="text-[0.55em]">人</span>
+        </span>
+        <span class="text-sm text-ink-muted">累計受講登録者数（{udemyEnrollment.asOf}現在）</span>
       </p>
     </div>
   </section>
