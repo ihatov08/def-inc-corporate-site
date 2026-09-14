@@ -1,0 +1,492 @@
+---
+import { getCollection } from 'astro:content';
+import PrintLayout from '../layouts/PrintLayout.astro';
+import PamphletPage from '../components/PamphletPage.astro';
+import Logo from '../components/Logo.astro';
+import QrCode from '../components/QrCode.astro';
+import { site, company } from '../data/site';
+import { services, strengths, fields, flow } from '../data/content';
+import { books, courses, ossContributions } from '../data/publications';
+import { clients, clientsNote } from '../data/clients';
+
+const works = (await getCollection('works', ({ data }) => !data.draft)).sort(
+  (a, b) => b.data.date.valueOf() - a.data.date.valueOf()
+);
+
+// 掲載スペースの都合上、クライアントワーク4件＋自社プロダクト2件の代表例に絞る
+const featuredWorks = [
+  ...works.filter((w) => w.data.type === 'client').slice(0, 4),
+  ...works.filter((w) => w.data.type === 'inhouse').slice(0, 2),
+];
+
+// Markdown本文から「背景・課題 / 取り組み / 成果」を抜き出し、パンフレット用に要約する
+interface WorkDetail {
+  background: string;
+  actions: string[];
+  outcomes: string[];
+}
+
+function parseWork(body: string): WorkDetail {
+  const sections: Record<'background' | 'actions' | 'outcomes', string[]> = {
+    background: [],
+    actions: [],
+    outcomes: [],
+  };
+  let current: keyof typeof sections | null = null;
+
+  for (const raw of body.split('\n')) {
+    const line = raw.trim();
+    const heading = line.match(/^##\s+(.*)$/);
+    if (heading) {
+      const t = heading[1];
+      current =
+        t.includes('背景') || t.includes('課題')
+          ? 'background'
+          : t.includes('取り組み')
+            ? 'actions'
+            : t.includes('成果')
+              ? 'outcomes'
+              : null;
+      continue;
+    }
+    // 見出し直下の説明以外（補足の引用や表）は載せない
+    if (!current || !line || line.startsWith('>') || line.startsWith('|')) continue;
+    sections[current].push(line);
+  }
+
+  const clean = (s: string) =>
+    s
+      .replace(/\*\*/g, '')
+      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
+      .replace(/`/g, '')
+      .trim();
+  const toList = (arr: string[]) =>
+    arr
+      .filter((l) => /^([-*]|\d+\.)\s/.test(l))
+      .map((l) => clean(l.replace(/^([-*]|\d+\.)\s+/, '')))
+      .filter(Boolean);
+
+  return {
+    background: clean(sections.background.join(' ')),
+    actions: toList(sections.actions),
+    outcomes: toList(sections.outcomes),
+  };
+}
+
+const workDetails = featuredWorks.map((entry) => ({
+  entry,
+  detail: parseWork(entry.body ?? ''),
+}));
+
+// 1ページ2件ずつに分割
+const WORK_PER_PAGE = 2;
+const workPages = Array.from(
+  { length: Math.ceil(workDetails.length / WORK_PER_PAGE) },
+  (_, i) => workDetails.slice(i * WORK_PER_PAGE, (i + 1) * WORK_PER_PAGE)
+);
+
+const companyRows = [
+  { label: '会社名', value: company.name },
+  { label: '代表社員', value: company.representative },
+  { label: '設立', value: company.established },
+  { label: '資本金', value: company.capital },
+  { label: '事業内容', value: company.business },
+  { label: '本店所在地', value: `〒${company.postalCode} ${company.address}（登記上の所在地）` },
+  { label: '営業所', value: `${company.office}（開発業務はこちらで行っています）` },
+];
+---
+
+<PrintLayout>
+  <!-- ===================== P1: 表紙 ===================== -->
+  <section class="page flex flex-col">
+    <span class="pointer-events-none absolute left-0 top-0 h-full w-[4mm] bg-brand" aria-hidden="true"></span>
+    <div class="h-0 w-full" />
+    <div class="flex flex-1 flex-col justify-between py-[18mm] pl-[26mm] pr-[18mm]">
+      <div class="flex items-center justify-between">
+        <Logo class="h-[32px] w-auto text-ink" />
+        <span class="font-en text-[0.62rem] uppercase tracking-[0.24em] text-ink">Company Profile</span>
+      </div>
+
+      <div>
+        <h1 class="text-[2.6rem] font-bold leading-tight tracking-tight text-ink">{company.name}</h1>
+        <p class="mt-5 text-[1.3rem] font-bold leading-snug text-ink">
+          Webシステムの<br />
+          <span class="text-brand">開発・運用・保守</span>
+        </p>
+        <p class="mt-3 font-en text-[0.66rem] uppercase tracking-[0.2em] text-ink">
+          System Development / Operation / Maintenance
+        </p>
+      </div>
+
+      <dl class="grid grid-cols-3 overflow-hidden rounded-card border border-line">
+        <div class="border-r border-line p-[5mm]">
+          <dt class="font-en text-[1.45rem] font-bold text-ink">2019</dt>
+          <dd class="mt-1 font-en text-[0.6rem] uppercase tracking-wider text-ink">Since / 設立</dd>
+        </div>
+        <div class="border-r border-line p-[5mm]">
+          <dt class="font-en text-[1.45rem] font-bold text-ink">Development</dt>
+          <dd class="mt-1 font-en text-[0.6rem] uppercase tracking-wider text-ink">設計・開発</dd>
+        </div>
+        <div class="p-[5mm]">
+          <dt class="font-en text-[1.45rem] font-bold text-ink">Operation</dt>
+          <dd class="mt-1 font-en text-[0.6rem] uppercase tracking-wider text-ink">運用・保守</dd>
+        </div>
+      </dl>
+
+      <div class="flex items-end justify-between border-t border-line pt-[6mm]">
+        <div>
+          <p class="font-en text-[0.6rem] uppercase tracking-[0.2em] text-ink">Representative</p>
+          <p class="mt-1 mb-0 text-[1rem] font-bold text-ink">{company.representative}</p>
+        </div>
+        <div class="flex items-center gap-[4mm]">
+          <div class="text-right">
+            <p class="font-en text-[0.6rem] uppercase tracking-[0.2em] text-ink">Website</p>
+            <p class="mt-1 mb-0 font-en text-[0.72rem] tracking-[0.16em] text-ink">https://{site.domain}</p>
+          </div>
+          <QrCode value={`https://${site.domain}`} class="h-[16mm] w-[16mm] rounded-card border border-line" aria-hidden="true" />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ===================== P2: 会社紹介 ===================== -->
+  <PamphletPage label="About Us" pageNo="02" title="会社紹介" lead="岩手県盛岡市の営業所を開発拠点に、Webシステム・スマートフォンアプリの開発を行っています。">
+    <div class="grid grid-cols-[1.15fr_1fr] gap-[8mm]">
+      <div class="text-[0.83rem] leading-relaxed text-ink">
+        <p class="mt-0">
+          def合同会社は、岩手県盛岡市の営業所を開発拠点にWebシステム・スマートフォンアプリの開発を行っています（登記上の本店は八幡平市）。「def（define：定義する）」という社名のとおり、目の前の課題が本当は何なのかを一緒に定義するところから始めます。
+        </p>
+        <p class="mb-0">
+          流行りの技術を使うこと自体が目的ではなく、市場のニーズに密着した、多くの人の役に立つサービスを届けること。それが私たちの変わらない指針です。
+        </p>
+      </div>
+      <div class="flex items-center gap-[5mm] rounded-card border border-line bg-surface-subtle p-[5mm]">
+        <div class="relative h-[34mm] w-[34mm] shrink-0 overflow-hidden rounded-2xl bg-brand-soft">
+          <span class="absolute inset-0 grid place-items-center font-en text-3xl font-bold text-brand/40">Y</span>
+          <img
+            src="/images/representative.jpg"
+            alt={`代表社員 ${company.representative}`}
+            loading="lazy"
+            class="relative h-full w-full object-cover"
+            onerror="this.style.display='none'"
+          />
+        </div>
+        <div>
+          <p class="eyebrow text-[0.62rem]!">Message</p>
+          <p class="mt-2 mb-0 text-[0.78rem] leading-relaxed text-ink">
+            お客様の課題を「定義」するところから伴走し、長く役に立つプロダクトづくりを大切にしています。
+          </p>
+          <p class="mt-2 mb-0 text-[0.9rem] font-bold text-ink">{company.representative}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- 会社概要 -->
+    <h3 class="mt-[9mm] mb-0 text-[1rem] font-bold text-ink">会社概要</h3>
+    <dl class="mt-3 overflow-hidden rounded-card border border-line">
+      {
+        companyRows.map((r, i) => (
+          <div class:list={['grid grid-cols-[36mm_1fr] border-t border-line', i === 0 && 'border-t-0', i % 2 === 1 && 'bg-surface-subtle']}>
+            <dt class="border-r border-line px-[4mm] py-[2.4mm] text-[0.78rem] font-bold text-ink">{r.label}</dt>
+            <dd class="px-[4mm] py-[2.4mm] text-[0.78rem] text-ink">{r.value}</dd>
+          </div>
+        ))
+      }
+    </dl>
+
+    <!-- 携わってきた分野 -->
+    <h3 class="mt-[8mm] mb-0 text-[1rem] font-bold text-ink">携わってきた分野</h3>
+    <ul class="mt-3 grid grid-cols-3 gap-2" role="list">
+      {
+        fields.map((f) => (
+          <li class="flex items-center gap-2 rounded-card border border-line bg-surface-elevated px-[3.5mm] py-[3mm]">
+            <svg class="shrink-0 text-brand" width="16" height="16" viewBox="0 0 24 24" fill="none">
+              <path d={f.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <span class="text-[0.75rem] font-bold text-ink">{f.title}</span>
+          </li>
+        ))
+      }
+    </ul>
+  </PamphletPage>
+
+  <!-- ===================== P3: 事業内容 ===================== -->
+  <PamphletPage label="Services" pageNo="03" title="事業内容" lead="企画・設計から開発、公開後の保守・運用まで。開発に関わることをまとめてお任せいただけます。">
+    <div class="grid grid-cols-3 gap-[5mm]">
+      {
+        services.map((s, i) => (
+          <div class="rounded-card border border-line bg-surface-elevated p-[5mm]">
+            <div class="grid h-10 w-10 place-items-center rounded-2xl bg-brand-soft text-brand">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+                <path d={s.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <p class="mt-3 mb-0 font-en text-[0.62rem] text-ink">0{i + 1}</p>
+            <h3 class="mt-1 mb-0 text-[0.92rem] font-bold leading-snug text-ink">{s.title}</h3>
+            <p class="mt-2 mb-0 text-[0.72rem] leading-relaxed text-ink">{s.lead}</p>
+            <ul class="mt-2 grid gap-1 pl-0" role="list">
+              {s.points.map((p) => (
+                <li class="flex items-start gap-1.5 text-[0.72rem] leading-snug text-ink">
+                  <svg class="mt-[3px] shrink-0 text-brand" width="12" height="12" viewBox="0 0 24 24" fill="none">
+                    <path d="M20 6 9 17l-5-5" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                  {p}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- お仕事の流れ -->
+    <h3 class="mt-[8mm] mb-0 text-[1rem] font-bold text-ink">お仕事の進め方</h3>
+    <div class="mt-3 grid grid-cols-4 gap-[4mm]">
+      {
+        flow.map((f) => (
+          <div class="rounded-card border border-line bg-surface-subtle p-[4mm]">
+            <span class="font-en text-[1.5rem] font-bold text-brand/30">{f.step}</span>
+            <h4 class="mt-1 mb-0 text-[0.82rem] font-bold text-ink">{f.title}</h4>
+            <p class="mt-1 mb-0 text-[0.68rem] leading-relaxed text-ink">{f.desc}</p>
+          </div>
+        ))
+      }
+    </div>
+
+    <!-- 私たちの強み -->
+    <h3 class="mt-[8mm] mb-0 text-[1rem] font-bold text-ink">私たちの強み</h3>
+    <ul class="mt-3 grid grid-cols-2 gap-x-[6mm] gap-y-[3mm]" role="list">
+      {
+        strengths.map((s) => (
+          <li class="flex items-start gap-2.5">
+            <svg class="mt-[2px] shrink-0 text-brand" width="18" height="18" viewBox="0 0 24 24" fill="none">
+              <path d={s.icon} stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" />
+            </svg>
+            <div>
+              <h4 class="mb-0 text-[0.82rem] font-bold text-ink">{s.title}</h4>
+              <p class="mt-0.5 mb-0 text-[0.7rem] leading-relaxed text-ink">{s.desc}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </PamphletPage>
+
+  <!-- ===================== P4-: 開発実績（詳細） ===================== -->
+  {
+    workPages.map((group, i) => (
+      <PamphletPage
+        label={`Works ${i + 1}/${workPages.length}`}
+        pageNo={String(4 + i).padStart(2, '0')}
+        title={i === 0 ? '開発実績' : `開発実績（${i + 1}/${workPages.length}）`}
+        lead={
+          i === 0
+            ? 'お客様からご依頼いただいたクライアントワークと、自社で企画・開発したプロダクトの代表例です。QRコードから各サービスのサイトを開けます。'
+            : undefined
+        }
+      >
+        {group.map(({ entry: w, detail }) => (
+          <article class="mt-[4mm] rounded-card border border-line bg-surface-elevated p-[5mm] first:mt-1">
+            <div class="flex flex-wrap items-center gap-2">
+              <span class:list={['chip px-1.5 py-0 text-[0.56rem]', w.data.type === 'client' && 'chip-client']}>
+                {w.data.type === 'client' ? 'クライアントワーク' : '自社プロダクト'}
+              </span>
+              <span class="chip px-1.5 py-0 text-[0.56rem]">{w.data.category}</span>
+              {w.data.client && <span class="text-[0.62rem] text-ink">{w.data.client}</span>}
+            </div>
+
+            <h3 class="mt-2 mb-0 text-[1.02rem] font-bold leading-snug text-ink">{w.data.title}</h3>
+            <p class="mt-1 mb-0 text-[0.7rem] leading-relaxed text-ink">{w.data.summary}</p>
+
+            <div class="mt-3 grid grid-cols-[1fr_30mm] gap-[5mm]">
+              <div class="min-w-0">
+                {detail.background && (
+                  <div class="mb-2">
+                    <h4 class="mb-0.5 text-[0.68rem] font-bold text-brand">背景・課題</h4>
+                    <p class="mb-0 line-clamp-3 text-[0.66rem] leading-relaxed text-ink">{detail.background}</p>
+                  </div>
+                )}
+                {detail.actions.length > 0 && (
+                  <div class="mb-2">
+                    <h4 class="mb-1 text-[0.68rem] font-bold text-brand">取り組み</h4>
+                    <ul class="grid gap-1 pl-0" role="list">
+                      {detail.actions.slice(0, 3).map((a) => (
+                        <li class="flex items-start gap-1.5 text-[0.66rem] leading-snug text-ink">
+                          <span class="mt-[5px] h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true"></span>
+                          <span class="line-clamp-2">{a}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+                {detail.outcomes.length > 0 && (
+                  <div>
+                    <h4 class="mb-1 text-[0.68rem] font-bold text-brand">成果</h4>
+                    <ul class="grid gap-1 pl-0" role="list">
+                      {detail.outcomes.slice(0, 2).map((a) => (
+                        <li class="flex items-start gap-1.5 text-[0.66rem] leading-snug text-ink">
+                          <span class="mt-[5px] h-1 w-1 shrink-0 rounded-full bg-brand" aria-hidden="true"></span>
+                          <span class="line-clamp-2">{a}</span>
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+              </div>
+
+              <aside class="border-l border-line pl-[4mm]">
+                <dl class="grid gap-2">
+                  {w.data.role && (
+                    <div>
+                      <dt class="font-en text-[0.55rem] uppercase tracking-wide text-ink">Role</dt>
+                      <dd class="mb-0 mt-0.5 text-[0.62rem] leading-snug text-ink">{w.data.role}</dd>
+                    </div>
+                  )}
+                  {w.data.tags.length > 0 && (
+                    <div>
+                      <dt class="font-en text-[0.55rem] uppercase tracking-wide text-ink">Stack</dt>
+                      <dd class="mb-0 mt-0.5 text-[0.6rem] leading-snug text-ink">
+                        {w.data.tags.slice(0, 5).join(' / ')}
+                      </dd>
+                    </div>
+                  )}
+                </dl>
+                {w.data.link && (
+                  <div class="mt-3">
+                    <QrCode
+                      value={w.data.link}
+                      class="h-[22mm] w-[22mm] rounded-card border border-line"
+                      aria-hidden="true"
+                    />
+                    <p class="mt-1 mb-0 text-[0.56rem] font-bold text-ink">{w.data.linkLabel ?? 'サービスサイト'}</p>
+                    <p class="mt-0.5 mb-0 break-all font-en text-[0.5rem] leading-tight text-ink">
+                      {w.data.link}
+                    </p>
+                  </div>
+                )}
+              </aside>
+            </div>
+          </article>
+        ))}
+      </PamphletPage>
+    ))
+  }
+
+  <!-- ===================== P7: 出版実績 ===================== -->
+  <PamphletPage
+    label="Publications"
+    pageNo="07"
+    title="出版実績"
+    lead="技術書の執筆を通じて、開発の知見を発信しています。QRコードから各書籍の販売ページを開けます。"
+  >
+    <ul class="mt-1 grid grid-cols-4 gap-[4mm]" role="list">
+      {
+        books.map((b) => (
+          <li class="flex flex-col rounded-card border border-line bg-surface-elevated p-[3mm]">
+            <div class="overflow-hidden rounded-[3px] border border-line bg-white">
+              {b.image ? (
+                <img src={b.image} alt={b.title} loading="lazy" class="block h-auto w-full" />
+              ) : (
+                <div class="grid aspect-[5/7] w-full place-items-center bg-brand-soft text-[0.58rem] text-brand">
+                  {b.series}
+                </div>
+              )}
+            </div>
+            <p class="mt-2 mb-0 line-clamp-3 text-[0.66rem] font-bold leading-snug text-ink">
+              {b.title}
+              {b.volume && <span class="font-normal text-ink">（{b.volume}）</span>}
+            </p>
+            <div class="mt-auto flex items-end justify-between gap-2 pt-2">
+              <p class="mb-0 text-[0.55rem] leading-tight text-ink">
+                {b.series}
+                <br />
+                {b.format}
+              </p>
+              <QrCode value={b.link} class="h-[11mm] w-[11mm] shrink-0 rounded-card border border-line" aria-hidden="true" />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </PamphletPage>
+
+  <!-- ===================== P8: オンライン講座 ===================== -->
+  <PamphletPage
+    label="Courses"
+    pageNo="08"
+    title="オンライン講座"
+    lead="Udemyで生成AI・Rails・Next.js・Docker・Linux などの講座を公開しています。QRコードから各講座のページを開けます。"
+  >
+    <ul class="mt-1 grid grid-cols-3 gap-[5mm]" role="list">
+      {
+        courses.map((c) => (
+          <li class="flex flex-col rounded-card border border-line bg-surface-elevated p-[2.5mm]">
+            <div class="aspect-video w-full overflow-hidden rounded-[3px] border border-line bg-surface-subtle">
+              {c.image ? (
+                <img src={c.image} alt={c.title} loading="lazy" class="h-full w-full object-cover" />
+              ) : (
+                <span class="grid h-full w-full place-items-center text-[0.58rem] text-ink">{c.category}</span>
+              )}
+            </div>
+            <span class="chip mt-2 self-start px-1.5 py-0 text-[0.55rem]">{c.category}</span>
+            <p class="mt-1.5 mb-0 line-clamp-2 text-[0.68rem] font-bold leading-snug text-ink">{c.title}</p>
+            <div class="mt-auto flex items-end justify-between gap-2 pt-2">
+              <span class="font-en text-[0.55rem] uppercase tracking-wide text-ink">Udemy</span>
+              <QrCode
+                value={c.link}
+                level="L"
+                class="h-[14mm] w-[14mm] shrink-0 rounded-card border border-line"
+                aria-hidden="true"
+              />
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </PamphletPage>
+
+  <!-- ===================== P9: OSS・お問い合わせ ===================== -->
+  <PamphletPage label="Open Source & Contact" pageNo="09" title="OSSコントリビュート・お問い合わせ">
+    <h3 class="mt-0 mb-0 text-[0.98rem] font-bold text-ink">OSSコントリビュート</h3>
+    <p class="mt-1 mb-0 text-[0.68rem] text-ink">
+      利用しているオープンソースプロジェクトへ改善を還元しています。QRコードから各プロジェクトのページを開けます。
+    </p>
+    <ul class="mt-3 grid grid-cols-2 gap-[3mm]" role="list">
+      {
+        ossContributions.map((o) => (
+          <li class="flex items-center gap-[3mm] rounded-card border border-line bg-surface-elevated px-[3mm] py-[2.4mm]">
+            <QrCode value={o.link} class="h-[12mm] w-[12mm] shrink-0 rounded-card border border-line" aria-hidden="true" />
+            <div class="min-w-0">
+              <p class="mb-0 font-en text-[0.66rem] font-medium text-ink">{o.repo}</p>
+              <p class="mb-0 line-clamp-2 text-[0.6rem] leading-snug text-ink">{o.description}</p>
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+
+    <!-- お問い合わせ -->
+    <div class="relative mt-[8mm] overflow-hidden rounded-card border border-line bg-surface-subtle px-[7mm] py-[6mm]">
+      <span class="pointer-events-none absolute left-0 top-0 h-full w-[2mm] bg-brand" aria-hidden="true"></span>
+      <div class="flex items-center justify-between gap-[6mm]">
+        <div>
+          <p class="eyebrow text-[0.62rem]!">Contact</p>
+          <h3 class="mt-2 mb-0 text-[1.2rem] font-bold text-ink">プロジェクトのご相談はお気軽に</h3>
+          <p class="mt-2 mb-0 max-w-[84mm] text-[0.75rem] leading-relaxed text-ink">
+            「こんなことはできる?」という段階でも大丈夫です。まずはお話をお聞かせください。QRコードからサイト・お問い合わせフォームを開けます。
+          </p>
+        </div>
+        <div class="flex shrink-0 gap-[6mm]">
+          <figure class="m-0 text-center">
+            <QrCode value={`https://${site.domain}`} class="h-[22mm] w-[22mm] rounded-card border border-line" aria-hidden="true" />
+            <figcaption class="mt-1.5 font-en text-[0.58rem] text-ink">https://{site.domain}</figcaption>
+          </figure>
+          <figure class="m-0 text-center">
+            <QrCode value={site.contactFormUrl} class="h-[22mm] w-[22mm] rounded-card border border-line" aria-hidden="true" />
+            <figcaption class="mt-1.5 font-en text-[0.58rem] text-ink">お問い合わせフォーム</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </PamphletPage>
+</PrintLayout>

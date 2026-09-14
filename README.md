@@ -8,6 +8,7 @@ Web / スマホアプリ開発の**開発実績（Works）**の掲載に対応�
 - **Astro** … 静的サイトジェネレーター
 - **Tailwind CSS v4** … `@tailwindcss/vite` 経由（トークンは [`src/styles/global.css`](src/styles/global.css) に集約）
 - **Content Collections** … 開発実績を Markdown で管理
+- **[qrcode](https://www.npmjs.com/package/qrcode)** … パンフレット掲載URLのQRコードをビルド時にSVG生成
 - ライト / ダークモード対応（右上のトグル・OSの設定に追従）
 
 ## セットアップ
@@ -33,6 +34,7 @@ npm run preview   # ビルド結果のプレビュー
 | `/company` | 会社概要 |
 | `/contact` | お問い合わせ |
 | `/sales-email-policy` | 営業目的のご連絡に関するポリシー |
+| `/pamphlet` | 会社紹介パンフレット（A4縦・印刷用。ナビ非表示・`noindex`） |
 
 ## 開発実績（Works）の追加方法
 
@@ -66,6 +68,23 @@ npm run preview   # ビルド結果のプレビュー
 
 書籍・Udemy講座・OSSコントリビュートは [`src/data/publications.ts`](src/data/publications.ts) の
 配列（`books` / `courses` / `ossContributions`）を編集すれば、各ページとトップページに反映されます。
+
+## 会社紹介パンフレット（`/pamphlet`）
+
+A4縦・全9ページの会社案内を印刷用に書き出したページです。ナビには表示せず、`noindex` を付けています。
+
+- 構成: 表紙 / 会社紹介 / 事業内容 / 開発実績（詳細・3ページ） / 出版実績 / オンライン講座 / OSS・お問い合わせ
+  （開発実績は本文の「背景・課題 / 取り組み / 成果」を要約して掲載。出版・講座は表紙画像つき）
+- レイアウト: [`src/layouts/PrintLayout.astro`](src/layouts/PrintLayout.astro)（共通レイアウト）と
+  [`src/components/PamphletPage.astro`](src/components/PamphletPage.astro)（紙面の枠）、
+  印刷用CSSは [`src/styles/print.css`](src/styles/print.css) に集約
+- PDF化: `/pamphlet` を開き、上部の「印刷 / PDFとして保存」ボタン（またはブラウザの印刷）から
+  「PDFに保存」を選ぶと A4の配布用PDFになります
+- QRコード: 掲載URLは [`src/components/QrCode.astro`](src/components/QrCode.astro) がビルド時にSVGで生成します
+  （外部APIに依存せず、紙面でも崩れません）。用途は**紙面から各サービスのサイトを開くこと**で、
+  実績の詳細はパンフレット本文に掲載しています
+- 掲載文言は [`src/data/content.ts`](src/data/content.ts) の共有配列（`services` / `strengths` / `fields` / `flow`）
+  と各データから読み込んでいます
 
 ## 画像の配置
 
