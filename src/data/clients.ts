@@ -19,21 +19,19 @@ export type Client = {
 
 export const clients: Client[] = [
   {
-    // ロゴ画像は使わず社名テキストで掲載する（logo を指定しなければテキスト表示になる）
-    name: '株式会社ドワンゴ',
+    name: '教育サービス事業者様',
     work: 'n-yobiko',
   },
   {
-    name: 'ブルーモ証券株式会社',
+    name: '証券サービス事業者様',
     work: 'bloomo',
   },
   {
-    name: 'パーソルキャリア株式会社',
+    name: '人材サービス事業者様',
     work: 'hr-analyst',
   },
   {
-    name: 'Lish株式会社',
-    url: 'https://lishinc.co.jp/',
+    name: 'バックオフィス支援事業者様',
     work: 'urakata',
   },
 ];

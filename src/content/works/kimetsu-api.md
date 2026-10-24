@@ -1,5 +1,5 @@
 ---
-title: キャラクター情報を提供する公開API「鬼滅の刃API」
+title: キャラクター情報を提供する公開API
 summary: 開発者が学習や練習で気軽に使える、無料の公開JSON API。GitHub Pages上で静的APIとして提供しています。
 category: API
 type: inhouse
@@ -11,8 +11,6 @@ tags:
   - Docker
 date: 2023-06-18
 accent: "#0c8599"
-link: https://ihatov08.github.io/kimetsu_api/
-linkLabel: 公開ページ
 draft: false
 ---
 
@@ -31,4 +29,4 @@ draft: false
 - 誰でも無料で利用できる公開APIとして提供
 - 学習・プロトタイピング向けのデータソースとして活用できる形に
 
-> APIの仕様やエンドポイントは <a href="https://ihatov08.github.io/kimetsu_api/" target="_blank" rel="noopener">鬼滅の刃API 公開ページ</a> で確認できます。
+> APIの仕様やエンドポイントは公開ページで確認できます。
