@@ -24,13 +24,33 @@ const buildExamples: [string, string, string, string[]][] = [
 
 const saasExamples = [
   ['Google Workspace', 'https://api.iconify.design/logos/google-drive.svg'],
+  ['Gmail', 'https://api.iconify.design/logos/google-gmail.svg'],
+  ['Google Sheets', 'https://api.iconify.design/logos/google-sheets.svg'],
+  ['Google Calendar', 'https://api.iconify.design/logos/google-calendar.svg'],
   ['Microsoft 365', 'https://api.iconify.design/logos/microsoft-icon.svg'],
   ['Slack', 'https://api.iconify.design/logos/slack-icon.svg'],
   ['LINE WORKS', 'https://api.iconify.design/logos/line.svg'],
+  ['Chatwork', 'https://api.iconify.design/logos/chatwork.svg'],
+  ['Discord', 'https://api.iconify.design/logos/discord-icon.svg'],
   ['Notion', 'https://api.iconify.design/logos/notion-icon.svg'],
+  ['Miro', 'https://api.iconify.design/logos/miro.svg'],
+  ['Figma', 'https://api.iconify.design/logos/figma.svg'],
   ['kintone', 'https://api.iconify.design/logos/kintone.svg'],
   ['freee', 'https://api.iconify.design/logos/freee.svg'],
   ['Dropbox', 'https://api.iconify.design/logos/dropbox.svg'],
+  ['Box', 'https://api.iconify.design/logos/box.svg'],
+  ['Zoom', 'https://api.iconify.design/logos/zoom-icon.svg'],
+  ['GitHub', 'https://api.iconify.design/logos/github-icon.svg'],
+  ['GitLab', 'https://api.iconify.design/logos/gitlab.svg'],
+  ['Jira', 'https://api.iconify.design/logos/jira.svg'],
+  ['Trello', 'https://api.iconify.design/logos/trello.svg'],
+  ['Asana', 'https://api.iconify.design/logos/asana.svg'],
+  ['Salesforce', 'https://api.iconify.design/logos/salesforce.svg'],
+  ['HubSpot', 'https://api.iconify.design/logos/hubspot.svg'],
+  ['Zendesk', 'https://api.iconify.design/logos/zendesk.svg'],
+  ['Shopify', 'https://api.iconify.design/logos/shopify.svg'],
+  ['WordPress', 'https://api.iconify.design/logos/wordpress-icon.svg'],
+  ['Stripe', 'https://api.iconify.design/logos/stripe.svg'],
 ];
 
 const steps = [
@@ -81,7 +101,7 @@ const steps = [
 
     <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>自分だけのAIチームを<br /><em>つくろう。</em></h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><div class="ai-build-avatar"><AIEmployeeAvatar name={item[0]} colors={item[3]} /></div><div class="ai-build-label"><span>0{i + 1}</span><b>{item[0]}</b></div><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div><span class="ai-scroll-cue" aria-hidden="true">→</span></div></section>
 
-    <section class="ai-section ai-integrations"><div class="ai-wrap"><div class="ai-integration-panel"><div class="ai-integration-copy"><p class="ai-kicker">SaaS連携</p><h2>国内外の<br />SaaSと連携できます。</h2><p>いま使っているツールを置き換えるのではなく、御社の業務に必要な範囲でつなぎます。</p></div><div class="ai-saas-cloud" aria-label="連携先の例">{saasExamples.map((service, i) => <span class={`ai-saas-pill ai-saas-${i + 1}`}><i><img src={service[1]} alt="" loading="lazy" /></i>{service[0]}</span>)}</div><span class="ai-integration-shape ai-shape-one" aria-hidden="true"></span><span class="ai-integration-shape ai-shape-two" aria-hidden="true"></span></div><p class="ai-integration-note">連携先は、ご利用中のサービスを確認して設計します。</p></div></section>
+    <section class="ai-section ai-integrations"><div class="ai-wrap"><div class="ai-integration-panel"><div class="ai-integration-copy"><p class="ai-kicker">SaaS連携</p><h2>国内外の<br />SaaSと連携できます。</h2><p>いま使っているツールを置き換えるのではなく、御社の業務に必要な範囲でつなぎます。</p></div><div class="ai-saas-cloud" aria-label="連携先の例">{saasExamples.map((service, i) => <span class={`ai-saas-pill ai-saas-${(i % 8) + 1}`}><i><img src={service[1]} alt="" loading="lazy" /></i>{service[0]}</span>)}</div><span class="ai-integration-shape ai-shape-one" aria-hidden="true"></span><span class="ai-integration-shape ai-shape-two" aria-hidden="true"></span></div><p class="ai-integration-note">連携先の例です。ご利用中のサービスを確認して、対応可否と連携方法を設計します。</p></div></section>
 
     <section class="ai-section ai-navy"><div class="ai-wrap"><p class="ai-kicker">できること</p><div class="ai-heading-row"><h2>「AIに任せたい」を、<br /><em>仕事の形</em>にします。</h2><p>役割を絞るから、使い始めやすい。業務に合わせて、できることを一緒に決めます。</p></div><div class="ai-example-list">{examples.map((item, i) => <div><span>0{i + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div><b>↗</b></div>)}</div></div></section>
 
