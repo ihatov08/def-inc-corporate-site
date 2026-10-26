@@ -1,0 +1,216 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { site } from '../data/site';
+
+const concerns = [
+  'ChatGPTは使っているが、一部の社員だけで止まっている',
+  '社員ごとに使い方が違い、会社としてのルールがない',
+  'AIで効率化できそうな業務はあるが、どこから始めるか分からない',
+  '社内の資料や過去の知識を、AIにうまく活用させられていない',
+  '情報漏洩やセキュリティが心配で、活用を広げられない',
+];
+
+const services = [
+  {
+    number: '01',
+    title: 'AI活用診断',
+    lead: 'いまの使い方を整理し、次の一手を見つけます。',
+    body: '業務の流れとChatGPTの利用状況をヒアリング。AIで改善できる業務、優先順位、社内で整えるべきルールを一緒に整理します。',
+    tags: ['業務棚卸し', '活用ロードマップ', 'ツール選定'],
+  },
+  {
+    number: '02',
+    title: 'AI・DX顧問',
+    lead: '社内にAI担当者がいなくても、いつでも相談できます。',
+    body: 'AIツールの選定から社内展開、活用方法の相談まで。経営者と現場の間に立ち、継続的な改善を支援します。',
+    tags: ['月次相談', '社内ルール', '導入判断'],
+  },
+  {
+    number: '03',
+    title: '実務に合わせた研修',
+    lead: '学んで終わらず、翌日から使える研修へ。',
+    body: '一般的な操作説明だけでなく、御社の資料・業務・役割を題材に実践。経営者向け、管理職向け、現場向けに内容を設計します。',
+    tags: ['社内研修', 'ハンズオン', '活用テンプレート'],
+  },
+  {
+    number: '04',
+    title: '業務システム構築',
+    lead: 'AIを、会社の業務フローに組み込みます。',
+    body: '社内ナレッジ検索、問い合わせ対応、報告書作成など、既製ツールだけでは足りない部分をWebシステムとして設計・開発します。',
+    tags: ['AIチャット', '業務自動化', 'Webシステム'],
+  },
+];
+
+const steps = [
+  ['01', '無料相談', '改善したい業務をひとつ教えてください。AIの知識がなくても大丈夫です。'],
+  ['02', '業務を整理', 'いまの仕事の流れと、すでに使っているツールを確認します。'],
+  ['03', '小さく試す', '効果が見えやすい業務を選び、無理のない範囲で始めます。'],
+  ['04', '社内に広げる', '研修・ルール整備・仕組み化を通じて、使い続けられる状態にします。'],
+];
+
+const useCases = [
+  ['営業・提案', '過去の提案書や商品情報をもとに、提案のたたき台を作る'],
+  ['総務・管理', '社内規程やよくある質問を検索し、回答作成の時間を減らす'],
+  ['報告・記録', '議事録・日報・作業報告を整理し、転記や文章作成を軽くする'],
+];
+---
+
+<BaseLayout
+  title="AI・DX導入支援"
+  description="ChatGPTを個人の便利ツールで終わらせない。岩手・盛岡の企業向けに、AI活用診断、AI・DX顧問、研修、業務システム構築まで伴走します。"
+>
+  <section class="relative overflow-hidden border-b border-line bg-surface-subtle">
+    <span class="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand" aria-hidden="true"></span>
+    <div class="container-x grid min-h-[78vh] items-center gap-12 py-20 lg:grid-cols-[1.05fr_0.95fr] lg:py-24">
+      <div>
+        <p class="eyebrow reveal is-visible">AI / DX SUPPORT IN IWATE</p>
+        <h1 class="reveal is-visible mt-5 max-w-3xl text-[clamp(2.35rem,6vw,4.7rem)] font-bold leading-[1.08] tracking-tight text-ink">
+          ChatGPTを、<br />“個人の便利ツール”で<br /><span class="text-brand">終わらせない。</span>
+        </h1>
+        <p class="reveal is-visible mt-7 max-w-2xl text-lg leading-8 text-ink-muted">
+          使い始めた、その先へ。AI活用の整理から、社内展開、業務改善、システム構築まで。岩手・盛岡の企業に合わせて、AIを「会社の仕組み」に変えていきます。
+        </p>
+        <div class="reveal is-visible mt-9 flex flex-wrap gap-3">
+          <a class="btn btn-primary" href="/contact">AI活用を無料で相談する <span aria-hidden="true">→</span></a>
+          <a class="btn btn-ghost" href="#services">支援内容を見る</a>
+        </div>
+        <div class="reveal mt-12 flex flex-wrap gap-x-6 gap-y-2 text-sm text-ink-muted">
+          <span><span class="mr-2 text-brand">●</span>AI初心者も歓迎</span>
+          <span><span class="mr-2 text-brand">●</span>岩手・盛岡／オンライン対応</span>
+          <span><span class="mr-2 text-brand">●</span>開発まで対応</span>
+        </div>
+      </div>
+
+      <div class="reveal relative mx-auto w-full max-w-md lg:ml-auto">
+        <div class="absolute -inset-4 border border-brand/20"></div>
+        <div class="relative border border-line bg-surface-elevated p-5 shadow-float sm:p-7">
+          <div class="flex items-center justify-between border-b border-line pb-4 font-en text-xs text-ink-faint">
+            <span>AI NEXT STEP / 01</span><span>def.inc</span>
+          </div>
+          <p class="mt-8 font-en text-sm text-brand">CURRENT STATE</p>
+          <p class="mt-2 text-xl font-bold text-ink">ChatGPTを使っている</p>
+          <div class="my-7 h-px bg-line"></div>
+          <p class="font-en text-sm text-brand">NEXT STATE</p>
+          <p class="mt-2 text-xl font-bold text-ink">会社の業務に組み込まれている</p>
+          <div class="mt-8 grid grid-cols-3 gap-2 text-center text-xs text-ink-muted">
+            <div class="border border-line p-3"><span class="block font-en text-lg text-brand">01</span>整理</div>
+            <div class="border border-line p-3"><span class="block font-en text-lg text-brand">02</span>実践</div>
+            <div class="border border-line p-3"><span class="block font-en text-lg text-brand">03</span>定着</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-line py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div class="reveal">
+        <p class="eyebrow">The gap after ChatGPT</p>
+        <h2 class="mt-3 text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-ink">こんな状態で<br />止まっていませんか？</h2>
+        <p class="mt-5 text-ink-muted">ChatGPTを使い始めた企業が、次にぶつかる壁があります。個人の工夫を、会社の成果へつなげます。</p>
+      </div>
+      <ul class="reveal grid gap-3 sm:grid-cols-2">
+        {concerns.map((concern, index) => (
+          <li class="flex items-start gap-3 border border-line bg-surface-elevated p-5 text-[0.95rem] text-ink">
+            <span class="font-en text-sm text-brand">0{index + 1}</span><span>{concern}</span>
+          </li>
+        ))}
+      </ul>
+    </div>
+  </section>
+
+  <section id="services" class="border-b border-line bg-surface-subtle py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x">
+      <div class="reveal max-w-2xl">
+        <p class="eyebrow">Services</p>
+        <h2 class="mt-3 text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-ink">相談から、開発まで。</h2>
+        <p class="mt-4 text-ink-muted">いきなり大きなシステムを作る必要はありません。いまの状態に合うところから始め、必要に応じて次の段階へ進みます。</p>
+      </div>
+      <div class="mt-12 grid gap-5 md:grid-cols-2">
+        {services.map((service) => (
+          <article class="reveal border border-line bg-surface-elevated p-7 transition-colors hover:border-brand sm:p-8">
+            <div class="flex items-start justify-between gap-4">
+              <span class="font-en text-sm text-brand">{service.number}</span>
+              <span class="font-en text-xs uppercase tracking-widest text-ink-faint">support</span>
+            </div>
+            <h3 class="mt-7 text-xl font-bold text-ink">{service.title}</h3>
+            <p class="mt-3 font-bold text-ink">{service.lead}</p>
+            <p class="mt-3 text-[0.94rem] text-ink-muted">{service.body}</p>
+            <div class="mt-6 flex flex-wrap gap-2">
+              {service.tags.map((tag) => <span class="chip">{tag}</span>)}
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-line py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x">
+      <div class="reveal flex flex-wrap items-end justify-between gap-5">
+        <div>
+          <p class="eyebrow">How it works</p>
+          <h2 class="mt-3 text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-ink">小さく始めて、確実に広げる。</h2>
+        </div>
+        <p class="max-w-md text-ink-muted">改善したい業務をひとつ決めるだけで大丈夫です。課題の整理から一緒に進めます。</p>
+      </div>
+      <div class="mt-12 grid gap-px border border-line bg-line md:grid-cols-4">
+        {steps.map((step) => (
+          <div class="reveal bg-surface-elevated p-6 sm:p-7">
+            <span class="font-en text-sm text-brand">{step[0]}</span>
+            <h3 class="mt-7 text-lg font-bold text-ink">{step[1]}</h3>
+            <p class="mt-3 mb-0 text-sm text-ink-muted">{step[2]}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-line bg-surface-subtle py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x grid gap-12 lg:grid-cols-[0.8fr_1.2fr]">
+      <div class="reveal">
+        <p class="eyebrow">Practical use cases</p>
+        <h2 class="mt-3 text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-ink">AIを、日々の仕事へ。</h2>
+        <p class="mt-4 text-ink-muted">業種を問わず、まずは時間のかかっている業務から。御社の仕事に合わせて活用方法を考えます。</p>
+      </div>
+      <div class="grid gap-4">
+        {useCases.map((useCase, index) => (
+          <div class="reveal flex gap-5 border border-line bg-surface-elevated p-6 sm:items-center">
+            <span class="font-en text-sm text-brand">0{index + 1}</span>
+            <div><h3 class="font-bold text-ink">{useCase[0]}</h3><p class="mt-1 mb-0 text-sm text-ink-muted">{useCase[1]}</p></div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <section class="border-b border-line py-[clamp(4rem,9vw,7rem)]">
+    <div class="container-x grid gap-12 lg:grid-cols-[1.1fr_0.9fr] lg:items-center">
+      <div class="reveal">
+        <p class="eyebrow">Why def</p>
+        <h2 class="mt-3 text-[clamp(1.8rem,4vw,2.8rem)] font-bold text-ink">使い方を教えるだけでなく、<br />必要なら実際に作れます。</h2>
+        <p class="mt-5 max-w-2xl text-ink-muted">def合同会社は、Webシステム・スマートフォンアプリの開発会社です。AIの活用相談や研修だけで終わらず、業務に合わせた仕組みの設計・開発・保守運用まで対応できます。</p>
+        <div class="mt-8 flex flex-wrap gap-2"><span class="chip chip-client">岩手・盛岡</span><span class="chip chip-client">Web / App開発</span><span class="chip chip-client">設計から運用まで</span></div>
+      </div>
+      <div class="reveal border border-line bg-surface-subtle p-7 sm:p-8">
+        <p class="font-en text-xs uppercase tracking-widest text-brand">Future direction</p>
+        <h3 class="mt-6 text-2xl font-bold text-ink">AI社員という選択肢</h3>
+        <p class="mt-4 text-ink-muted">業務を理解したAIを、会社の新しいメンバーのように。個別支援で見つけた課題をもとに、自社専用のAI社員サービスへ発展させていきます。</p>
+        <div class="mt-7 border-t border-line pt-5 text-sm text-ink-muted">営業・総務・ナレッジ・広報など、役割ごとのAIを構想中</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="pb-[clamp(4rem,9vw,7rem)] pt-[clamp(4rem,8vw,6rem)]">
+    <div class="container-x">
+      <div class="reveal relative overflow-hidden border border-line bg-surface-subtle px-6 py-16 text-center sm:px-10">
+        <span class="pointer-events-none absolute left-0 top-0 h-full w-[3px] bg-brand" aria-hidden="true"></span>
+        <p class="eyebrow">Start with one task</p>
+        <h2 class="mx-auto mt-4 max-w-2xl text-[clamp(1.7rem,4vw,2.6rem)] font-bold text-ink">改善したい業務を、<br class="sm:hidden" />ひとつだけ教えてください。</h2>
+        <p class="mx-auto mt-5 max-w-xl text-ink-muted">「何から始めればいいか分からない」という段階からご相談いただけます。初回相談では、無理な営業は行いません。</p>
+        <a class="btn btn-primary mt-8" href="/contact">AI活用について無料で相談する <span aria-hidden="true">→</span></a>
+        <p class="mt-5 text-xs text-ink-faint">{site.name} / 岩手県盛岡市を拠点にオンライン対応</p>
+      </div>
+    </div>
+  </section>
+</BaseLayout>
