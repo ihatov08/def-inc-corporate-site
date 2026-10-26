@@ -13,13 +13,13 @@ const examples = [
   ['報告書づくり', 'メモや音声から、日報・議事録・作業報告を整える'],
 ];
 
-const buildExamples: [string, string, string, string[]][] = [
-  ['営業AI', '提案書の下書き', '過去の提案書・商品資料から、次の提案を整理', ['#5b35e8', '#ffb43b', '#ff6b8a', '#1f2937', '#f7f8fc']],
-  ['総務AI', '社内質問への回答', '就業規則・社内ルールから、回答の候補を提示', ['#159a9c', '#bdeff0', '#ffcf56', '#273444', '#f7f8fc']],
-  ['採用AI', '応募者への案内文', '募集内容や会社情報をもとに、連絡文を作成', ['#e95686', '#ffc2d9', '#5b35e8', '#2f3140', '#fff7fb']],
-  ['現場AI', '作業報告の整理', '現場メモや写真の内容から、報告書の下書きを作成', ['#36a269', '#b9ebc9', '#ffb43b', '#243b35', '#f7f8fc']],
-  ['経理AI', '請求書の確認補助', '請求内容を整理し、確認が必要な項目を一覧化', ['#d88b00', '#ffe08a', '#ff6b4a', '#31323a', '#fffaf0']],
-  ['広報AI', '発信内容の下書き', '社内の出来事やサービス情報を、発信用に整える', ['#7561d8', '#d8d0ff', '#ff7895', '#2f3140', '#faf9ff']],
+const buildExamples: [string, string, string, string[], string[][]][] = [
+  ['営業AI', '提案書の下書き', '過去の提案書・商品資料から、次の提案を整理', ['#5b35e8', '#ffb43b', '#ff6b8a', '#1f2937', '#f7f8fc'], [['Google Drive', 'https://api.iconify.design/logos/google-drive.svg'], ['Google Sheets', 'https://api.iconify.design/thesvg-color/google-sheets.svg']]],
+  ['総務AI', '社内質問への回答', '就業規則・社内ルールから、回答の候補を提示', ['#159a9c', '#bdeff0', '#ffcf56', '#273444', '#f7f8fc'], [['Notion', 'https://api.iconify.design/logos/notion-icon.svg'], ['Slack', 'https://api.iconify.design/logos/slack-icon.svg']]],
+  ['採用AI', '応募者への案内文', '募集内容や会社情報をもとに、連絡文を作成', ['#e95686', '#ffc2d9', '#5b35e8', '#2f3140', '#fff7fb'], [['Gmail', 'https://api.iconify.design/logos/google-gmail.svg'], ['Google Calendar', 'https://api.iconify.design/logos/google-calendar.svg']]],
+  ['現場AI', '作業報告の整理', '現場メモや写真の内容から、報告書の下書きを作成', ['#36a269', '#b9ebc9', '#ffb43b', '#243b35', '#f7f8fc'], [['Dropbox', 'https://api.iconify.design/logos/dropbox.svg'], ['Google Drive', 'https://api.iconify.design/logos/google-drive.svg']]],
+  ['経理AI', '請求書の確認補助', '請求内容を整理し、確認が必要な項目を一覧化', ['#d88b00', '#ffe08a', '#ff6b4a', '#31323a', '#fffaf0'], [['Google Sheets', 'https://api.iconify.design/thesvg-color/google-sheets.svg'], ['Stripe', 'https://api.iconify.design/logos/stripe.svg']]],
+  ['広報AI', '発信内容の下書き', '社内の出来事やサービス情報を、発信用に整える', ['#7561d8', '#d8d0ff', '#ff7895', '#2f3140', '#faf9ff'], [['Figma', 'https://api.iconify.design/logos/figma.svg'], ['Slack', 'https://api.iconify.design/logos/slack-icon.svg']]],
 ];
 
 const saasExamples = [
@@ -95,7 +95,7 @@ const steps = [
 
     <section class="ai-section" id="worries"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">こんな会社へ</p><h2>個人の工夫を、<br />会社の仕事につなげる。</h2></div><p>ChatGPTを個人が便利に使う段階から、会社の仕事で使う段階へ。まずは、時間を取られている業務をひとつ見つけます。</p></div><div class="ai-worry-grid">{worries.map((item, i) => <article><span>0{i + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
 
-    <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>自分だけのAIチームを<br /><em>つくろう。</em></h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><div class="ai-build-avatar"><AIEmployeeAvatar name={item[0]} colors={item[3]} /></div><div class="ai-build-label"><span>0{i + 1}</span><b>{item[0]}</b></div><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div></div></section>
+    <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>自分だけのAIチームを<br /><em>つくろう。</em></h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><div class="ai-build-avatar"><AIEmployeeAvatar name={item[0]} colors={item[3]} /></div><div class="ai-build-label"><span>0{i + 1}</span><b>{item[0]}</b></div><h3>{item[1]}</h3><p>{item[2]}</p><div class="ai-build-tools" aria-label={`${item[0]}で使うSaaS`}>{item[4].map((tool) => <span title={tool[0]}><img src={tool[1]} alt={`${tool[0]}のロゴ`} /></span>)}</div></article>)}</div></div></section>
 
     <section class="ai-section ai-integrations"><div class="ai-wrap"><div class="ai-integration-panel"><div class="ai-integration-copy"><p class="ai-kicker">SaaS連携</p><h2>国内外の<br />SaaSと連携できます。</h2><p>いま使っているツールを置き換えるのではなく、御社の業務に必要な範囲でつなぎます。</p></div><div class="ai-saas-cloud" aria-label="連携先の例">{saasExamples.map((service, i) => <span class={`ai-saas-pill ai-saas-${(i % 8) + 1}`}><i><img src={service[1]} alt={`${service[0]}のロゴ`} loading="lazy" /></i>{service[0]}</span>)}</div><span class="ai-integration-shape ai-shape-one" aria-hidden="true"></span><span class="ai-integration-shape ai-shape-two" aria-hidden="true"></span></div><p class="ai-integration-note">連携先の例です。ご利用中のサービスを確認して、対応可否と連携方法を設計します。</p></div></section>
 
@@ -248,6 +248,7 @@ const steps = [
   .ai-builds .ai-heading-row h2 em { color:#5b35e8; font-style:normal; }
   .ai-build-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:16px; margin-top:54px; }
   .ai-build-grid article { min-height:250px; padding:20px; border-radius:24px; background:#f3f4f9; }
+  .ai-build-grid article { position:relative; padding-bottom:72px; }
   .ai-build-grid article:nth-child(1) { background:#e9e2ff; } .ai-build-grid article:nth-child(2) { background:#d9f5ff; } .ai-build-grid article:nth-child(3) { background:#ffe5f1; } .ai-build-grid article:nth-child(4) { background:#dff7e9; } .ai-build-grid article:nth-child(5) { background:#fff0c7; } .ai-build-grid article:nth-child(6) { background:#eeeaff; }
   .ai-build-grid span { display:block; color:#6d5bd1; font-size:11px; font-weight:700; }
   .ai-build-label { display:flex; align-items:center; gap:8px; }
@@ -256,6 +257,9 @@ const steps = [
   .ai-build-grid p { margin:0; color:#646779; font-size:12px; line-height:1.8; }
   .ai-build-avatar { display:flex; justify-content:center; height:108px; margin:-4px 0 8px; }
   .ai-build-avatar svg { width:92px; height:92px; }
+  .ai-build-tools { position:absolute; right:16px; bottom:14px; display:flex; align-items:center; gap:6px; }
+  .ai-build-tools span { display:grid; place-items:center; width:34px; height:34px; border:3px solid #fff; border-radius:50%; background:#fff; box-shadow:0 4px 10px rgba(50,55,90,.12); }
+  .ai-build-tools img { width:23px; height:23px; object-fit:contain; }
   .ai-integrations { background:#fff; }
   .ai-integration-panel { position:relative; display:block; padding:58px 46px 52px; overflow:hidden; border-radius:38px; background:#f0f1f5; }
   .ai-integration-copy { position:relative; z-index:2; max-width:620px; margin:0 auto; padding:0 18px; text-align:center; }
