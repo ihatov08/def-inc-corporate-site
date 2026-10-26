@@ -22,7 +22,7 @@ const buildExamples: [string, string, string, string[]][] = [
   ['広報AI', '発信内容の下書き', '社内の出来事やサービス情報を、発信用に整える', ['#7561d8', '#d8d0ff', '#ff7895', '#2f3140', '#faf9ff']],
 ];
 
-const saasExamples = ['Google Workspace', 'Microsoft 365', 'Slack', 'LINE WORKS', 'Notion', 'kintone', 'freee', 'Dropbox'];
+const saasExamples = [['Google Workspace', 'G'], ['Microsoft 365', 'M'], ['Slack', 'S'], ['LINE WORKS', 'L'], ['Notion', 'N'], ['kintone', 'K'], ['freee', 'F'], ['Dropbox', 'D']];
 
 const steps = [
   ['01', '無料相談', '困っている業務をひとつだけお聞かせください。AIの知識は不要です。'],
@@ -72,7 +72,7 @@ const steps = [
 
     <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>自分だけのAIチームを<br /><em>つくろう。</em></h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><div class="ai-build-avatar"><AIEmployeeAvatar name={item[0]} colors={item[3]} /></div><div class="ai-build-label"><span>0{i + 1}</span><b>{item[0]}</b></div><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div><span class="ai-scroll-cue" aria-hidden="true">→</span></div></section>
 
-    <section class="ai-section ai-integrations"><div class="ai-wrap ai-integrations-inner"><div><p class="ai-kicker">SaaS連携</p><h2>国内外のSaaSと<br /><em>連携できます。</em></h2><p>いま使っているツールを置き換えるのではなく、御社の業務に必要な範囲でつなぎます。連携先は、ご利用中のサービスを確認して設計します。</p></div><div class="ai-saas-cloud" aria-label="連携先の例">{saasExamples.map((service, i) => <span class={`ai-saas-pill ai-saas-${i + 1}`}>{service}</span>)}</div></div></section>
+    <section class="ai-section ai-integrations"><div class="ai-wrap"><div class="ai-integration-panel"><div class="ai-integration-copy"><p class="ai-kicker">SaaS連携</p><h2>国内外の<br />SaaSと連携できます。</h2><p>いま使っているツールを置き換えるのではなく、御社の業務に必要な範囲でつなぎます。</p></div><div class="ai-saas-cloud" aria-label="連携先の例">{saasExamples.map((service, i) => <span class={`ai-saas-pill ai-saas-${i + 1}`}><i>{service[1]}</i>{service[0]}</span>)}</div><span class="ai-integration-shape ai-shape-one" aria-hidden="true"></span><span class="ai-integration-shape ai-shape-two" aria-hidden="true"></span></div><p class="ai-integration-note">連携先は、ご利用中のサービスを確認して設計します。</p></div></section>
 
     <section class="ai-section ai-navy"><div class="ai-wrap"><p class="ai-kicker">できること</p><div class="ai-heading-row"><h2>「AIに任せたい」を、<br /><em>仕事の形</em>にします。</h2><p>役割を絞るから、使い始めやすい。業務に合わせて、できることを一緒に決めます。</p></div><div class="ai-example-list">{examples.map((item, i) => <div><span>0{i + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div><b>↗</b></div>)}</div></div></section>
 
@@ -234,14 +234,20 @@ const steps = [
   .ai-build-avatar svg { width:92px; height:92px; }
   .ai-builds .ai-wrap { position:relative; }
   .ai-scroll-cue { position:absolute; right:12px; bottom:102px; display:grid; place-items:center; width:42px; height:42px; border-radius:50%; color:#fff; background:#5b35e8; box-shadow:0 8px 18px rgba(60,40,170,.2); font-size:22px; pointer-events:none; }
-  .ai-integrations { background:#f3f4f8; }
-  .ai-integrations-inner { display:grid; grid-template-columns:.8fr 1.2fr; gap:70px; align-items:center; }
-  .ai-integrations h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:clamp(30px,4.2vw,50px); line-height:1.3; }
-  .ai-integrations h2 em { color:#5b35e8; font-style:normal; }
+  .ai-integrations { background:#fff; }
+  .ai-integration-panel { position:relative; display:grid; grid-template-columns:.86fr 1.14fr; gap:44px; align-items:center; min-height:430px; padding:62px; overflow:hidden; border-radius:38px; background:#f0f1f5; }
+  .ai-integration-copy { position:relative; z-index:2; max-width:470px; }
+  .ai-integrations h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:clamp(32px,4.2vw,58px); line-height:1.3; }
   .ai-integrations p:not(.ai-kicker) { margin:22px 0 0; color:#646779; font-size:14px; line-height:2; }
-  .ai-saas-cloud { display:flex; flex-wrap:wrap; justify-content:center; gap:16px; padding:34px; border-radius:32px; background:#fff; box-shadow:0 12px 28px rgba(50,55,90,.07); }
-  .ai-saas-pill { display:inline-flex; align-items:center; justify-content:center; min-width:150px; min-height:62px; padding:12px 20px; border-radius:20px; color:#303444; background:#f4f5f9; font-size:13px; font-weight:700; box-shadow:0 6px 14px rgba(50,55,90,.05); }
+  .ai-saas-cloud { position:relative; z-index:2; display:flex; flex-wrap:wrap; justify-content:center; gap:18px; padding:24px; }
+  .ai-saas-pill { display:flex; align-items:center; gap:10px; min-width:155px; padding:10px 15px 10px 10px; border-radius:999px; color:#303444; background:#fff; font-size:12px; font-weight:700; box-shadow:0 10px 22px rgba(50,55,90,.12); }
+  .ai-saas-pill i { display:grid; place-items:center; width:42px; height:42px; flex:none; border-radius:50%; color:#fff; background:#5b35e8; font-style:normal; font-size:18px; font-weight:800; }
   .ai-saas-1,.ai-saas-5 { background:#e9e2ff; color:#5b35e8; } .ai-saas-2,.ai-saas-6 { background:#d9f5ff; color:#197c99; } .ai-saas-3,.ai-saas-7 { background:#dff7e9; color:#31875b; } .ai-saas-4,.ai-saas-8 { background:#fff0c7; color:#9c6a00; }
+  .ai-saas-1 i,.ai-saas-5 i { background:#5b35e8; } .ai-saas-2 i,.ai-saas-6 i { background:#159a9c; } .ai-saas-3 i,.ai-saas-7 i { background:#36a269; } .ai-saas-4 i,.ai-saas-8 i { background:#d88b00; }
+  .ai-integration-shape { position:absolute; border-radius:50%; opacity:.9; }
+  .ai-shape-one { right:-70px; bottom:-130px; width:380px; height:380px; background:#713bff; }
+  .ai-shape-two { right:34%; top:-70px; width:150px; height:150px; background:#ffcf56; }
+  .ai-integration-note { margin:16px 0 0; color:#9296a5; font-size:11px; text-align:center; }
   .ai-navy { color:#fff; background:#5828df; border-radius:42px; margin:0 20px; }
   .ai-navy .ai-heading-row h2 em { color:#ffe05b; }
   .ai-navy .ai-heading-row > p { color:#eeeaff; }
@@ -265,5 +271,5 @@ const steps = [
   .ai-person h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:32px; letter-spacing:-.05em; }
   .ai-person h2 small { margin-left:8px; color:#737789; font-family:"Noto Sans JP", sans-serif; font-size:13px; font-weight:500; letter-spacing:0; }
   .ai-person p:not(.ai-kicker) { margin:14px 0 0; color:#646779; font-size:14px; line-height:2; }
-  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-hero-question { display:block; padding:15px 18px; border-radius:18px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-build-grid { margin-top:38px; padding-inline:21px; margin-inline:-21px; } .ai-build-grid article { min-height:0; } .ai-integrations-inner { display:block; } .ai-integrations-inner > div + div { margin-top:34px; } .ai-saas-cloud { gap:10px; padding:22px 14px; } .ai-saas-pill { min-width:calc(50% - 5px); min-height:56px; padding:10px; font-size:11px; } .ai-flow { grid-template-columns:1fr; gap:9px; margin-top:38px; } .ai-flow-step { min-height:0; padding:20px 16px; } .ai-flow-step strong { margin-top:10px; } .ai-flow-arrow { transform:rotate(90deg); } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:6px 0 0; } .ai-person p:not(.ai-kicker) { text-align:left; } .mobile-only { display:block; } }
+  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-hero-question { display:block; padding:15px 18px; border-radius:18px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-build-grid { margin-top:38px; padding-inline:21px; margin-inline:-21px; } .ai-build-grid article { min-height:0; } .ai-integration-panel { display:block; min-height:0; padding:34px 22px 42px; border-radius:28px; } .ai-saas-cloud { gap:10px; padding:28px 0 10px; } .ai-saas-pill { min-width:calc(50% - 5px); padding:8px 10px 8px 8px; font-size:10px; } .ai-saas-pill i { width:34px; height:34px; font-size:15px; } .ai-shape-one { right:-110px; bottom:-150px; } .ai-shape-two { right:18%; top:35%; width:90px; height:90px; } .ai-flow { grid-template-columns:1fr; gap:9px; margin-top:38px; } .ai-flow-step { min-height:0; padding:20px 16px; } .ai-flow-step strong { margin-top:10px; } .ai-flow-arrow { transform:rotate(90deg); } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:6px 0 0; } .ai-person p:not(.ai-kicker) { text-align:left; } .mobile-only { display:block; } }
 </style>
