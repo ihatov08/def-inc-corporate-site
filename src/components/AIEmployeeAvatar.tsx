@@ -6,5 +6,5 @@ interface Props {
 }
 
 export default function AIEmployeeAvatar({ name, colors }: Props) {
-  return <Avatar name={name} variant="bauhaus" colors={colors} size={92} square={false} />;
+  return <Avatar name={name} variant="beam" colors={colors} size={92} square={false} />;
 }
