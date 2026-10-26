@@ -65,6 +65,8 @@ const steps = [
 
     <section class="ai-section ai-cream"><div class="ai-wrap ai-reason"><div><p class="ai-kicker">def合同会社について</p><h2>相談だけで終わらず、<br />必要なら実際につくれます。</h2></div><div><p>私たちは岩手県盛岡市を拠点に、Webシステムやアプリを開発してきた会社です。AIの使い方を説明するだけでなく、御社の業務に合わせた仕組みとして設計・開発・運用まで対応します。</p><p>「AIを使いたいけれど、何を頼めばいいか分からない」という段階からご相談ください。</p></div></div></section>
 
+    <section class="ai-person"><div class="ai-wrap ai-person-inner"><div class="ai-person-photo"><img src="/images/representative.jpg" alt="def合同会社 代表社員 吉田智哉" /><span>担当者</span></div><div><p class="ai-kicker">担当者</p><h2>吉田 智哉 <small>代表社員</small></h2><p>岩手県盛岡市を拠点に、Webシステム・スマートフォンアプリの開発を行っています。技術書籍の執筆、オンライン講座、OSSへの貢献を通じて、開発の知見も発信しています。</p><p>AIの導入を決める前の「何から考えればいいか分からない」という相談から、業務に合わせた仕組みの設計・開発まで、直接お話を伺います。</p></div></div></section>
+
     <section class="ai-final"><div class="ai-wrap"><p class="ai-kicker">まずは、ひとつの仕事から</p><h2>御社なら、<br />どの仕事をAIに任せたいですか？</h2><p>業務の話を聞かせてください。無料相談で、AI社員にできそうなこと・まだ難しいことを正直にお伝えします。</p><a class="ai-button ai-button-light" href="/contact">一人目のAI社員について相談する <span>→</span></a><small>無料の対象範囲や進め方は、相談時にご説明します。</small></div></section>
   </div>
   </body>
@@ -204,5 +206,13 @@ const steps = [
   .ai-final .ai-kicker { color:#e5477d; background:#fff; }
   .ai-final h2 { color:#fff; }
   .ai-final p { color:#fff0f6; }
-  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } }
+  .ai-person { padding:86px 0; background:#fff; }
+  .ai-person-inner { display:grid; grid-template-columns:180px 1fr; gap:34px; align-items:center; max-width:760px; }
+  .ai-person-photo { position:relative; }
+  .ai-person-photo img { display:block; width:180px; height:180px; object-fit:cover; border-radius:50%; background:#eeeaff; }
+  .ai-person-photo span { position:absolute; right:-8px; bottom:8px; padding:7px 12px; border-radius:999px; color:#fff; background:#5b35e8; font-size:11px; font-weight:700; }
+  .ai-person h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:32px; letter-spacing:-.05em; }
+  .ai-person h2 small { margin-left:8px; color:#737789; font-family:"Noto Sans JP", sans-serif; font-size:13px; font-weight:500; letter-spacing:0; }
+  .ai-person p:not(.ai-kicker) { margin:14px 0 0; color:#646779; font-size:14px; line-height:2; }
+  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:6px 0 0; } .ai-person p:not(.ai-kicker) { text-align:left; } }
 </style>
