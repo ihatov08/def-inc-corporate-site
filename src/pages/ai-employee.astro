@@ -54,6 +54,7 @@ const steps = [
         <p class="ai-kicker">AI社員とは</p>
         <div class="ai-heading-row"><h2>万能なロボットではありません。<br /><em>御社の仕事を手伝う、専属の相棒</em>です。</h2><p>ChatGPTをそのまま渡すのではなく、御社の資料・仕事の流れ・言葉づかいに合わせて、役割をひとつ決めます。</p></div>
         <div class="ai-three"><div><b>知っている</b><strong>御社の資料・ルール</strong><span>必要な情報を探し、回答の根拠にする</span></div><div><b>できる</b><strong>決めた仕事を手伝う</strong><span>下書き、整理、検索、報告を軽くする</span></div><div><b>育てられる</b><strong>使うほど御社向けに</strong><span>現場の声をもとに改善していく</span></div></div>
+        <div class="ai-flow" aria-label="AI社員が仕事を手伝う流れ"><div class="ai-flow-step ai-flow-input"><span>01</span><strong>御社の情報</strong><small>資料・ルール<br />過去の事例</small></div><b class="ai-flow-arrow">→</b><div class="ai-flow-step ai-flow-core"><span>02</span><strong>御社のAI社員</strong><small>決めた役割に沿って<br />情報を整理・判断</small></div><b class="ai-flow-arrow">→</b><div class="ai-flow-step ai-flow-output"><span>03</span><strong>仕事の下書き</strong><small>報告書・回答・提案<br />人が確認して完成</small></div></div>
       </div>
     </section>
 
@@ -187,6 +188,14 @@ const steps = [
   .ai-three > div { padding:30px 24px; border-radius:25px; text-align:center; box-shadow:0 8px 20px rgba(40,45,80,.06); }
   .ai-three > div:nth-child(1) { background:#e9e2ff; } .ai-three > div:nth-child(2) { background:#d9f5ff; } .ai-three > div:nth-child(3) { background:#dff7e9; }
   .ai-three strong { font-family:"M PLUS Rounded 1c", sans-serif; font-weight:800; }
+  .ai-flow { display:grid; grid-template-columns:1fr 42px 1fr 42px 1fr; gap:12px; align-items:center; max-width:900px; margin:58px auto 0; }
+  .ai-flow-step { min-height:150px; padding:24px 18px; border-radius:24px; text-align:center; }
+  .ai-flow-input { background:#e9e2ff; } .ai-flow-core { color:#fff; background:#5b35e8; } .ai-flow-output { background:#d9f5ff; }
+  .ai-flow-step span { display:block; color:#6d5bd1; font-size:11px; font-weight:700; }
+  .ai-flow-core span,.ai-flow-core small { color:#e9e4ff; }
+  .ai-flow-step strong { display:block; margin-top:20px; font-family:"M PLUS Rounded 1c", sans-serif; font-size:18px; font-weight:800; }
+  .ai-flow-step small { display:block; margin-top:8px; color:#646779; font-size:11px; line-height:1.8; }
+  .ai-flow-arrow { color:#5b35e8; font-size:25px; text-align:center; }
   .ai-worry-grid { gap:18px; margin-top:52px; }
   .ai-worry-grid article { padding:27px 25px; border:0; border-radius:24px; box-shadow:0 8px 20px rgba(40,45,80,.06); }
   .ai-worry-grid article:nth-child(1) { background:#dff7e9; } .ai-worry-grid article:nth-child(2) { background:#ffe5f1; } .ai-worry-grid article:nth-child(3) { background:#e9e2ff; }
@@ -214,5 +223,5 @@ const steps = [
   .ai-person h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:32px; letter-spacing:-.05em; }
   .ai-person h2 small { margin-left:8px; color:#737789; font-family:"Noto Sans JP", sans-serif; font-size:13px; font-weight:500; letter-spacing:0; }
   .ai-person p:not(.ai-kicker) { margin:14px 0 0; color:#646779; font-size:14px; line-height:2; }
-  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:6px 0 0; } .ai-person p:not(.ai-kicker) { text-align:left; } }
+  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-flow { grid-template-columns:1fr; gap:9px; margin-top:38px; } .ai-flow-step { min-height:0; padding:20px 16px; } .ai-flow-step strong { margin-top:10px; } .ai-flow-arrow { transform:rotate(90deg); } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:6px 0 0; } .ai-person p:not(.ai-kicker) { text-align:left; } }
 </style>
