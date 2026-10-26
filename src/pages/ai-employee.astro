@@ -1,0 +1,208 @@
+---
+const worries = [
+  ['人手不足', '採用したくても人が来ない。既存社員に仕事が集中している。'],
+  ['属人化', '担当者に聞かないと分からない。過去の資料が活かされていない。'],
+  ['AI活用', 'ChatGPTは試した。でも、会社の仕事にはまだつながっていない。'],
+];
+
+const examples = [
+  ['営業の下調べ', '過去の提案書や商品資料をもとに、提案のたたき台を作る'],
+  ['社内の問い合わせ', '社内規程・マニュアルをもとに、よくある質問へ回答する'],
+  ['報告書づくり', 'メモや音声から、日報・議事録・作業報告を整える'],
+];
+
+const steps = [
+  ['01', '無料相談', '困っている業務をひとつだけお聞かせください。AIの知識は不要です。'],
+  ['02', '業務を整理', '仕事の流れと、AIに任せる範囲を一緒に決めます。'],
+  ['03', '一人目をつくる', '御社の資料やルールに合わせた、最初のAI社員を試作します。'],
+  ['04', '使いながら育てる', '現場で使い、回答や仕事ぶりを見ながら改善します。'],
+];
+---
+
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>御社だけのAI社員｜岩手県の企業向け</title>
+    <meta name="description" content="岩手県の企業向け。御社の業務と資料を理解する、御社だけのAI社員をつくりませんか。今なら一人目のAI社員の構築を無料でご相談いただけます。" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+  <div class="ai-lp">
+    <section class="ai-hero">
+      <div class="ai-wrap ai-hero-grid">
+        <div>
+          <p class="ai-kicker">岩手県の企業向け｜AI活用支援</p>
+          <h1>御社の仕事を、<br /><span>ひとつAIに任せてみる。</span></h1>
+          <p class="ai-hero-lead">採用が難しい仕事、担当者に集中している仕事、毎回くり返す仕事。<br class="desktop-only" />御社の業務に合わせたAIの使い方を、一緒に考えます。</p>
+          <div class="ai-offer"><strong>今なら、一人目のAI社員の構築を無料で。</strong><small>初回相談では、御社の業務に合うかどうかを一緒に整理します。</small></div>
+          <div class="ai-actions"><a class="ai-button ai-button-dark" href="/contact">無料で相談する <span>→</span></a><a class="ai-text-link" href="#what">AI社員とは？</a></div>
+          <p class="ai-note">岩手県内・オンライン対応　／　無理な営業は行いません</p>
+        </div>
+        <div class="ai-visual" aria-label="AI導入相談の内容">
+          <div class="ai-consult-card"><div class="ai-consult-head"><span>相談内容の例</span><span>01</span></div><h2>営業担当が毎週つくる<br />報告書を軽くしたい</h2><dl><div><dt>いまの仕事</dt><dd>メモを集める → 整える → 上司へ送る</dd></div><div><dt>AIに任せること</dt><dd>メモをもとに、報告書の下書きをつくる</dd></div><div><dt>人が確認すること</dt><dd>内容を確認して、必要な部分だけ直す</dd></div></dl><p>AIに任せる範囲を、業務ごとに決めます。</p></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="ai-section ai-cream" id="what">
+      <div class="ai-wrap">
+        <p class="ai-kicker">AI社員とは</p>
+        <div class="ai-heading-row"><h2>万能なロボットではありません。<br /><em>御社の仕事を手伝う、専属の相棒</em>です。</h2><p>ChatGPTをそのまま渡すのではなく、御社の資料・仕事の流れ・言葉づかいに合わせて、役割をひとつ決めます。</p></div>
+        <div class="ai-three"><div><b>知っている</b><strong>御社の資料・ルール</strong><span>必要な情報を探し、回答の根拠にする</span></div><div><b>できる</b><strong>決めた仕事を手伝う</strong><span>下書き、整理、検索、報告を軽くする</span></div><div><b>育てられる</b><strong>使うほど御社向けに</strong><span>現場の声をもとに改善していく</span></div></div>
+      </div>
+    </section>
+
+    <section class="ai-section" id="worries"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">こんな会社へ</p><h2>人を増やせないからこそ、<br />仕事のやり方を変える。</h2></div><p>AI導入を大げさに考える必要はありません。まずは、時間を取られている業務をひとつ見つけます。</p></div><div class="ai-worry-grid">{worries.map((item, i) => <article><span>0{i + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
+
+    <section class="ai-section ai-navy"><div class="ai-wrap"><p class="ai-kicker">できること</p><div class="ai-heading-row"><h2>「AIに任せたい」を、<br /><em>仕事の形</em>にします。</h2><p>役割を絞るから、使い始めやすい。業務に合わせて、できることを一緒に決めます。</p></div><div class="ai-example-list">{examples.map((item, i) => <div><span>0{i + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div><b>↗</b></div>)}</div></div></section>
+
+    <section class="ai-section"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">始め方</p><h2>最初から完璧を<br />目指さなくて大丈夫です。</h2></div><p>一人目のAI社員は、会社全体を変えるためではなく、効果が分かりやすい仕事から始めるための一歩です。</p></div><div class="ai-steps">{steps.map((step) => <div><span>{step[0]}</span><h3>{step[1]}</h3><p>{step[2]}</p></div>)}</div></div></section>
+
+    <section class="ai-section ai-cream"><div class="ai-wrap ai-reason"><div><p class="ai-kicker">def合同会社について</p><h2>相談だけで終わらず、<br />必要なら実際につくれます。</h2></div><div><p>私たちは岩手県盛岡市を拠点に、Webシステムやアプリを開発してきた会社です。AIの使い方を説明するだけでなく、御社の業務に合わせた仕組みとして設計・開発・運用まで対応します。</p><p>「AIを使いたいけれど、何を頼めばいいか分からない」という段階からご相談ください。</p></div></div></section>
+
+    <section class="ai-final"><div class="ai-wrap"><p class="ai-kicker">まずは、ひとつの仕事から</p><h2>御社なら、<br />どの仕事をAIに任せたいですか？</h2><p>業務の話を聞かせてください。無料相談で、AI社員にできそうなこと・まだ難しいことを正直にお伝えします。</p><a class="ai-button ai-button-light" href="/contact">一人目のAI社員について相談する <span>→</span></a><small>無料の対象範囲や進め方は、相談時にご説明します。</small></div></section>
+  </div>
+  </body>
+</html>
+
+<style>
+  :root { color-scheme:light; }
+  * { box-sizing:border-box; }
+  html { scroll-behavior:smooth; }
+  body { margin:0; background:#fffdf8; }
+  a { color:inherit; }
+  .ai-lp { --ink:#25241f; --muted:#716f67; --cream:#f3f0e8; --paper:#fffdf8; --navy:#17323b; --orange:#d45b35; color:var(--ink); background:var(--paper); font-family: "Hiragino Kaku Gothic ProN", "Yu Gothic", YuGothic, sans-serif; }
+  .ai-lp * { box-sizing:border-box; }
+  .ai-wrap { max-width:1080px; margin:auto; padding:0 32px; }
+  .ai-hero { background:var(--cream); overflow:hidden; }
+  .ai-hero-grid { min-height:690px; display:grid; grid-template-columns:1.05fr .95fr; align-items:center; gap:40px; padding-top:80px; padding-bottom:80px; }
+  .ai-kicker { margin:0 0 18px; color:var(--orange); font-size:12px; font-weight:700; letter-spacing:.14em; }
+  .ai-hero h1 { margin:0; font-family:Georgia, "Times New Roman", serif; font-size:clamp(42px, 5.3vw, 76px); line-height:1.14; letter-spacing:-.055em; font-weight:700; }
+  .ai-hero h1 span { color:var(--orange); }
+  .ai-hero-lead { margin:28px 0 0; color:var(--muted); font-size:17px; line-height:2; }
+  .ai-offer { margin-top:26px; padding:17px 20px; border-left:4px solid var(--orange); background:rgba(255,253,248,.76); }
+  .ai-offer strong { display:block; font-size:18px; }
+  .ai-offer small { display:block; margin-top:3px; color:var(--muted); font-size:12px; }
+  .ai-actions { display:flex; align-items:center; gap:22px; margin-top:30px; }
+  .ai-button { display:inline-flex; gap:18px; align-items:center; padding:16px 22px; font-size:14px; font-weight:700; text-decoration:none; transition:transform .2s, background .2s; }
+  .ai-button:hover { transform:translateY(-2px); }
+  .ai-button-dark { color:#fff; background:var(--navy); }
+  .ai-button-light { color:var(--navy); background:#fff; }
+  .ai-text-link { color:var(--ink); font-size:13px; text-decoration:underline; text-underline-offset:5px; }
+  .ai-note { margin:16px 0 0; color:#89867e; font-size:11px; }
+  .ai-visual { position:relative; width:min(100%,440px); margin-left:auto; }
+  .ai-paper { padding:24px; border:1px solid #d9d4c8; background:#fff; box-shadow:18px 18px 0 #ded9cc; transform:rotate(2.2deg); }
+  .ai-paper-top,.ai-paper-foot { display:flex; justify-content:space-between; color:#8d897f; font-size:10px; letter-spacing:.08em; }
+  .ai-status { color:#56835f; }
+  .ai-avatar { display:flex; align-items:center; gap:15px; margin:36px 0 28px; }
+  .ai-avatar-face { display:grid; place-items:center; width:74px; height:74px; border-radius:50%; background:#e9c9ab; position:relative; }
+  .ai-avatar-face:before { content:""; position:absolute; width:80px; height:33px; top:-6px; border-radius:50% 50% 40% 40%; background:#3d4b4b; }
+  .ai-avatar-face i { width:7px; height:7px; border-radius:50%; background:#31312e; position:relative; margin:0 5px; }
+  .ai-avatar-face b { position:absolute; width:22px; height:7px; border-bottom:2px solid #31312e; border-radius:50%; bottom:18px; }
+  .ai-avatar span { font-family:Georgia,serif; font-size:21px; font-weight:700; }
+  .ai-chat { border-top:1px solid #ece8df; border-bottom:1px solid #ece8df; padding:20px 0; font-size:12px; line-height:1.7; }
+  .ai-chat p { margin:0; } .ai-chat b { color:var(--orange); } .ai-chat .ai-reply { margin-top:17px; padding:12px; background:#f4f1e9; }
+  .ai-paper-foot { margin-top:20px; justify-content:flex-start; gap:10px; } .ai-paper-foot span { padding:5px 8px; border:1px solid #ddd8cc; }
+  .ai-stamp { position:absolute; right:-20px; bottom:-30px; display:grid; place-items:center; width:86px; height:86px; border:2px solid var(--orange); border-radius:50%; color:var(--orange); font-family:Georgia,serif; font-size:18px; line-height:1; text-align:center; transform:rotate(-12deg); } .ai-stamp small { font:700 9px sans-serif; letter-spacing:.15em; }
+  .ai-section { padding:110px 0; } .ai-cream { background:var(--cream); } .ai-navy { color:#f5f1e8; background:var(--navy); } .ai-navy .ai-kicker { color:#ef9b78; }
+  .ai-heading-row { display:grid; grid-template-columns:1fr .72fr; gap:60px; align-items:end; } .ai-heading-row h2,.ai-final h2 { margin:0; font-family:Georgia,"Times New Roman",serif; font-size:clamp(32px,4vw,52px); line-height:1.3; letter-spacing:-.04em; } .ai-heading-row h2 em { color:var(--orange); font-style:normal; } .ai-heading-row > p { margin:0; color:var(--muted); line-height:2; font-size:14px; } .ai-navy .ai-heading-row > p { color:#b9c3c1; }
+  .ai-three { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; margin-top:65px; background:#d8d4cb; border:1px solid #d8d4cb; } .ai-three > div { padding:29px; background:var(--paper); } .ai-three b { display:block; color:var(--orange); font-size:11px; } .ai-three strong { display:block; margin-top:30px; font-family:Georgia,serif; font-size:21px; } .ai-three span { display:block; margin-top:12px; color:var(--muted); font-size:12px; line-height:1.8; }
+  .ai-worry-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:18px; margin-top:58px; } .ai-worry-grid article { padding:28px 24px; border:1px solid #e3dfd5; background:#fff; } .ai-worry-grid span,.ai-example-list > div > span,.ai-steps span { color:var(--orange); font-family:Georgia,serif; font-size:14px; } .ai-worry-grid h3 { margin:35px 0 10px; font-family:Georgia,serif; font-size:24px; } .ai-worry-grid p,.ai-example-list p,.ai-steps p { margin:0; color:var(--muted); font-size:13px; line-height:1.9; }
+  .ai-example-list { margin-top:54px; border-top:1px solid rgba(255,255,255,.25); } .ai-example-list > div { display:grid; grid-template-columns:70px 1fr 25px; gap:20px; align-items:center; padding:25px 0; border-bottom:1px solid rgba(255,255,255,.25); } .ai-example-list h3 { margin:0 0 5px; color:#fff; font-family:Georgia,serif; font-size:23px; } .ai-example-list p { color:#b9c3c1; } .ai-example-list b { color:#ef9b78; font-size:21px; }
+  .ai-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:60px; border-top:1px solid #d8d4cb; } .ai-steps > div { padding:24px 20px 0 0; border-right:1px solid #d8d4cb; margin-right:20px; } .ai-steps > div:last-child { border:0; } .ai-steps h3 { margin:28px 0 9px; font-size:18px; } .ai-reason { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; } .ai-reason p { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:2; }
+  .ai-final { padding:110px 0 125px; color:#f8f4ec; text-align:center; background:var(--orange); } .ai-final .ai-kicker { color:#ffe0ce; } .ai-final h2 { font-size:clamp(36px,5vw,64px); } .ai-final p { max-width:540px; margin:22px auto 30px; color:#ffe8dc; font-size:14px; line-height:2; } .ai-final small { display:block; margin-top:15px; color:#ffe0ce; font-size:11px; }
+  @media (max-width: 760px) { .ai-wrap { padding:0 21px; } .ai-hero-grid { display:block; padding-top:62px; padding-bottom:70px; } .ai-hero h1 { font-size:43px; } .ai-hero-lead { font-size:15px; } .desktop-only { display:none; } .ai-visual { width:90%; margin:64px 5% 20px 5%; } .ai-section,.ai-final { padding:76px 0; } .ai-heading-row,.ai-reason { display:block; } .ai-heading-row > p,.ai-reason > div:last-child { margin-top:24px; } .ai-three,.ai-worry-grid { grid-template-columns:1fr; margin-top:38px; } .ai-three > div { padding:24px; } .ai-three strong { margin-top:18px; } .ai-steps { grid-template-columns:1fr 1fr; gap:22px 0; margin-top:38px; } .ai-steps > div { border-right:1px solid #d8d4cb; } .ai-steps > div:nth-child(2) { border-right:0; } .ai-example-list > div { grid-template-columns:38px 1fr 20px; gap:12px; } .ai-actions { flex-wrap:wrap; gap:15px; } }
+  /* Ad LP: 控えめで実務的な見た目にするため、装飾を抑える */
+  .ai-lp { --ink:#292a28; --muted:#686b66; --cream:#f7f7f4; --paper:#fff; --navy:#252b2a; --orange:#b94c2e; font-family:"Hiragino Sans", "Yu Gothic", YuGothic, sans-serif; }
+  .ai-hero { background:#fff; border-bottom:1px solid #dedfda; }
+  .ai-hero-grid { min-height:640px; padding-top:66px; padding-bottom:66px; }
+  .ai-kicker { font-size:11px; letter-spacing:.08em; }
+  .ai-hero h1,.ai-heading-row h2,.ai-final h2,.ai-avatar span,.ai-worry-grid h3,.ai-example-list h3 { font-family:"Hiragino Sans", "Yu Gothic", YuGothic, sans-serif; letter-spacing:-.035em; }
+  .ai-hero h1 { font-size:clamp(38px,4.8vw,64px); line-height:1.28; }
+  .ai-hero h1 span { color:var(--ink); border-bottom:8px solid #f2c6b7; }
+  .ai-hero-lead { font-size:16px; line-height:1.9; }
+  .ai-offer { background:#fff; border:1px solid #dedfda; border-left:3px solid var(--orange); }
+  .ai-offer strong { font-size:16px; }
+  .ai-button { border-radius:2px; }
+  .ai-visual { width:min(100%,470px); }
+  .ai-paper,.ai-avatar,.ai-chat,.ai-paper-foot,.ai-stamp { display:none; }
+  .ai-consult-card { padding:30px; border:1px solid #cfd1cb; background:#fff; box-shadow:8px 8px 0 #ecece7; transform:none; }
+  .ai-consult-head { display:flex; justify-content:space-between; padding-bottom:16px; border-bottom:1px solid #dedfda; color:#777b75; font-size:11px; }
+  .ai-consult-card h2 { margin:28px 0; font-size:25px; line-height:1.55; letter-spacing:-.04em; }
+  .ai-consult-card dl { margin:0; }
+  .ai-consult-card dl div { display:grid; grid-template-columns:100px 1fr; gap:15px; padding:14px 0; border-top:1px solid #ecece8; }
+  .ai-consult-card dt { color:#777b75; font-size:11px; }
+  .ai-consult-card dd { margin:0; font-size:13px; line-height:1.7; }
+  .ai-consult-card > p { margin:24px 0 0; color:var(--orange); font-size:12px; }
+  .ai-section { padding:96px 0; }
+  .ai-three > div,.ai-worry-grid article { background:#fff; }
+  .ai-three { margin-top:54px; }
+  .ai-three strong { font-family:inherit; font-size:18px; }
+  .ai-heading-row h2 { font-size:clamp(29px,3.6vw,46px); }
+  .ai-worry-grid h3 { font-size:21px; }
+  .ai-navy { background:#2c3432; }
+  .ai-navy .ai-heading-row h2 em { color:#f1a289; }
+  .ai-final { background:#b94c2e; }
+  .ai-final h2 { font-size:clamp(32px,4.5vw,54px); }
+
+  /* Yoom参考のサービスLP表現：丸い見出し、強い色面、中央揃え */
+  .ai-lp { --ink:#20212a; --muted:#646779; --cream:#f7f8fc; --paper:#fff; --navy:#3b22b8; --orange:#ff5b45; font-family:"Noto Sans JP", sans-serif; overflow:hidden; }
+  .ai-hero { position:relative; background:#fff; border:0; }
+  .ai-hero-grid { display:block; min-height:auto; max-width:1120px; padding:82px 32px 104px; text-align:center; }
+  .ai-hero h1,.ai-heading-row h2,.ai-final h2,.ai-avatar span,.ai-worry-grid h3,.ai-example-list h3 { font-family:"M PLUS Rounded 1c", "Noto Sans JP", sans-serif; font-weight:800; letter-spacing:-.05em; }
+  .ai-kicker { display:inline-block; padding:7px 14px; border-radius:999px; background:#fff0ee; color:#ee4d39; font-size:12px; letter-spacing:.04em; }
+  .ai-hero h1 { margin-top:22px; font-size:clamp(38px,6vw,72px); line-height:1.25; }
+  .ai-hero h1 span { color:#5b35e8; border:0; }
+  .ai-hero-lead { max-width:670px; margin:22px auto 0; font-size:16px; line-height:2; }
+  .ai-offer { width:fit-content; max-width:100%; margin:28px auto 0; padding:14px 24px; border:0; border-radius:16px; background:#fff3c9; text-align:left; }
+  .ai-offer strong { color:#3f3120; }
+  .ai-actions { justify-content:center; margin-top:28px; }
+  .ai-button { border-radius:999px; padding:16px 25px; box-shadow:0 8px 18px rgba(47,35,125,.16); }
+  .ai-button-dark { background:#4b28d8; }
+  .ai-text-link { text-decoration:none; color:#4b28d8; font-weight:700; }
+  .ai-note { text-align:center; }
+  .ai-visual { width:min(100%,650px); margin:68px auto 0; }
+  .ai-consult-card { position:relative; padding:34px 38px; border:0; border-radius:28px; background:#f1efff; box-shadow:none; text-align:left; }
+  .ai-consult-card:after { content:""; position:absolute; right:-26px; top:-28px; width:90px; height:90px; border-radius:50%; background:#ffcc42; z-index:0; }
+  .ai-consult-card > * { position:relative; z-index:1; }
+  .ai-consult-head { color:#664ee1; border:0; font-weight:700; }
+  .ai-consult-card h2 { font-family:"M PLUS Rounded 1c", sans-serif; font-size:26px; }
+  .ai-consult-card dl div { padding:16px 0; border-color:#d9d3fa; }
+  .ai-consult-card dt { color:#6c5bd1; font-weight:700; }
+  .ai-consult-card > p { color:#5b35e8; font-weight:700; }
+  .ai-section { padding:112px 0; }
+  .ai-section:nth-of-type(3) { background:#edf8ff; }
+  .ai-cream { background:#fff4cf; }
+  .ai-heading-row { display:block; text-align:center; }
+  .ai-heading-row h2 { font-size:clamp(29px,4.4vw,52px); }
+  .ai-heading-row > p { max-width:650px; margin:22px auto 0; }
+  .ai-three { gap:18px; margin-top:52px; background:transparent; border:0; }
+  .ai-three > div { padding:30px 24px; border-radius:25px; text-align:center; box-shadow:0 8px 20px rgba(40,45,80,.06); }
+  .ai-three > div:nth-child(1) { background:#e9e2ff; } .ai-three > div:nth-child(2) { background:#d9f5ff; } .ai-three > div:nth-child(3) { background:#dff7e9; }
+  .ai-three strong { font-family:"M PLUS Rounded 1c", sans-serif; font-weight:800; }
+  .ai-worry-grid { gap:18px; margin-top:52px; }
+  .ai-worry-grid article { padding:27px 25px; border:0; border-radius:24px; box-shadow:0 8px 20px rgba(40,45,80,.06); }
+  .ai-worry-grid article:nth-child(1) { background:#dff7e9; } .ai-worry-grid article:nth-child(2) { background:#ffe5f1; } .ai-worry-grid article:nth-child(3) { background:#e9e2ff; }
+  .ai-worry-grid h3 { margin-top:25px; }
+  .ai-navy { color:#fff; background:#5828df; border-radius:42px; margin:0 20px; }
+  .ai-navy .ai-heading-row h2 em { color:#ffe05b; }
+  .ai-navy .ai-heading-row > p { color:#eeeaff; }
+  .ai-example-list { max-width:760px; margin:52px auto 0; border:0; }
+  .ai-example-list > div { padding:22px 24px; margin-top:12px; border:0; border-radius:20px; background:#fff; color:var(--ink); }
+  .ai-example-list h3 { color:var(--ink); } .ai-example-list p { color:#646779; } .ai-example-list b { color:#5828df; }
+  .ai-steps { gap:16px; border:0; }
+  .ai-steps > div { padding:28px 22px; margin:0; border:0; border-radius:22px; background:#f2f3f8; }
+  .ai-steps h3 { font-family:"M PLUS Rounded 1c", sans-serif; font-weight:800; }
+  .ai-reason { text-align:center; }
+  .ai-reason > div:last-child { max-width:680px; margin:26px auto 0; }
+  .ai-final { padding:112px 0 126px; background:#ff5b92; border-radius:42px 42px 0 0; }
+  .ai-final .ai-kicker { color:#e5477d; background:#fff; }
+  .ai-final h2 { color:#fff; }
+  .ai-final p { color:#fff0f6; }
+  @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 76px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } }
+</style>
