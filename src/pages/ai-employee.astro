@@ -39,7 +39,7 @@ const steps = [
           <p class="ai-kicker">岩手県の企業向け｜AI活用支援</p>
           <h1>御社の仕事を、<br /><span>ひとつAIに任せてみる。</span></h1>
           <p class="ai-hero-lead">採用が難しい仕事、担当者に集中している仕事、毎回くり返す仕事。<br class="desktop-only" />御社の業務に合わせたAIの使い方を、一緒に考えます。</p>
-          <div class="ai-offer"><strong>今なら、一人目のAI社員の構築を無料で。</strong><small>初回相談では、御社の業務に合うかどうかを一緒に整理します。</small></div>
+          <div class="ai-offer"><span>無料構築のご案内</span><strong>一人目のAI社員、<b>構築費0円。</b></strong><small>御社の業務に合わせた最初の1人を、無料でつくります。</small></div>
           <div class="ai-actions"><a class="ai-button ai-button-dark" href="/contact">無料で相談する <span>→</span></a><a class="ai-text-link" href="#what">AI社員とは？</a></div>
           <p class="ai-note">岩手県内・オンライン対応　／　無理な営業は行いません</p>
         </div>
@@ -68,7 +68,7 @@ const steps = [
 
     <section class="ai-person"><div class="ai-wrap ai-person-inner"><div class="ai-person-photo"><img src="/images/representative.jpg" alt="def合同会社 代表社員 吉田智哉" /><span>代表</span></div><div><p class="ai-kicker">代表</p><h2>最初のご相談から、<br />吉田が直接お話を伺います。<small>代表社員 吉田 智哉</small></h2><p>岩手県盛岡市を拠点に、Webシステム・スマートフォンアプリの開発を行っています。技術書籍の執筆、オンライン講座、OSSへの貢献を通じて、開発の知見も発信しています。</p><p>AIの導入を決める前の「何から考えればいいか分からない」という相談から、業務に合わせた仕組みの設計・開発まで、直接お話を伺います。</p></div></div></section>
 
-    <section class="ai-final"><div class="ai-wrap"><p class="ai-kicker">まずは、ひとつの仕事から</p><h2>御社なら、<br />どの仕事をAIに任せたいですか？</h2><p>業務の話を聞かせてください。無料相談で、AI社員にできそうなこと・まだ難しいことを正直にお伝えします。</p><a class="ai-button ai-button-light" href="/contact">一人目のAI社員について相談する <span>→</span></a><small>無料の対象範囲や進め方は、相談時にご説明します。</small></div></section>
+    <section class="ai-final"><div class="ai-wrap"><p class="ai-kicker">無料構築のご案内</p><h2>一人目のAI社員を、<br />無料でつくるところから。</h2><p>まずは、AIに任せたい仕事をひとつ教えてください。御社に合うかどうか、できること・難しいことを正直にお伝えします。</p><a class="ai-button ai-button-light" href="/contact">無料構築について相談する <span>→</span></a><small>無料の対象範囲や進め方は、相談時にご説明します。</small></div></section>
   </div>
   </body>
 </html>
@@ -89,7 +89,9 @@ const steps = [
   .ai-hero h1 span { color:var(--orange); }
   .ai-hero-lead { margin:28px 0 0; color:var(--muted); font-size:17px; line-height:2; }
   .ai-offer { margin-top:26px; padding:17px 20px; border-left:4px solid var(--orange); background:rgba(255,253,248,.76); }
-  .ai-offer strong { display:block; font-size:18px; }
+  .ai-offer > span { display:block; color:var(--orange); font-size:11px; font-weight:800; letter-spacing:.08em; }
+  .ai-offer strong { display:block; font-size:23px; }
+  .ai-offer strong b { color:var(--orange); }
   .ai-offer small { display:block; margin-top:3px; color:var(--muted); font-size:12px; }
   .ai-actions { display:flex; align-items:center; gap:22px; margin-top:30px; }
   .ai-button { display:inline-flex; gap:18px; align-items:center; padding:16px 22px; font-size:14px; font-weight:700; text-decoration:none; transition:transform .2s, background .2s; }
@@ -130,7 +132,7 @@ const steps = [
   .ai-hero h1 span { color:var(--ink); border-bottom:8px solid #f2c6b7; }
   .ai-hero-lead { font-size:16px; line-height:1.9; }
   .ai-offer { background:#fff; border:1px solid #dedfda; border-left:3px solid var(--orange); }
-  .ai-offer strong { font-size:16px; }
+  .ai-offer strong { font-size:23px; }
   .ai-button { border-radius:2px; }
   .ai-visual { width:min(100%,470px); }
   .ai-paper,.ai-avatar,.ai-chat,.ai-paper-foot,.ai-stamp { display:none; }
