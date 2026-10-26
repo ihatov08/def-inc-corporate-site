@@ -69,7 +69,7 @@ const steps = [
 
     <section class="ai-section" id="worries"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">こんな会社へ</p><h2>個人の工夫を、<br />会社の仕事につなげる。</h2></div><p>ChatGPTを個人が便利に使う段階から、会社の仕事で使う段階へ。まずは、時間を取られている業務をひとつ見つけます。</p></div><div class="ai-worry-grid">{worries.map((item, i) => <article><span>0{i + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
 
-    <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>AI社員の役割は、<br /><em>御社の仕事</em>に合わせて決めます。</h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><span>0{i + 1}</span><b>{item[0]}</b><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div></div></section>
+    <section class="ai-section ai-builds"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">構築例（イメージ）</p><h2>AI社員の役割は、<br /><em>御社の仕事</em>に合わせて決めます。</h2></div><p>同じAIを全社に配るのではなく、業務ごとに役割を持たせます。下記は構築できる役割の一例です。</p></div><div class="ai-build-grid">{buildExamples.map((item, i) => <article><div class="ai-build-label"><span>0{i + 1}</span><b>{item[0]}</b></div><h3>{item[1]}</h3><p>{item[2]}</p></article>)}</div></div></section>
 
     <section class="ai-section ai-navy"><div class="ai-wrap"><p class="ai-kicker">できること</p><div class="ai-heading-row"><h2>「AIに任せたい」を、<br /><em>仕事の形</em>にします。</h2><p>役割を絞るから、使い始めやすい。業務に合わせて、できることを一緒に決めます。</p></div><div class="ai-example-list">{examples.map((item, i) => <div><span>0{i + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div><b>↗</b></div>)}</div></div></section>
 
@@ -222,7 +222,8 @@ const steps = [
   .ai-build-grid article { min-height:190px; padding:25px; border-radius:24px; background:#f3f4f9; }
   .ai-build-grid article:nth-child(1) { background:#e9e2ff; } .ai-build-grid article:nth-child(2) { background:#d9f5ff; } .ai-build-grid article:nth-child(3) { background:#ffe5f1; } .ai-build-grid article:nth-child(4) { background:#dff7e9; } .ai-build-grid article:nth-child(5) { background:#fff0c7; } .ai-build-grid article:nth-child(6) { background:#eeeaff; }
   .ai-build-grid span { display:block; color:#6d5bd1; font-size:11px; font-weight:700; }
-  .ai-build-grid b { display:block; margin-top:22px; color:#5b35e8; font-size:12px; }
+  .ai-build-label { display:flex; align-items:center; gap:8px; }
+  .ai-build-grid b { display:block; color:#5b35e8; font-size:12px; }
   .ai-build-grid h3 { margin:6px 0 8px; font-family:"M PLUS Rounded 1c", sans-serif; font-size:19px; font-weight:800; }
   .ai-build-grid p { margin:0; color:#646779; font-size:12px; line-height:1.8; }
   .ai-navy { color:#fff; background:#5828df; border-radius:42px; margin:0 20px; }
