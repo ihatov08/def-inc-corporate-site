@@ -281,21 +281,22 @@ const steps = [
   .ai-automation-copy h2 { margin:0; font-family:"M PLUS Rounded 1c", sans-serif; font-size:clamp(30px,4vw,52px); line-height:1.35; letter-spacing:-.06em; }
   .ai-automation-copy h2 em { color:#6535e8; font-style:normal; }
   .ai-automation-copy > p:not(.ai-kicker) { max-width:390px; margin:24px 0 0; color:#646779; font-size:14px; line-height:2; }
-  .ai-automation-diagram { position:relative; min-height:540px; }
+  .ai-automation-diagram { position:relative; min-height:540px; overflow:hidden; border-radius:42px; background:linear-gradient(135deg,#eee9ff 0%,#fff 48%,#e8f7ff 100%); box-shadow:inset 0 0 0 1px rgba(91,53,232,.08); }
   .ai-automation-diagram::before { content:""; position:absolute; left:50%; top:50%; width:380px; height:380px; border:28px solid rgba(126,76,255,.13); border-radius:50%; transform:translate(-50%,-50%); }
   .ai-automation-diagram::after { content:""; position:absolute; left:50%; top:50%; width:250px; height:250px; border:18px solid rgba(255,123,190,.16); border-radius:50%; transform:translate(-50%,-50%); }
   .ai-automation-center { position:absolute; z-index:2; left:50%; top:50%; display:grid; place-items:center; width:174px; height:174px; border:8px solid #fff; border-radius:50%; background:#fff; box-shadow:0 18px 38px rgba(75,40,160,.18); text-align:center; transform:translate(-50%,-50%); }
   .ai-automation-avatar { position:absolute; top:-44px; }
   .ai-automation-avatar svg { width:110px; height:110px; }
   .ai-automation-center strong { margin-top:55px; color:#5429d3; font-family:"M PLUS Rounded 1c", sans-serif; font-size:18px; line-height:1.35; }
-  .ai-orbit { position:absolute; z-index:1; display:grid; place-items:center; width:184px; min-height:112px; padding:16px; border:4px solid #fff; border-radius:30px; background:#fff; box-shadow:0 14px 30px rgba(75,40,160,.12); text-align:center; }
+  .ai-orbit { position:absolute; z-index:1; display:grid; place-items:center; width:184px; min-height:128px; padding:22px 16px 14px; border:4px solid #fff; border-radius:30px; background:#fff; box-shadow:0 14px 30px rgba(75,40,160,.12); text-align:center; }
   .ai-orbit::after { content:""; position:absolute; width:20px; height:20px; border-radius:50%; background:#ffce4c; }
+  .ai-orbit::before { position:absolute; top:-17px; display:grid; place-items:center; width:42px; height:42px; border:4px solid #fff; border-radius:50%; color:#fff; font-size:20px; font-weight:800; box-shadow:0 7px 15px rgba(75,40,160,.14); }
   .ai-orbit b { color:#252631; font-family:"M PLUS Rounded 1c", sans-serif; font-size:15px; }
   .ai-orbit span { margin-top:6px; color:#737789; font-size:11px; line-height:1.6; }
-  .ai-orbit-top { left:50%; top:0; transform:translateX(-50%); background:#e8e0ff; } .ai-orbit-top::after { right:-20px; bottom:12px; }
-  .ai-orbit-right { right:0; top:50%; transform:translateY(-50%); background:#d9f5ff; } .ai-orbit-right::after { left:-20px; top:12px; background:#ff83bb; }
-  .ai-orbit-bottom { left:50%; bottom:0; transform:translateX(-50%); background:#ffe8a8; } .ai-orbit-bottom::after { left:-20px; top:12px; background:#6fe0bb; }
-  .ai-orbit-left { left:0; top:50%; transform:translateY(-50%); background:#dff7e9; } .ai-orbit-left::after { right:-20px; top:12px; background:#9d7cff; }
+  .ai-orbit-top { left:50%; top:20px; transform:translateX(-50%); background:#e8e0ff; } .ai-orbit-top::before { content:"✦"; background:#6b3be8; } .ai-orbit-top::after { right:-20px; bottom:12px; }
+  .ai-orbit-right { right:22px; top:50%; transform:translateY(-50%); background:#d9f5ff; } .ai-orbit-right::before { content:"↗"; background:#1e9abb; } .ai-orbit-right::after { left:-20px; top:12px; background:#ff83bb; }
+  .ai-orbit-bottom { left:50%; bottom:20px; transform:translateX(-50%); background:#ffe8a8; } .ai-orbit-bottom::before { content:"✓"; background:#e19c00; } .ai-orbit-bottom::after { left:-20px; top:12px; background:#6fe0bb; }
+  .ai-orbit-left { left:22px; top:50%; transform:translateY(-50%); background:#dff7e9; } .ai-orbit-left::before { content:"↻"; background:#22a575; } .ai-orbit-left::after { right:-20px; top:12px; background:#9d7cff; }
   .ai-navy { color:#fff; background:#5828df; border-radius:42px; margin:0 20px; }
   .ai-navy .ai-heading-row h2 em { color:#ffe05b; }
   .ai-navy .ai-heading-row > p { color:#eeeaff; }
