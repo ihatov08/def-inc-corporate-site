@@ -226,7 +226,8 @@ const steps = [
   .ai-cost-chart-column { display:flex; flex-direction:column; align-items:center; justify-content:flex-end; gap:12px; height:100%; }
   .ai-cost-chart-column > b { color:#30313a; font-size:13px; }
   .ai-cost-chart-bar { display:flex; align-items:flex-start; justify-content:center; width:100px; padding-top:16px; border-radius:18px 18px 0 0; color:#fff; font-size:11px; font-style:normal; font-weight:800; line-height:1.5; text-align:center; }
-  .ai-cost-chart-bar-human { height:205px; background:#aeb3c1; } .ai-cost-chart-bar-ai { height:48px; background:#7e5bef; }
+  .ai-cost-chart-bar-human { height:205px; background:#aeb3c1; } .ai-cost-chart-bar-ai { position:relative; height:48px; background:#7e5bef; }
+  .ai-cost-chart-bar-ai::before { content:"↓"; position:absolute; top:-48px; left:50%; color:#5b35e8; font-size:36px; font-weight:900; line-height:1; transform:translateX(-50%); }
   .ai-navy { background:#2c3432; }
   .ai-navy .ai-heading-row h2 em { color:#f1a289; }
   .ai-final { background:#b94c2e; }
