@@ -1,12 +1,6 @@
 ---
 import AIEmployeeAvatar from '../components/AIEmployeeAvatar';
 
-const examples = [
-  ['営業の下調べ', '過去の提案書や商品資料をもとに、提案のたたき台を作る'],
-  ['社内の問い合わせ', '社内規程・マニュアルをもとに、よくある質問へ回答する'],
-  ['報告書づくり', 'メモや音声から、日報・議事録・作業報告を整える'],
-];
-
 const actionExamples = [
   ['✦', 'AIワーカー'], ['↗', 'アプリと連携する'], ['♙', '担当者へ対応を依頼する'], ['♡', '承認を依頼する'],
   ['▤', 'データベースを操作する'], ['✉', 'メールを送る'], ['▧', '書類を発行する'], ['▥', 'フォーム'],
@@ -103,8 +97,6 @@ const steps = [
     <section class="ai-section ai-actions-showcase" id="actions"><div class="ai-action-ring ai-action-ring-one" aria-hidden="true"></div><div class="ai-action-ring ai-action-ring-two" aria-hidden="true"></div><div class="ai-wrap ai-action-layout"><div class="ai-action-copy"><p class="ai-kicker">実行できる内容は様々</p><h2>退屈なデスクワークを、<br /><em>まとめて任せる。</em></h2><p>フローボットでは、SaaSの操作・ブラウザ操作・書類の作成・メールの送信など、デスクワークに必要なアクションを自由に組み合わせます。</p></div><div class="ai-action-list">{actionExamples.map((action) => <div class="ai-action-pill"><i>{action[0]}</i><span>{action[1]}</span></div>)}</div><div class="ai-action-avatar"><AIEmployeeAvatar name="AI社員" colors={['#5b35e8', '#ff78b6']} /></div></div></section>
 
     <section class="ai-section ai-trigger" id="triggers"><div class="ai-trigger-ring ai-trigger-ring-one" aria-hidden="true"></div><div class="ai-trigger-ring ai-trigger-ring-two" aria-hidden="true"></div><div class="ai-wrap ai-trigger-layout"><div class="ai-trigger-flow"><div class="ai-trigger-step"><i>◷</i><b>朝9時になったら<br />今日の仕事を確認</b></div><div class="ai-trigger-step ai-trigger-step-center"><img src="/icons/saas/google-drive.svg" alt="Google Driveのロゴ" /><b>過去の資料や履歴を<br />要点だけ整理</b></div><div class="ai-trigger-step ai-trigger-step-start"><i>↗</i><b>次の一手を<br />担当者へ共有</b></div><span class="ai-trigger-arrow">↓</span><div class="ai-trigger-avatars"><AIEmployeeAvatar name="整理AI" colors={['#ff78b6', '#d94c9a']} /><AIEmployeeAvatar name="実行AI" colors={['#1683ee', '#5b35e8']} /></div></div><div class="ai-trigger-copy"><p class="ai-kicker">仕事が動き出すきっかけ</p><h2>決めた合図で、<br /><em>AI社員が動き出す。</em></h2><p>時間や社内の出来事をきっかけに、御社のAI社員が必要な情報を集め、次の仕事まで準備します。</p></div></div></section>
-
-    <section class="ai-section ai-navy" id="examples"><div class="ai-wrap"><p class="ai-kicker">できること</p><div class="ai-heading-row"><h2>「AIに任せたい」を、<br /><em>仕事の形</em>にします。</h2><p>役割を絞るから、使い始めやすい。業務に合わせて、できることを一緒に決めます。</p></div><div class="ai-example-list">{examples.map((item, i) => <div><span>0{i + 1}</span><div><h3>{item[0]}</h3><p>{item[1]}</p></div><b>↗</b></div>)}</div></div></section>
 
     <section class="ai-section" id="steps"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">始め方</p><h2>最初から完璧を<br />目指さなくて大丈夫です。</h2></div><p>一人目のAI社員は、会社全体を変えるためではなく、効果が分かりやすい仕事から始めるための一歩です。</p></div><div class="ai-steps">{steps.map((step) => <div><span>{step[0]}</span><h3>{step[1]}</h3><p>{step[2]}</p></div>)}</div></div></section>
 
@@ -452,10 +444,10 @@ const steps = [
   .ai-steps h3 { font-family:"M PLUS Rounded 1c", sans-serif; font-weight:800; }
   .ai-reason { text-align:center; }
   .ai-reason > div:last-child { max-width:680px; margin:26px auto 0; }
-  .ai-final { padding:112px 0 126px; background:#ff5b92; border-radius:42px 42px 0 0; }
-  .ai-final .ai-kicker { color:#e5477d; background:#fff; }
+  .ai-final { padding:112px 0 126px; background:#5b35e8; border-radius:42px 42px 0 0; }
+  .ai-final .ai-kicker { color:#5b35e8; background:#fff; }
   .ai-final h2 { color:#fff; }
-  .ai-final p { color:#fff0f6; }
+  .ai-final p { color:#eeeaff; }
   .ai-person { padding:86px 0; background:#fff; }
   .ai-person-inner { display:grid; grid-template-columns:180px 1fr; gap:34px; align-items:center; max-width:760px; }
   .ai-person-photo { position:relative; }
