@@ -69,6 +69,17 @@ const steps = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <script is:inline>
+      (function () {
+        try {
+          var saved = localStorage.getItem('theme');
+          var systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+          document.documentElement.dataset.theme = saved || (systemDark ? 'dark' : 'light');
+        } catch (e) {
+          document.documentElement.dataset.theme = 'light';
+        }
+      })();
+    </script>
   </head>
   <body>
   <div class="ai-lp">
@@ -162,6 +173,77 @@ const steps = [
   .ai-steps { display:grid; grid-template-columns:repeat(4,1fr); gap:0; margin-top:60px; border-top:1px solid #d8d4cb; } .ai-steps > div { padding:24px 20px 0 0; border-right:1px solid #d8d4cb; margin-right:20px; } .ai-steps > div:last-child { border:0; } .ai-steps h3 { margin:28px 0 9px; font-size:18px; } .ai-reason { display:grid; grid-template-columns:1fr 1fr; gap:80px; align-items:start; } .ai-reason p { margin:0 0 18px; color:var(--muted); font-size:14px; line-height:2; }
   .ai-final { padding:110px 0 125px; color:#f8f4ec; text-align:center; background:var(--orange); } .ai-final .ai-kicker { color:#ffe0ce; } .ai-final h2 { font-size:clamp(36px,5vw,64px); } .ai-final p { max-width:540px; margin:22px auto 30px; color:#ffe8dc; font-size:14px; line-height:2; } .ai-final small { display:block; margin-top:15px; color:#ffe0ce; font-size:11px; }
   @media (max-width: 760px) { .ai-wrap { padding:0 21px; } .ai-hero-grid { display:block; padding-top:62px; padding-bottom:70px; } .ai-hero h1 { font-size:43px; } .ai-hero-lead { font-size:15px; } .desktop-only { display:none; } .ai-visual { width:90%; margin:64px 5% 20px 5%; } .ai-section,.ai-final { padding:76px 0; } .ai-heading-row,.ai-reason { display:block; } .ai-heading-row > p,.ai-reason > div:last-child { margin-top:24px; } .ai-three,.ai-worry-grid { grid-template-columns:1fr; margin-top:38px; } .ai-three > div { padding:24px; } .ai-three strong { margin-top:18px; } .ai-steps { grid-template-columns:1fr 1fr; gap:22px 0; margin-top:38px; } .ai-steps > div { border-right:1px solid #d8d4cb; } .ai-steps > div:nth-child(2) { border-right:0; } .ai-example-list > div { grid-template-columns:38px 1fr 20px; gap:12px; } .ai-actions { flex-wrap:wrap; gap:15px; } }
+
+  /* Dark mode: preserve the colorful accents while replacing paper surfaces and muted text. */
+  :root[data-theme="dark"] { color-scheme:dark; }
+  :root[data-theme="dark"] body { background:#090b0f; color:#e8ebf0; }
+  :root[data-theme="dark"] .ai-lp {
+    --ink:#e8ebf0;
+    --muted:#a3abb8;
+    --cream:#11151c;
+    --paper:#0d1117;
+    --navy:#21134f;
+    /* LPの強調色もサイト本体と揃えて紫系にする */
+    --orange:#9b87ff;
+    color:var(--ink);
+    background:var(--paper);
+  }
+  :root[data-theme="dark"] .ai-hero,
+  :root[data-theme="dark"] .ai-builds,
+  :root[data-theme="dark"] .ai-integrations,
+  :root[data-theme="dark"] .ai-person { background:#0d1117; }
+  :root[data-theme="dark"] .ai-hero-question,
+  :root[data-theme="dark"] .ai-kicker { background:#241b43; color:#c3b5ff; }
+  :root[data-theme="dark"] .ai-hero h1 span { color:#c3b5ff; }
+  :root[data-theme="dark"] .ai-offer,
+  :root[data-theme="dark"] .ai-consult-card,
+  :root[data-theme="dark"] .ai-hero-workflow-step,
+  :root[data-theme="dark"] .ai-hero-saas-cloud span,
+  :root[data-theme="dark"] .ai-action-pill,
+  :root[data-theme="dark"] .ai-trigger-step,
+  :root[data-theme="dark"] .ai-orbit,
+  :root[data-theme="dark"] .ai-automation-center,
+  :root[data-theme="dark"] .ai-saas-pill,
+  :root[data-theme="dark"] .ai-saas-pill i { background:#171c25; color:var(--ink); }
+  :root[data-theme="dark"] .ai-offer { border-color:#343b48; }
+  :root[data-theme="dark"] .ai-offer strong,
+  :root[data-theme="dark"] .ai-action-pill span,
+  :root[data-theme="dark"] .ai-trigger-step,
+  :root[data-theme="dark"] .ai-orbit b,
+  :root[data-theme="dark"] .ai-action-copy h2,
+  :root[data-theme="dark"] .ai-trigger-copy h2,
+  :root[data-theme="dark"] .ai-cost-chart-title,
+  :root[data-theme="dark"] .ai-cost-chart-column > b { color:var(--ink); }
+  :root[data-theme="dark"] .ai-section:nth-of-type(3),
+  :root[data-theme="dark"] .ai-actions-showcase { background:#101a26; }
+  :root[data-theme="dark"] .ai-cost { background:#211b16; }
+  :root[data-theme="dark"] .ai-cream { background:#241f13; }
+  :root[data-theme="dark"] .ai-navy { background:#21134f; }
+  :root[data-theme="dark"] .ai-integration-panel,
+  :root[data-theme="dark"] .ai-cost-chart { background:#171c25; }
+  :root[data-theme="dark"] .ai-three > div,
+  :root[data-theme="dark"] .ai-worry-grid article,
+  :root[data-theme="dark"] .ai-build-grid article { box-shadow:0 8px 24px rgba(0,0,0,.24); }
+  :root[data-theme="dark"] .ai-worry-grid article,
+  :root[data-theme="dark"] .ai-build-grid article { border-color:#303743; }
+  :root[data-theme="dark"] .ai-person { border-top:1px solid #252c36; }
+  :root[data-theme="dark"] .ai-steps,
+  :root[data-theme="dark"] .ai-steps > div,
+  :root[data-theme="dark"] .ai-consult-head,
+  :root[data-theme="dark"] .ai-consult-card dl div { border-color:#303743; }
+  :root[data-theme="dark"] .ai-person h2 small,
+  :root[data-theme="dark"] .ai-automation-copy > p:not(.ai-kicker),
+  :root[data-theme="dark"] .ai-action-copy > p:not(.ai-kicker),
+  :root[data-theme="dark"] .ai-trigger-copy > p:not(.ai-kicker),
+  :root[data-theme="dark"] .ai-cost-compare p,
+  :root[data-theme="dark"] .ai-cost-note,
+  :root[data-theme="dark"] .ai-build-grid p,
+  :root[data-theme="dark"] .ai-integrations p:not(.ai-kicker) { color:var(--muted); }
+  :root[data-theme="dark"] .ai-final { background:#4b35a8; }
+  :root[data-theme="dark"] .ai-button-light { background:#f0f2f5; color:#171c25; }
+  :root[data-theme="dark"] .ai-paper,
+  :root[data-theme="dark"] .ai-build-tools span { border-color:#343b48; background:#171c25; }
+  :root[data-theme="dark"] .ai-automation-diagram { background:linear-gradient(135deg,#201a3b 0%,#171c25 48%,#102536 100%); }
   /* Ad LP: 控えめで実務的な見た目にするため、装飾を抑える */
   .ai-lp { --ink:#292a28; --muted:#686b66; --cream:#f7f7f4; --paper:#fff; --navy:#252b2a; --orange:#b94c2e; font-family:"Hiragino Sans", "Yu Gothic", YuGothic, sans-serif; }
   .ai-hero { background:#fff; border-bottom:1px solid #dedfda; }

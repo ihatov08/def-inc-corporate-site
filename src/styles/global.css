@@ -52,9 +52,10 @@
   --text: #e8ebf0;
   --text-muted: #838b99;
   --text-faint: #5f6673;
-  --color-brand: #ff5533;
-  --color-brand-strong: #ff7a5f;
-  --color-brand-soft: #241611;
+  /* ライトテーマと同じ紫系を基調にし、ダーク時だけオレンジへ反転させない */
+  --color-brand: #9b87ff;
+  --color-brand-strong: #b3a5ff;
+  --color-brand-soft: #241d45;
   --shadow-soft: 0 1px 0 rgba(0, 0, 0, 0.4);
   --shadow-card: 0 1px 0 rgba(0, 0, 0, 0.5);
   --shadow-float: 0 16px 44px rgba(0, 0, 0, 0.6);
@@ -306,4 +307,65 @@
 .site-body main section .hover\:border-brand:hover { border-color: #b5a8f7; }
 @media (max-width: 1024px) {
   .site-header .container-x { height: 64px; }
+}
+
+/* Dark theme overrides for the service-site layer.
+   Keep page components readable even when they use the light brand palette above. */
+:root[data-theme="dark"] .site-body {
+  background: var(--bg);
+  color: var(--text);
+}
+:root[data-theme="dark"] .site-header {
+  background: color-mix(in srgb, var(--bg) 88%, transparent) !important;
+  border-bottom-color: color-mix(in srgb, var(--border) 90%, transparent) !important;
+}
+:root[data-theme="dark"] .site-header nav a:hover,
+:root[data-theme="dark"] .site-header nav a[aria-current="page"] {
+  background: var(--color-brand-soft);
+  color: var(--color-brand-strong);
+}
+:root[data-theme="dark"] .site-body .btn-ghost {
+  border-color: var(--border);
+  background: var(--bg-elevated);
+  color: var(--text);
+}
+:root[data-theme="dark"] .site-body .btn-primary {
+  background: var(--color-brand);
+  border-color: var(--color-brand);
+  color: #180b07;
+}
+:root[data-theme="dark"] .site-body .btn-primary:hover {
+  background: var(--color-brand-strong);
+  border-color: var(--color-brand-strong);
+}
+:root[data-theme="dark"] .site-body .eyebrow,
+:root[data-theme="dark"] .site-body .chip-client {
+  background: color-mix(in srgb, var(--color-brand) 18%, var(--bg-elevated));
+  color: var(--color-brand-strong);
+}
+:root[data-theme="dark"] .site-body .chip {
+  background: var(--bg-subtle);
+  color: var(--text-muted);
+}
+:root[data-theme="dark"] .site-body main > section:first-child,
+:root[data-theme="dark"] .site-body main section .bg-surface-elevated {
+  background: var(--bg-elevated);
+}
+:root[data-theme="dark"] .site-body main section[class*="bg-surface-subtle"] {
+  background: var(--bg-subtle);
+}
+:root[data-theme="dark"] .site-body main section[class*="border-y"],
+:root[data-theme="dark"] .site-body main section .border-line {
+  border-color: var(--border);
+}
+:root[data-theme="dark"] .site-footer {
+  background: #070809;
+}
+:root[data-theme="dark"] .site-footer .text-ink-muted,
+:root[data-theme="dark"] .site-footer .text-ink-faint,
+:root[data-theme="dark"] .site-footer a {
+  color: #aeb5c2;
+}
+:root[data-theme="dark"] .site-footer .border-line {
+  border-color: rgba(255, 255, 255, .12);
 }
