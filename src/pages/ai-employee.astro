@@ -85,22 +85,13 @@ const steps = [
           <h1>御社の仕事に、<br /><span>専属のAI社員を。</span></h1>
           <p class="ai-hero-lead">採用が難しい仕事、担当者に集中している仕事、毎回くり返す仕事。<br class="desktop-only" />御社の業務に合わせたAIの使い方を、一緒に考えます。</p>
           <div class="ai-offer"><span>無料構築のご案内</span><strong>一人目のAI社員、<b>構築費0円。</b></strong><small>御社の業務に合わせた最初の1人を、無料でつくります。</small><small>※サーバー費用・AI API利用料などの月額利用料は別途かかります。</small></div>
-          <div class="ai-actions"><a class="ai-button ai-button-dark" href="/contact">無料で相談する <span>→</span></a><a class="ai-text-link" href="#what">AI社員とは？</a></div>
+          <div class="ai-actions"><a class="ai-button ai-button-dark" href="/contact">無料で相談する <span>→</span></a><a class="ai-text-link" href="#automation">AI社員の役割を見る</a></div>
           <p class="ai-note">岩手県内・オンライン対応　／　無理な営業は行いません</p>
         </div>
         <div class="ai-hero-saas-cloud" aria-label="連携できるSaaSの例">{saasExamples.slice(0, 8).map((service, i) => <span class={`ai-hero-saas-${i + 1}`}><img src={service[1]} alt={`${service[0]}のロゴ`} loading="lazy" /></span>)}</div>
       </div>
       <div class="ai-hero-team" aria-label="御社だけのAIチーム"><div class="ai-hero-team-member ai-hero-team-one"><AIEmployeeAvatar name="営業AI" colors={['#5b35e8', '#ff78b6']} /></div><div class="ai-hero-team-member ai-hero-team-two"><AIEmployeeAvatar name="総務AI" colors={['#159a9c', '#bdeff0']} /></div><div class="ai-hero-team-member ai-hero-team-three"><AIEmployeeAvatar name="採用AI" colors={['#e95686', '#ffc2d9']} /></div><div class="ai-hero-team-member ai-hero-team-four"><AIEmployeeAvatar name="現場AI" colors={['#36a269', '#b9ebc9']} /></div><div class="ai-hero-team-member ai-hero-team-five"><AIEmployeeAvatar name="広報AI" colors={['#d88b00', '#ffe08a']} /></div></div>
       <div class="ai-hero-workflow" aria-label="AI社員のワークフロー"><div class="ai-hero-workflow-step"><i>⌁</i><span>フォームが送信されたら</span></div><div class="ai-hero-workflow-step"><AIEmployeeAvatar name="情報整理AI" colors={['#159a9c', '#bdeff0']} /><span>企業情報をリサーチして<br />適したフォルダに格納</span></div><div class="ai-hero-workflow-step"><i>♧</i><span>担当者に確認依頼</span></div></div>
-    </section>
-
-    <section class="ai-section ai-cream" id="what">
-      <div class="ai-wrap">
-        <p class="ai-kicker">AI社員とは</p>
-        <div class="ai-heading-row"><h2>万能なロボットではありません。<br /><em>御社の仕事を手伝う、専属の相棒</em>です。</h2><p>ChatGPTをそのまま渡すのではなく、御社の資料・仕事の流れ・言葉づかいに合わせて、役割をひとつ決めます。</p></div>
-        <div class="ai-three"><div><b>知っている</b><strong>御社の資料・ルール</strong><span>必要な情報を探し、回答の根拠にする</span></div><div><b>できる</b><strong>決めた仕事を手伝う</strong><span>下書き、整理、検索、報告を軽くする</span></div><div><b>育てられる</b><strong>使うほど御社向けに</strong><span>現場の声をもとに改善していく</span></div></div>
-        <div class="ai-flow" aria-label="AI社員が仕事を手伝う流れ"><div class="ai-flow-step ai-flow-input"><span>01</span><strong>御社の情報</strong><small>資料・ルール<br />過去の事例</small></div><b class="ai-flow-arrow">→</b><div class="ai-flow-step ai-flow-core"><span>02</span><strong>御社のAI社員</strong><small>決めた役割に沿って<br />情報を整理・判断</small></div><b class="ai-flow-arrow">→</b><div class="ai-flow-step ai-flow-output"><span>03</span><strong>仕事の下書き</strong><small>報告書・回答・提案<br />人が確認して完成</small></div></div>
-      </div>
     </section>
 
     <section class="ai-section" id="worries"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">こんな会社へ</p><h2>個人の工夫を、<br />会社の仕事につなげる。</h2></div><p>ChatGPTを個人が便利に使う段階から、会社の仕事で使う段階へ。まずは、時間を取られている業務をひとつ見つけます。</p></div><div class="ai-worry-grid">{worries.map((item, i) => <article><span>0{i + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
