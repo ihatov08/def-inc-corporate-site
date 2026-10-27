@@ -1,12 +1,6 @@
 ---
 import AIEmployeeAvatar from '../components/AIEmployeeAvatar';
 
-const worries = [
-  ['人手不足', '採用したくても人が来ない。既存社員に仕事が集中している。'],
-  ['属人化', '担当者に聞かないと分からない。過去の資料が活かされていない。'],
-  ['AI活用', 'ChatGPTは試した。でも、会社の仕事にはまだつながっていない。'],
-];
-
 const examples = [
   ['営業の下調べ', '過去の提案書や商品資料をもとに、提案のたたき台を作る'],
   ['社内の問い合わせ', '社内規程・マニュアルをもとに、よくある質問へ回答する'],
@@ -93,8 +87,6 @@ const steps = [
       <div class="ai-hero-team" aria-label="御社だけのAIチーム"><div class="ai-hero-team-member ai-hero-team-one"><AIEmployeeAvatar name="営業AI" colors={['#5b35e8', '#ff78b6']} /></div><div class="ai-hero-team-member ai-hero-team-two"><AIEmployeeAvatar name="総務AI" colors={['#159a9c', '#bdeff0']} /></div><div class="ai-hero-team-member ai-hero-team-three"><AIEmployeeAvatar name="採用AI" colors={['#e95686', '#ffc2d9']} /></div><div class="ai-hero-team-member ai-hero-team-four"><AIEmployeeAvatar name="現場AI" colors={['#36a269', '#b9ebc9']} /></div><div class="ai-hero-team-member ai-hero-team-five"><AIEmployeeAvatar name="広報AI" colors={['#d88b00', '#ffe08a']} /></div></div>
       <div class="ai-hero-workflow" aria-label="AI社員のワークフロー"><div class="ai-hero-workflow-step"><i>⌁</i><span>フォームが送信されたら</span></div><div class="ai-hero-workflow-step"><AIEmployeeAvatar name="情報整理AI" colors={['#159a9c', '#bdeff0']} /><span>企業情報をリサーチして<br />適したフォルダに格納</span></div><div class="ai-hero-workflow-step"><i>♧</i><span>担当者に確認依頼</span></div></div>
     </section>
-
-    <section class="ai-section" id="worries"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">こんな会社へ</p><h2>個人の工夫を、<br />会社の仕事につなげる。</h2></div><p>ChatGPTを個人が便利に使う段階から、会社の仕事で使う段階へ。まずは、時間を取られている業務をひとつ見つけます。</p></div><div class="ai-worry-grid">{worries.map((item, i) => <article><span>0{i + 1}</span><h3>{item[0]}</h3><p>{item[1]}</p></article>)}</div></div></section>
 
     <section class="ai-section ai-cost" id="cost"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">コストを抑える選択肢</p><h2>人を採用する前に、<br /><em>AI社員という選択。</em></h2></div><p>すべての仕事をAIに置き換える話ではありません。毎月くり返す定型業務を任せることで、採用・教育・引き継ぎにかかる負担を抑えます。</p></div><div class="ai-cost-compare"><article class="ai-cost-human"><span>人を採用する場合</span><strong>採用・教育・引き継ぎ</strong><p>採用活動から始まり、仕事を覚えてもらう時間や、担当者の教育負担が発生します。</p></article><div class="ai-cost-arrow">または</div><article class="ai-cost-ai"><span>AI社員を構築する場合</span><strong>疲れ知らずのAI社員</strong><p>構築費0円から。決めた業務に必要な資料とルールを設定し、定型業務を継続して任せられます。</p><small>※サーバー費用・AI API利用料などの月額利用料は別途かかります。</small></article></div><div class="ai-cost-chart" aria-label="人を採用する場合とAI社員の費用負担比較"><div class="ai-cost-chart-title"><strong>費用負担を比較</strong><span>定型業務を任せる場合のイメージ</span></div><div class="ai-cost-chart-plot"><div class="ai-cost-chart-column"><div class="ai-cost-chart-bar ai-cost-chart-bar-human"><span>採用・教育・<br />引き継ぎ</span></div><b>人を採用</b></div><div class="ai-cost-chart-column"><div class="ai-cost-chart-bar ai-cost-chart-bar-ai"><span>構築費0円<br />＋月額利用料</span></div><b>AI社員</b></div></div></div><p class="ai-cost-note">人にしかできない判断や対応は人が担い、繰り返す仕事をAI社員に任せる。役割を分けることで、チーム全体の時間を有効に使えます。<small>※実際の費用は業務内容・利用量によって異なります。</small></p></div></section>
 
