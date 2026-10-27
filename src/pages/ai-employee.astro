@@ -3,8 +3,7 @@ import AIEmployeeAvatar from '../components/AIEmployeeAvatar';
 import { company } from '../data/site';
 import { books, courses, udemyEnrollment } from '../data/publications';
 
-const aiContactFormUrl = 'https://docs.google.com/forms/d/e/1FAIpQLSetT9pST2FYVDCiva0_oB6G78oE9rbVtn-U8ZhNswEnIn0Fug/viewform';
-const aiContactFormEmbedUrl = `${aiContactFormUrl}?embedded=true`;
+const aiContactEndpoint = 'https://script.google.com/macros/s/AKfycbyNs1Bh_KtSv1ZG8MSdzWkRB63nOOaVQREr3S47afkfT3Eac34Xxe0gPIEd8tJ3e7eD/exec';
 
 const aiCompanyRows = [
   ['会社名', `${company.name}（デフゴウドウガイシャ）`],
@@ -70,6 +69,20 @@ const saasExamples = [
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;500;700;800&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet" />
+    <!-- Meta Pixel -->
+    <script is:inline>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+      n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+      if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+      n.queue=[];t=b.createElement(e);t.async=!0;
+      t.src=v;s=b.getElementsByTagName(e)[0];
+      s.parentNode.insertBefore(t,s)}(window,document,'script',
+      'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '2304690506987142');
+      fbq('track', 'PageView');
+    </script>
+    <noscript><img height="1" width="1" style="display:none" src="https://www.facebook.com/tr?id=2304690506987142&ev=PageView&noscript=1" /></noscript>
     <script is:inline>
       // このLPはブランド表現を固定するため、サイト共通のテーマ設定を適用しない。
       document.documentElement.dataset.theme = 'light';
@@ -113,8 +126,27 @@ const saasExamples = [
 
     <section class="ai-section ai-process" id="process"><div class="ai-wrap"><div class="ai-heading-row"><div><p class="ai-kicker">お問い合わせから運用開始まで</p><h2>AI社員が働き始めるまで、<br />一緒に進めます。</h2></div><p>お問い合わせをいただいた後、日程を調整してお話を伺います。御社の業務に合う形を一緒につくり、小さく始めて、使いながら育てていきます。</p></div><div class="ai-process-grid"><article class="ai-process-card"><span>01</span><h3>お問い合わせ</h3><p>まずはフォームから、AIに任せたい仕事や現在困っていることをお知らせください。</p></article><article class="ai-process-card"><span>02</span><h3>日程を調整</h3><p>内容を確認し、こちらからご連絡します。オンラインなど、ご都合のよい日時を調整します。</p></article><article class="ai-process-card"><span>03</span><h3>ご相談</h3><p>業務の流れや必要な資料を確認し、AIに任せる範囲を一緒に整理します。</p></article><article class="ai-process-card"><span>04</span><h3>AI社員を構築</h3><p>御社の資料やルールに合わせて、最初のAI社員をつくります。</p></article><article class="ai-process-card"><span>05</span><h3>運用を開始</h3><p>実際の業務で使いながら、回答や仕事ぶりを一緒に改善します。</p></article></div></div></section>
 
-    <section class="ai-final" id="contact"><div class="ai-wrap"><p class="ai-kicker">無料構築のご案内</p><h2>一人目のAI社員を、<br />無料でつくるところから。</h2><div class="ai-contact-form"><iframe src={aiContactFormEmbedUrl} title="AI社員に関するお問い合わせフォーム" loading="lazy" frameborder="0">読み込んでいます…</iframe></div><small>※運用開始後は、サーバー費用・AI API利用料などの月額利用料が別途かかります。</small></div></section>
+    <section class="ai-final" id="contact"><div class="ai-wrap"><p class="ai-kicker">無料構築のご案内</p><h2>一人目のAI社員を、<br />無料でつくるところから。</h2><form class="ai-contact-form" data-ai-contact-form data-endpoint={aiContactEndpoint}><div class="ai-form-grid"><label>会社名<span>必須</span><input name="companyName" type="text" autocomplete="organization" required /></label><label>お名前<span>必須</span><input name="name" type="text" autocomplete="name" required /></label><label>メールアドレス<span>必須</span><input name="email" type="email" autocomplete="email" required /></label><label>電話番号<span>必須</span><input name="phone" type="tel" autocomplete="tel" required /></label></div><input class="ai-form-honeypot" name="website" type="text" tabindex="-1" autocomplete="off" aria-hidden="true" /><input name="page" type="hidden" value="/ai-employee" /><button type="submit" class="ai-form-submit">無料で相談する <span>→</span></button><p class="ai-form-status" data-form-status role="status" aria-live="polite"></p><small>送信いただいた内容を確認のうえ、担当者からご連絡します。</small></form></div></section>
   </div>
+  <script is:inline>
+    (function () {
+      var form = document.querySelector('[data-ai-contact-form]');
+      if (!form) return;
+      form.addEventListener('submit', function (event) {
+        event.preventDefault();
+        var status = form.querySelector('[data-form-status]');
+        var submit = form.querySelector('button[type="submit"]');
+        submit.disabled = true;
+        status.textContent = '送信しています…';
+        fetch(form.dataset.endpoint, { method: 'POST', mode: 'no-cors', body: new FormData(form) })
+          .then(function () { window.location.href = '/ai-employee/thanks/'; })
+          .catch(function () {
+            submit.disabled = false;
+            status.textContent = '送信に失敗しました。時間をおいて、もう一度お試しください。';
+          });
+      });
+    })();
+  </script>
   </body>
 </html>
 
@@ -459,8 +491,17 @@ const saasExamples = [
   .ai-final .ai-kicker { color:#5b35e8; background:#fff; }
   .ai-final h2 { color:#fff; }
   .ai-final p { color:#eeeaff; }
-  .ai-contact-form { max-width:720px; margin:34px auto 0; overflow:hidden; border-radius:24px; background:#fff; text-align:left; }
-  .ai-contact-form iframe { display:block; width:100%; height:820px; border:0; }
+  .ai-contact-form { max-width:720px; margin:34px auto 0; padding:28px; border-radius:24px; background:#fff; color:#252631; text-align:left; }
+  .ai-form-grid { display:grid; grid-template-columns:1fr; gap:18px; }
+  .ai-form-grid label { display:flex; flex-direction:column; gap:8px; font-size:13px; font-weight:700; }
+  .ai-form-grid label span { margin-left:6px; color:#d94c27; font-size:11px; }
+  .ai-form-grid input { width:100%; min-height:48px; padding:10px 12px; border:1px solid #d7d9e2; border-radius:10px; background:#fff; color:#252631; font:inherit; }
+  .ai-form-grid input:focus { outline:3px solid rgba(91,53,232,.2); border-color:#5b35e8; }
+  .ai-form-honeypot { position:absolute; left:-9999px; width:1px; height:1px; opacity:0; }
+  .ai-form-submit { display:flex; align-items:center; justify-content:center; gap:18px; width:100%; margin-top:24px; padding:16px 22px; border:0; border-radius:999px; background:#5b35e8; color:#fff; cursor:pointer; font:inherit; font-weight:700; }
+  .ai-form-submit:disabled { cursor:wait; opacity:.65; }
+  .ai-form-status { min-height:1.6em; margin:12px 0 0; color:#d94c27; font-size:13px; }
+  .ai-contact-form > small { display:block; margin-top:14px; color:#646779; font-size:12px; line-height:1.7; }
   .ai-person { padding:86px 0; background:#fff; }
   .ai-person-inner { display:grid; grid-template-columns:180px 1fr; gap:34px; align-items:center; max-width:760px; }
   .ai-person-photo { position:relative; }
@@ -510,6 +551,16 @@ const saasExamples = [
   .ai-track-card:hover { transform:translateY(-3px); box-shadow:0 10px 24px rgba(40,45,80,.1); }
   .ai-track-card img { display:block; width:100%; height:150px; object-fit:cover; background:#f1f2f7; }
   .ai-track-card span { display:block; padding:12px; font-size:12px; font-weight:700; line-height:1.6; }
+  .ai-heading-row > p,
+  .ai-integrations p:not(.ai-kicker),
+  .ai-automation-copy > p:not(.ai-kicker),
+  .ai-action-copy > p:not(.ai-kicker),
+  .ai-trigger-copy > p:not(.ai-kicker),
+  .ai-person p:not(.ai-kicker),
+  .ai-company-heading > p:not(.ai-kicker),
+  .ai-track-heading > p:not(.ai-kicker) { color:#252631; font-size:16px; }
+  .ai-why-free-copy p { color:#252631; font-size:16px; }
+  .ai-process-card p { color:#252631; font-size:14px; }
   @media (max-width:760px) { .ai-hero-grid { padding:58px 21px 52px; } .ai-hero-question { display:block; padding:15px 18px; border-radius:18px; } .ai-offer { text-align:center; } .ai-consult-card { padding:25px 20px; } .ai-navy,.ai-final { margin-inline:0; border-radius:28px 28px 0 0; } .ai-three { gap:12px; } .ai-build-grid { grid-template-columns:1fr; gap:12px; margin-top:38px; } .ai-build-grid article { min-height:0; } .ai-integration-panel { min-height:0; padding:34px 18px 32px; border-radius:28px; } .ai-integration-copy { padding:0; } .ai-integrations h2 { font-size:clamp(27px,8vw,44px); } .ai-saas-cloud { grid-template-columns:repeat(4,minmax(0,1fr)); gap:10px; margin-top:28px; } .ai-saas-pill { min-width:0; min-height:62px; padding:6px; border-radius:18px; } .ai-saas-pill i { width:44px; height:44px; } .ai-saas-pill img { width:30px; height:30px; } .ai-shape-one { right:-110px; bottom:-150px; } .ai-shape-two { right:18%; top:35%; width:90px; height:90px; } .ai-hero-saas-cloud,.ai-hero-workflow { display:none; } .ai-hero-team { margin:-10px auto 0; gap:0; } .ai-hero-team-member { width:68px; height:74px; } .ai-hero-team-member svg { width:72px; height:72px; } .ai-automation-layout { display:block; } .ai-automation-copy h2 { font-size:clamp(24px,8vw,42px); } .ai-automation-copy > p:not(.ai-kicker) { margin-bottom:30px; } .ai-automation-diagram { min-height:540px; transform:scale(.86); transform-origin:top center; margin-bottom:-70px; } .ai-action-layout { display:block; min-height:0; padding-bottom:80px; } .ai-action-copy > p:not(.ai-kicker) { margin-bottom:28px; } .ai-action-list { grid-template-columns:1fr; gap:10px; } .ai-action-pill { min-height:56px; } .ai-action-avatar { left:-8px; bottom:-84px; } .ai-action-ring-one { right:-380px; } .ai-action-ring-two { right:-260px; } .ai-trigger-layout { display:block; } .ai-trigger-flow { min-height:400px; transform:scale(.83); transform-origin:top center; margin-bottom:-60px; } .ai-trigger-copy { margin-top:0; } .ai-trigger-step { width:250px; } .ai-trigger-step-first { left:0; } .ai-trigger-avatars svg { width:125px; height:125px; } .ai-cost-compare { grid-template-columns:1fr; gap:12px; } .ai-cost-compare article { min-height:0; padding:24px; } .ai-cost-arrow { width:54px; height:54px; } .ai-cost-chart { padding:24px 18px; } .ai-cost-chart-title { display:block; text-align:center; } .ai-cost-chart-title span { display:block; margin-top:5px; } .ai-cost-chart-plot { gap:34px; padding:0 10px; } .ai-cost-chart-bar { width:84px; } .ai-flow { grid-template-columns:1fr; gap:9px; margin-top:38px; } .ai-flow-step { min-height:0; padding:20px 16px; } .ai-flow-step strong { margin-top:10px; } .ai-flow-arrow { transform:rotate(90deg); } .ai-steps { grid-template-columns:1fr; } .ai-steps > div { border:0; } .ai-person { padding:70px 0; } .ai-person-inner { display:block; text-align:center; } .ai-person-photo { width:180px; margin:0 auto 28px; } .ai-person h2 small { display:block; margin:12px 0 0; font-size:20px; } .ai-person p:not(.ai-kicker) { text-align:left; } .ai-process-grid { display:grid; grid-template-columns:1fr; gap:12px; overflow:visible; } .ai-process-card { min-width:0; padding:24px 20px; } .mobile-only { display:block; } }
   @media (max-width:760px) {
     .ai-process-grid { margin-top:38px; }
@@ -524,8 +575,8 @@ const saasExamples = [
     .ai-track-stats strong { display:block; margin-bottom:6px; }
     .ai-track-columns { grid-template-columns:1fr; gap:38px; margin-top:40px; }
     .ai-track-card img { height:130px; }
-    .ai-contact-form { margin-top:28px; border-radius:18px; }
-    .ai-contact-form iframe { height:920px; }
+    .ai-contact-form { margin-top:28px; padding:20px; border-radius:18px; }
+    .ai-form-grid { grid-template-columns:1fr; gap:14px; }
     .ai-action-layout { display:flex !important; flex-direction:column; align-items:stretch; }
     .ai-action-copy { order:1; position:relative; z-index:1; }
     .ai-action-list { order:2; position:relative; z-index:1; }

@@ -1,4 +1,6 @@
 const FORM_ID_PROPERTY = 'CONTACT_FORM_ID';
+const CONTACT_SHEET_ID_PROPERTY = 'CONTACT_SHEET_ID';
+const CONTACT_NOTIFICATION_EMAIL_PROPERTY = 'CONTACT_NOTIFICATION_EMAIL';
 
 /**
  * Create the contact form once, then reuse it on subsequent runs.
@@ -20,6 +22,81 @@ function setupContactForm() {
   properties.setProperty(FORM_ID_PROPERTY, form.getId());
   logFormUrls(form);
   return form.getId();
+}
+
+/**
+ * Prepare the spreadsheet used by the custom AI employee contact form.
+ * Run this once from the Apps Script editor after deploying the web app.
+ */
+function setupContactEndpoint() {
+  const properties = PropertiesService.getScriptProperties();
+  let sheetId = properties.getProperty(CONTACT_SHEET_ID_PROPERTY);
+
+  if (!sheetId) {
+    const spreadsheet = SpreadsheetApp.create('def合同会社 AI社員お問い合わせ');
+    const sheet = spreadsheet.getSheets()[0];
+    sheet.setName('お問い合わせ');
+    sheet.appendRow(['受信日時', '会社名', 'お名前', 'メールアドレス', '電話番号', 'ページ', '流入元']);
+    sheetId = spreadsheet.getId();
+    properties.setProperty(CONTACT_SHEET_ID_PROPERTY, sheetId);
+  }
+
+  const email = Session.getEffectiveUser().getEmail();
+  if (email) properties.setProperty(CONTACT_NOTIFICATION_EMAIL_PROPERTY, email);
+
+  Logger.log(`Spreadsheet URL: https://docs.google.com/spreadsheets/d/${sheetId}/edit`);
+  Logger.log(`Notification email: ${properties.getProperty(CONTACT_NOTIFICATION_EMAIL_PROPERTY) || '未設定'}`);
+  return sheetId;
+}
+
+function doGet() {
+  return jsonResponse({ ok: true, service: 'ai-employee-contact' });
+}
+
+function doPost(e) {
+  const params = (e && e.parameter) || {};
+  if (params.website) return jsonResponse({ ok: true });
+
+  const required = ['companyName', 'name', 'email', 'phone'];
+  if (required.some((field) => !String(params[field] || '').trim())) {
+    return jsonResponse({ ok: false, error: 'required_fields' });
+  }
+
+  const properties = PropertiesService.getScriptProperties();
+  const sheetId = properties.getProperty(CONTACT_SHEET_ID_PROPERTY) || setupContactEndpoint();
+  const sheet = SpreadsheetApp.openById(sheetId).getSheets()[0];
+  const values = [
+    new Date(),
+    String(params.companyName).trim(),
+    String(params.name).trim(),
+    String(params.email).trim(),
+    String(params.phone).trim(),
+    String(params.page || '/ai-employee'),
+    String(params.utm_source || ''),
+  ];
+  sheet.appendRow(values);
+
+  const notificationEmail = properties.getProperty(CONTACT_NOTIFICATION_EMAIL_PROPERTY);
+  if (notificationEmail) {
+    MailApp.sendEmail({
+      to: notificationEmail,
+      subject: `AI社員のお問い合わせ：${values[1]}`,
+      body: [
+        'AI社員ページからお問い合わせがありました。',
+        '',
+        `会社名：${values[1]}`,
+        `お名前：${values[2]}`,
+        `メールアドレス：${values[3]}`,
+        `電話番号：${values[4]}`,
+      ].join('\n'),
+    });
+  }
+
+  return jsonResponse({ ok: true });
+}
+
+function jsonResponse(payload) {
+  return ContentService.createTextOutput(JSON.stringify(payload)).setMimeType(ContentService.MimeType.JSON);
 }
 
 function createContactForm() {
