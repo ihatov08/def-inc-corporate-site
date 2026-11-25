@@ -16,7 +16,7 @@ interface Props {
   margin?: number;
 }
 
-const { value, class: className = '', level = 'M', margin = 1 } = Astro.props;
+const { value, class: className = '', level = 'M', margin = 4 } = Astro.props;
 
 const qr = QRCode.create(value, { errorCorrectionLevel: level });
 const size = qr.modules.size;
