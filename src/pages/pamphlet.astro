@@ -142,7 +142,7 @@ const companyRows = [
             <p class="font-en text-[0.6rem] uppercase tracking-[0.2em] text-ink">Website</p>
             <p class="mt-1 mb-0 font-en text-[0.72rem] tracking-[0.16em] text-ink">https://{site.domain}</p>
           </div>
-          <QrCode value={`https://${site.domain}`} class="h-[16mm] w-[16mm] rounded-card border border-line" aria-hidden="true" />
+          <QrCode value={`https://${site.domain}`} class="h-[16mm] w-[16mm] border border-line" aria-hidden="true" />
         </div>
       </div>
     </div>
@@ -377,7 +377,7 @@ const companyRows = [
                   <div class="mt-3">
                     <QrCode
                       value={w.data.link}
-                      class="h-[22mm] w-[22mm] rounded-card border border-line"
+                      class="h-[22mm] w-[22mm] border border-line"
                       aria-hidden="true"
                     />
                     <p class="mt-1 mb-0 text-[0.56rem] font-bold text-ink">{w.data.linkLabel ?? 'サービスサイト'}</p>
@@ -424,7 +424,7 @@ const companyRows = [
                 <br />
                 {b.format}
               </p>
-              <QrCode value={b.link} class="h-[11mm] w-[11mm] shrink-0 rounded-card border border-line" aria-hidden="true" />
+              <QrCode value={b.link} class="h-[11mm] w-[11mm] shrink-0 border border-line" aria-hidden="true" />
             </div>
           </li>
         ))
@@ -458,7 +458,7 @@ const companyRows = [
                 <QrCode
                   value={c.link}
                   level="L"
-                  class="h-[12mm] w-[12mm] shrink-0 rounded-card border border-line"
+                  class="h-[12mm] w-[12mm] shrink-0 border border-line"
                   aria-hidden="true"
                 />
               </div>
@@ -479,7 +479,7 @@ const companyRows = [
       {
         ossContributions.map((o) => (
           <li class="flex items-center gap-[3mm] rounded-card border border-line bg-surface-elevated px-[3mm] py-[2.4mm]">
-            <QrCode value={o.link} class="h-[12mm] w-[12mm] shrink-0 rounded-card border border-line" aria-hidden="true" />
+            <QrCode value={o.link} class="h-[12mm] w-[12mm] shrink-0 border border-line" aria-hidden="true" />
             <div class="min-w-0">
               <p class="mb-0 font-en text-[0.66rem] font-medium text-ink">{o.repo}</p>
               <p class="mb-0 line-clamp-2 text-[0.6rem] leading-snug text-ink">{o.description}</p>
@@ -517,11 +517,11 @@ const companyRows = [
         </div>
         <div class="flex shrink-0 gap-[6mm]">
           <figure class="m-0 text-center">
-            <QrCode value={`https://${site.domain}`} class="h-[22mm] w-[22mm] rounded-card border border-line" aria-hidden="true" />
+            <QrCode value={`https://${site.domain}`} class="h-[22mm] w-[22mm] border border-line" aria-hidden="true" />
             <figcaption class="mt-1.5 font-en text-[0.58rem] text-ink">https://{site.domain}</figcaption>
           </figure>
           <figure class="m-0 text-center">
-            <QrCode value={site.contactFormUrl} class="h-[22mm] w-[22mm] rounded-card border border-line" aria-hidden="true" />
+            <QrCode value={site.contactFormUrl} class="h-[22mm] w-[22mm] border border-line" aria-hidden="true" />
             <figcaption class="mt-1.5 font-en text-[0.58rem] text-ink">お問い合わせフォーム</figcaption>
           </figure>
         </div>
